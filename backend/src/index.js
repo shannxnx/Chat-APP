@@ -4,8 +4,10 @@ const app = express();
 const PORT = 5001;
 
 
+// app.get("/api/auth", authRoutes);
+
 app.get("/", (req, res) => {
-    res.send("I just finished YOU season 5 kinda underwhelming")
+    res.send("I hope your a fuckery okay")
 })
 
 app.listen(PORT, () => {
