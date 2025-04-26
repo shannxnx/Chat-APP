@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);   //for authentication (login, signup, logout);
 
 app.get("/", (req, res) => {
     res.send("I hope your a fuckery okay")
@@ -17,5 +17,5 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-    connectDB();
+    connectDB(); //connect to the mongoDB
 })
