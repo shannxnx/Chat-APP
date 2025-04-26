@@ -1,10 +1,11 @@
 import express from "express";
+import authRoutes from "./routes/auth.route.js"
 
 const app = express();
 const PORT = 5001;
 
 
-// app.get("/api/auth", authRoutes);
+app.get("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.send("I hope your a fuckery okay")
