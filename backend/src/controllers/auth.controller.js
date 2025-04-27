@@ -13,8 +13,6 @@ export const signup = async (req, res) => {
         if (!fullName || !email || !password){
             res.status(400).json({message : "You must provide all information!"});
         }
-
-        
         if (password.length < 6){
             return res.status(400).json({message : "Password must be at least 6 characters"});
         }
@@ -37,6 +35,7 @@ export const signup = async (req, res) => {
             //generate jwt token
             generateToken(newUser._id, res);
             await newUser.save();
+            
 
             res.status(201).json({
                 _id : newUser._id,
@@ -45,7 +44,8 @@ export const signup = async (req, res) => {
                 profilePic : newUser.profilePic
             })
 
-        }else{
+        }
+        else{
             res.status(400).json({message : "Invalid User Data"});
         }
 
@@ -63,10 +63,43 @@ export const signup = async (req, res) => {
 
 
 
-export const login = (req, res) => {
-    res.send("login route");
+export const login = async (req, res) => {
+    const {email, password} = req.body;
+
+    try {
+       const user = await User.findOne({email});
+
+        if (!user){
+            res.status(400).json({message: "Invalid credintials"});
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        if (!isPasswordCorrect){
+            res.status(400).json({message: "Invalid credintials"});
+        }
+
+        generateToken(user._id, res);
+        res.status(201).json({
+            _id : user._id,
+            fullName : user.fullName,
+            email : user.email,
+            profilePic : user.profilePic
+        })
+
+        
+
+    } catch (error) {
+        console.log("Error in login controller : ", error.message);
+        res.status(500).json({message : "Server Error!"});
+    }
 }
 
 export const logout = (req, res) => {
-    res.send("logout route");
+    try {
+        res.cookie("jwt", "", {maxAge: 0});
+        res.status(200).json({message : "Loged out succesfully"});
+    } catch (error) {
+        console.log("Error in logout controller : ", error.message);
+        res.status(500).json({message : "Server Error!"});
+    }
 }
