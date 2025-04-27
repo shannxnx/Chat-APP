@@ -4,14 +4,14 @@ import dotenv from "dotenv";
 import { connectDB } from "./lib/db.js";
 import cors from "cors";
 
-dotenv.config();
+dotenv.config();                      //because of this we can use (process.env.PORT)
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT;    
 
-app.use(cors());
-app.use(express.json());
+app.use(cors());                     //important because this will allow the backend to talk to the frontend
+app.use(express.json());             //so we can get json in the body
 
-app.use("/api/auth", authRoutes);   //for authentication (login, signup, logout);
+app.use("/api/auth", authRoutes);    //for authentication (login, signup, logout);
 
 app.get("/", (req, res) => {
     res.send("I hope your a fuckery okay")
@@ -19,5 +19,5 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-    connectDB(); //connect to the mongoDB
+    connectDB();                      //connect to the mongoDB
 })
