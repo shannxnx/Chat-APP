@@ -58,21 +58,21 @@ export default function Signup(){
             <div className="w-[70%] mt-5 flex flex-col">
 
                 <label htmlFor="" className="mb-3">Full Name</label>
-                <input type="text" className="p-3  h-[50px] bg-white border-1" placeholder="Full Name" 
+                <input type="text" className="p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Full Name" 
                 name='fullName' value={signUpForm.fullName} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
             <div className="w-[70%] mt-2  flex flex-col">
 
                 <label htmlFor="" className="mb-3">Email</label>
-                <input type="text" className="p-3  h-[50px] bg-white border-1" placeholder="Email"
+                <input type="text" className="p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Email"
                 name='email' value={signUpForm.email} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
             <div className="w-[70%] mt-2 flex flex-col mb-8">
 
                 <label htmlFor="" className="mb-3">Password</label>
-                <input type="password" className="p-3 h-[50px] bg-white border-1" placeholder="Password"
+                <input type="password" className="p-3 h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
                 name='password' value={signUpForm.password} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
