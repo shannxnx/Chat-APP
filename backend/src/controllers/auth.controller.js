@@ -9,13 +9,17 @@ export const signup = async (req, res) => {
 
     try {
 
-
+        //check first if all the req is filled out
         if (!fullName || !email || !password){
             res.status(400).json({message : "You must provide all information!"});
         }
+
+        //check if the password is greater than 6
         if (password.length < 6){
             return res.status(400).json({message : "Password must be at least 6 characters"});
         }
+
+        //check if the email exist
         const user = await User.findOne({email});
         if (user){
             return res.status(400).json({message : "That email is existing already"});
@@ -69,10 +73,13 @@ export const login = async (req, res) => {
     try {
        const user = await User.findOne({email});
 
+       //check if the user is in the database
         if (!user){
             res.status(400).json({message: "Invalid credintials"});
         }
 
+
+        //check if the password is correct
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect){
             res.status(400).json({message: "Invalid credintials"});
@@ -102,4 +109,9 @@ export const logout = (req, res) => {
         console.log("Error in logout controller : ", error.message);
         res.status(500).json({message : "Server Error!"});
     }
+}
+
+
+export const updateProfile = async (req, res) => {
+    
 }
