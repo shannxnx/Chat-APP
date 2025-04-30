@@ -10,7 +10,10 @@ dotenv.config();                     //because of this we can use (process.env.P
 const app = express();
 const PORT = process.env.PORT;    
 
-app.use(cors());                     //important because this will allow the backend to talk to the frontend
+app.use(cors({
+    origin : "http://localhost:5173",
+    credentials : true
+}));                     //important because this will allow the backend to talk to the frontend
 app.use(express.json());             //so we can get json in the body
 app.use(cookieParser());             //allows to parse the cookie
 

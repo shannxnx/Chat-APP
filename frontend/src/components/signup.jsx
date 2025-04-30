@@ -18,7 +18,7 @@ export default function Signup(){
             //     console.log("Fill out all ");
             // }
 
-            const res = await axios.post(`http://localhost:5001/api/auth/signup`, signUpForm);
+            const res = await axios.post(`http://localhost:5001/api/auth/signup`, signUpForm, {withCredentials : true});
             console.log("Sign in succesfully!");
 
             setSignUpForm({fullName : "", email : "", password : ""});
@@ -32,10 +32,11 @@ export default function Signup(){
 
     async function handleLogOut(){
         try{
-            const res = await axios.post("http://localhost:5001/api/auth/logout");
+            const res = await axios.post("http://localhost:5001/api/auth/logout", {}, {withCredentials : true});
             console.log("Logout successfully!");
         }catch(e){
             console.log("Error in logout : ", e.message);
+            alern("Sign Up Error")
         }
     }
 

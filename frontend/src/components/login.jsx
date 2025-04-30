@@ -18,7 +18,7 @@ export default function Login(){
             //     console.log("Fill out all ");
             // }
 
-            const res = await axios.post(`http://localhost:5001/api/auth/login`, loginForm);
+            const res = await axios.post(`http://localhost:5001/api/auth/login`, loginForm, {withCredentials : true});
             console.log("Login succesfully!");
             alert("Login Succesfully!");
             setLoginForm({email : "", password : ""});
@@ -26,13 +26,14 @@ export default function Login(){
 
 
         } catch (e) {
-            console.log("Error in submit: ", e.message);
+            console.log("Login error: ", e.message);
+            // alert("Login Failed");
         }
     }
 
     async function handleLogOut(){
         try{
-            const res = await axios.post("http://localhost:5001/api/auth/logout");
+            const res = await axios.post("http://localhost:5001/api/auth/logout", {}, { withCredentials: true });
             console.log("Logout successfully!");
         }catch(e){
             console.log("Error in logout : ", e.message);
