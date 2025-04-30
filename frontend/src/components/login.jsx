@@ -19,9 +19,9 @@ export default function Login(){
             // }
 
             const res = await axios.post(`http://localhost:5001/api/auth/login`, loginForm);
-            console.log("Sign in succesfully!");
-
-            setSignUpForm({email : "", password : ""});
+            console.log("Login succesfully!");
+            alert("Login Succesfully!");
+            setLoginForm({email : "", password : ""});
             
 
 
@@ -40,7 +40,7 @@ export default function Login(){
     }
 
     function handleOnChange(e){
-        setSignUpForm((prev) => ({
+        setLoginForm((prev) => ({
             ...prev,
             [e.target.name] : e.target.value
         }))
