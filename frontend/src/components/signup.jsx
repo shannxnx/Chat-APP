@@ -51,7 +51,7 @@ export default function Signup(){
     return <div className="w-full h-screen flex flex-col items-center bg-[#F1E7E7] ">
         <h1 className="w-[90%] text-2xl lg:text-5xl mt-6 underline underline-offset-4 ">CHAT</h1>
 
-        <form onSubmit={handleOnSubmit} className="w-[30%] border-1 min-h-[400px] h-[450px] flex-col bg-[#E69DB8] mt-5 rounded-[20px] shadow-lg
+        <form onSubmit={handleOnSubmit} className="w-[30%] border-1 min-h-[400px] h-[450px] flex-col bg-[#E69DB8]  rounded-[20px] shadow-lg
         items-center flex ">
             <h1 className="w-[100%] text-center mt-4 text-3xl ">SIGN UP</h1>
 
@@ -82,6 +82,8 @@ export default function Signup(){
             hover:bg-gray-200 active:scale-95">SIGN UP</button>
 
         </form>
+
+        <h1 className='mt-4'>Already have an accont? <span className='text-[#E69DB8] underline underline-offset-4'><a href="">Log in</a></span></h1>
 
         <div className='w-[90%] h-[60px] flex justify-end items-center'>
             <div className=' w-[60px] h-[100%] flex justify-center items-center scale-115 rounded-[500px] bg-[#FFFECE]'>
