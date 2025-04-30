@@ -3,9 +3,9 @@ import { FaBeer, FaQuestion } from 'react-icons/fa';
 import axios from "axios"
 import { useState } from 'react';
 
-export default function Signup(){
+export default function Login(){
 
-    const [signUpForm, setSignUpForm] = useState({fullName : "", email : "", password : ""});
+    const [loginForm, setLoginForm] = useState({email : "", password : ""});
 
 
     async function handleOnSubmit(event){
@@ -18,10 +18,10 @@ export default function Signup(){
             //     console.log("Fill out all ");
             // }
 
-            const res = await axios.post(`http://localhost:5001/api/auth/signup`, signUpForm);
+            const res = await axios.post(`http://localhost:5001/api/auth/login`, loginForm);
             console.log("Sign in succesfully!");
 
-            setSignUpForm({fullName : "", email : "", password : ""});
+            setSignUpForm({email : "", password : ""});
             
 
 
@@ -51,39 +51,33 @@ export default function Signup(){
     return <div className="w-full h-screen flex flex-col items-center bg-[#F1E7E7] ">
         <h1 className="w-[90%] text-2xl lg:text-5xl mt-6 underline underline-offset-4 ">CHAT</h1>
 
-        <form onSubmit={handleOnSubmit} className="w-[30%] border-1 min-h-[400px] h-[450px] flex-col bg-[#E69DB8]  rounded-[20px] shadow-lg
-        items-center flex ">
-            <h1 className="w-[100%] text-center mt-4 text-3xl ">SIGN UP</h1>
+        <form onSubmit={handleOnSubmit} className="w-[30%] border-1 min-h-[350px] h-[350px] flex-col bg-[#E69DB8]  rounded-[20px] shadow-lg
+        items-center flex justify-center mt-16">
+            <h1 className="w-[100%] text-center mt-4 text-3xl ">LOG IN</h1>
 
-            <div className="w-[70%] mt-5 flex flex-col">
-
-                <label htmlFor="" className="mb-3">Full Name</label>
-                <input type="text" className="p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Full Name" 
-                name='fullName' value={signUpForm.fullName} onChange={handleOnChange} autoComplete='off' required/>
-
-            </div>
+        
             <div className="w-[70%] mt-2  flex flex-col">
 
                 <label htmlFor="" className="mb-3">Email</label>
                 <input type="text" className="p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Email"
-                name='email' value={signUpForm.email} onChange={handleOnChange} autoComplete='off' required/>
+                name='email' value={loginForm.email} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
             <div className="w-[70%] mt-2 flex flex-col mb-8">
 
                 <label htmlFor="" className="mb-3">Password</label>
                 <input type="password" className="p-3 h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
-                name='password' value={signUpForm.password} onChange={handleOnChange} autoComplete='off' required/>
+                name='password' value={loginForm.password} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
 
 
             <button className="border-1 w-[150px] h-[40px] rounded-[500px] cursor-pointer bg-white
-            hover:bg-gray-200 active:scale-95">SIGN UP</button>
+            hover:bg-gray-200 active:scale-95">LOG IN</button>
 
         </form>
 
-        <h1 className='mt-4'>Already have an accont? <span className='text-[#E69DB8] underline underline-offset-4'><a href="/login">Log in</a></span></h1>
+        <h1 className='mt-8'>Don't have an account? <span className='text-[#E69DB8] underline underline-offset-4'><a href="/">Sign Up</a></span></h1>
 
         <div className='w-[90%] h-[60px] flex justify-end items-center'>
             <div className=' w-[60px] h-[100%] flex justify-center items-center scale-115 rounded-[500px] bg-[#FFFECE]'>
