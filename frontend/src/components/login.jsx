@@ -67,7 +67,7 @@ export default function Login(){
             <div className="w-[70%] mt-2  flex flex-col">
 
                 <label htmlFor="" className="mb-3">Email</label>
-                <input type="text" className="p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Email"
+                <input type="text" className="rounded p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Email"
                 name='email' value={loginForm.email} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
@@ -79,7 +79,7 @@ export default function Login(){
                 name='password' value={loginForm.password} onChange={handleOnChange} autoComplete='off' required/> */}
 
                     <div className='flex relative'>
-                        <input type={showPass} className="p-3 w-[100%] h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
+                        <input type={showPass} className="rounded p-3 w-[100%] h-[50px] bg-white border-1 focus:outline-none" placeholder="********"
                         name='password' value={loginForm.password} onChange={handleOnChange} autoComplete='off' required/>
 
                         {

@@ -8,6 +8,8 @@ export default function Signup(){
 
     const [signUpForm, setSignUpForm] = useState({fullName : "", email : "", password : ""});
     const [showPass, setShowPass] = useState("password");
+
+    
     
 
     function handleShowPass(){
@@ -66,14 +68,14 @@ export default function Signup(){
             <div className="w-[70%] mt-5 flex flex-col">
 
                 <label htmlFor="" className="mb-3">Full Name</label>
-                <input type="text" className="p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Full Name" 
+                <input type="text" className="rounded p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Full Name" 
                 name='fullName' value={signUpForm.fullName} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
             <div className="w-[70%] mt-2  flex flex-col">
 
                 <label htmlFor="" className="mb-3">Email</label>
-                <input type="text" className="p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Email"
+                <input type="text" className="rounded p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Email"
                 name='email' value={signUpForm.email} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
@@ -82,7 +84,7 @@ export default function Signup(){
                 <label htmlFor="" className="mb-3">Password</label>
 
                 <div className='flex relative'>
-                    <input type={showPass} className="p-3 w-[100%] h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
+                    <input type={showPass} className="rounded p-3 w-[100%] h-[50px] bg-white border-1 focus:outline-none" placeholder="********"
                     name='password' value={signUpForm.password} onChange={handleOnChange} autoComplete='off' required/>
                     {
                         showPass === "password" ? <FaEyeSlash className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer'  onClick={handleShowPass}/>
@@ -96,8 +98,8 @@ export default function Signup(){
             </div>
 
 
-            <button className="border-1 w-[150px] h-[40px] rounded-[500px] cursor-pointer bg-white
-            hover:bg-gray-200 active:scale-95">SIGN UP</button>
+            <button className="border-1 w-[170px] h-[40px] rounded-[500px] cursor-pointer bg-white
+            hover:bg-gray-200 active:scale-95">CREATE ACCOUNT</button>
 
         </form>
 
