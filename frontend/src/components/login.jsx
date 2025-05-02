@@ -2,40 +2,54 @@ import { FaBeer, FaEye, FaEyeSlash, FaQuestion } from 'react-icons/fa';
 
 import axios from "axios"
 import { useState } from 'react';
+import { useAuthStore } from '../store/useAuthStore';
 
 export default function Login(){
 
     const [loginForm, setLoginForm] = useState({email : "", password : ""});
     const [showPass, setShowPass] = useState("password");
+
+    const {logIn} = useAuthStore();
     
 
     function handleShowPass(){
         setShowPass((prev) => prev === "password" ? "text" : "password");
     }
+
+
+
     
+    function handleOnChange(e){
+        setLoginForm((prev) => ({
+            ...prev,
+            [e.target.name] : e.target.value
+        }))
+    }
 
 
     async function handleOnSubmit(event){
         event.preventDefault();
 
-        try {
+        
+        logIn(loginForm);
+        // try {
 
 
-            // if (!signUpForm.fullName || !signUpForm.email || !signUpForm.password){
-            //     console.log("Fill out all ");
-            // }
+        //     // if (!signUpForm.fullName || !signUpForm.email || !signUpForm.password){
+        //     //     console.log("Fill out all ");
+        //     // }
 
-            const res = await axios.post(`http://localhost:5001/api/auth/login`, loginForm, {withCredentials : true});
-            console.log("Login succesfully!");
-            alert("Login Succesfully!");
-            setLoginForm({email : "", password : ""});
+        //     const res = await axios.post(`http://localhost:5001/api/auth/login`, loginForm, {withCredentials : true});
+        //     console.log("Login succesfully!");
+        //     alert("Login Succesfully!");
+        //     setLoginForm({email : "", password : ""});
             
 
 
-        } catch (e) {
-            console.log("Login error: ", e.message);
-            // alert("Login Failed");
-        }
+        // } catch (e) {
+        //     console.log("Login error: ", e.message);
+        //     // alert("Login Failed");
+        // }
     }
 
     async function handleLogOut(){
@@ -47,12 +61,7 @@ export default function Login(){
         }
     }
 
-    function handleOnChange(e){
-        setLoginForm((prev) => ({
-            ...prev,
-            [e.target.name] : e.target.value
-        }))
-    }
+    
     //bg-white border-1
     //bg-[#E69DB8] border-b-
 
@@ -90,13 +99,13 @@ export default function Login(){
                         
 
 
-                        {/* <FaEye className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer' onClick={handleShowPass}/> */}
+                      
                     </div>
 
             </div>
 
 
-            <button className="border-1 w-[150px] h-[40px] rounded-[500px] cursor-pointer bg-white
+            <button type='submit' className="border-1 w-[150px] h-[40px] rounded-[500px] cursor-pointer bg-white
             hover:bg-gray-200 active:scale-95">LOG IN</button>
 
         </form>

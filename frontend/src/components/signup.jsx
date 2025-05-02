@@ -25,7 +25,7 @@ export default function Signup(){
     const [showPass, setShowPass] = useState("password");
 
     
-    const {signUp, isSigningUp} = useAuthStore();
+    const {signUp, isSigningUp, logOut} = useAuthStore();
 
     const validateForm = () => {
         if (!signUpForm.fullName.trim()) return toast.error("Full name is required", toastStyle);

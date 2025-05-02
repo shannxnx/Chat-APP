@@ -2,13 +2,19 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import {create} from "zustand";
 
+const toastStyle = {
+    style : {
+        background : "red",
+        color : "white"
+    }
+}
+
 
 export const useAuthStore = create((set) => ({
     authUser : null,
     isSigningUp : false,
     isLoggingIn : false,
     isUpdatingProfile : false,
-
     isCheckingAuth : true,
 
     checkAuth : async () => {
@@ -25,7 +31,7 @@ export const useAuthStore = create((set) => ({
         }
     },
 
-    signUp : async(data) => {
+    signUp : async (data) => {
 
         set({isSigningUp : true});
         try {
@@ -34,11 +40,36 @@ export const useAuthStore = create((set) => ({
             toast.success("Account created successfully!");
 
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response.data.message, toastStyle);
         }finally{
             set({isSigningUp : false})
         }
+    },
+
+    logIn : async (data) => {
+        set({isLoggingIn : true});
+        try{
+            const res = await axios.post("http://localhost:5001/api/auth/login", data);
+            set({authUser : res.data});
+            toast.success("Logged in successfully!");
+        }catch(error){
+            toast.error(error.response.data.message, toastStyle);
+        }finally{
+            set({isLoggingIn : false});
+        }
+    },
+
+    logOut : async () => {
+        try {
+            await axios.post("http://localhost:5001/api/auth/logout");
+            set({authUser : null});
+            toast.success("Logged out successfully");
+        } catch (error) {
+            toast.error(error.response.data.message, toastStyle);
+        }
     }
+
+
 
 
 

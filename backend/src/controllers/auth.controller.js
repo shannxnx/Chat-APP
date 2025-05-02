@@ -76,14 +76,14 @@ export const login = async (req, res) => {
 
        //check if the user is in the database
         if (!user){
-            res.status(400).json({message: "Invalid credintials"});
+            res.status(400).json({message: "Invalid credentials"});
         }
 
 
         //check if the password is correct
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect){
-            res.status(401).json({message: "Invalid credintials"});
+            res.status(401).json({message: "Invalid credentials"});
         }
 
         generateToken(user._id, res);
