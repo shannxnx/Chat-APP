@@ -3,13 +3,14 @@ import { FaBeer, FaEye, FaEyeSlash, FaQuestion } from 'react-icons/fa';
 import axios from "axios"
 import { useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
+import { Loader2 } from 'lucide-react';
 
 export default function Login(){
 
     const [loginForm, setLoginForm] = useState({email : "", password : ""});
     const [showPass, setShowPass] = useState("password");
 
-    const {logIn} = useAuthStore();
+    const {logIn, isLoggingIn} = useAuthStore();
     
 
     function handleShowPass(){
@@ -106,7 +107,16 @@ export default function Login(){
 
 
             <button type='submit' className="border-1 w-[150px] h-[40px] rounded-[500px] cursor-pointer bg-white
-            hover:bg-gray-200 active:scale-95">LOG IN</button>
+            hover:bg-gray-200 active:scale-95" disabled={isLoggingIn}>
+                {
+                    isLoggingIn ? (
+                        <>
+                            
+                            Loading....
+                        </>
+                    ) : ("LOG IN")
+                }
+            </button>
 
         </form>
 
