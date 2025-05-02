@@ -1,4 +1,4 @@
-import { FaBeer, FaQuestion } from 'react-icons/fa';
+import { FaBeer, FaEye, FaQuestion } from 'react-icons/fa';
 
 import axios from "axios"
 import { useState } from 'react';
@@ -6,6 +6,12 @@ import { useState } from 'react';
 export default function Signup(){
 
     const [signUpForm, setSignUpForm] = useState({fullName : "", email : "", password : ""});
+    const [showPass, setShowPass] = useState("password");
+    
+
+    function handleShowPass(){
+        setShowPass((prev) => prev === "password" ? "text" : "password");
+    }
 
 
     async function handleOnSubmit(event){
@@ -73,8 +79,13 @@ export default function Signup(){
             <div className="w-[70%] mt-2 flex flex-col mb-8">
 
                 <label htmlFor="" className="mb-3">Password</label>
-                <input type="password" className="p-3 h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
-                name='password' value={signUpForm.password} onChange={handleOnChange} autoComplete='off' required/>
+
+                <div className='flex relative'>
+                    <input type={showPass} className="p-3 w-[100%] h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
+                    name='password' value={signUpForm.password} onChange={handleOnChange} autoComplete='off' required/>
+                    <FaEye className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer' onClick={handleShowPass}/>
+                </div>
+                
 
             </div>
 
