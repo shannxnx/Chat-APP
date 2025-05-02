@@ -6,7 +6,7 @@ import { useAuthStore } from './store/useAuthStore';
 import { Loader } from 'lucide-react';
 import Homepage from './components/homepage';
 import Profile from './components/profile';
-
+import { Toaster } from 'react-hot-toast';
 
 {/* <div className=''>
         <Signup/>
@@ -32,12 +32,15 @@ function App() {
     
     <BrowserRouter>
       <Routes>
+       
         <Route path='/' element={authUser ?  <Homepage/> : <Navigate to="/login"/>}/>
         <Route path='/signup' element={!authUser ? <Signup/> : <Navigate to="/"/>} />
         <Route path='/login' element={!authUser ? <Login/> : <Navigate to="/"/>}/>
         <Route path='/profile' element={authUser ? <Profile/> : <Navigate to="/login"/>}/>
+        
+        
       </Routes>
-      
+      <Toaster/> 
     </BrowserRouter>
     
     

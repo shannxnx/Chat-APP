@@ -1,8 +1,23 @@
 import { FaBeer, FaEye, FaEyeSlash, FaQuestion } from 'react-icons/fa';
-
 import axios from "axios"
 import { useState } from 'react';
-import { Camera } from 'lucide-react';
+import { Camera, Loader2 } from 'lucide-react';
+import { useAuthStore } from '../store/useAuthStore';
+import toast from 'react-hot-toast';
+
+
+
+
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const toastStyle = {
+    style : {
+        background : "red",
+        color : "white"
+    }
+}
+
 
 export default function Signup(){
 
@@ -10,7 +25,17 @@ export default function Signup(){
     const [showPass, setShowPass] = useState("password");
 
     
-    
+    const {signUp, isSigningUp} = useAuthStore();
+
+    const validateForm = () => {
+        if (!signUpForm.fullName.trim()) return toast.error("Full name is required", toastStyle);
+        if (!signUpForm.email.trim()) return toast.error("Email is required", toastStyle);
+        if (!emailRegex.test(signUpForm.email)) return toast.error("Invalid Email", toastStyle);
+        if (!signUpForm.password) return toast.error("Password is required", toastStyle);
+        if (signUpForm.password.length < 6) return toast.error("Password must be atleast 6 characters", toastStyle);
+
+        return true;
+    };
 
     function handleShowPass(){
         setShowPass((prev) => prev === "password" ? "text" : "password");
@@ -20,23 +45,12 @@ export default function Signup(){
     async function handleOnSubmit(event){
         event.preventDefault();
 
-        try {
+        const success = validateForm();
 
-
-            // if (!signUpForm.fullName || !signUpForm.email || !signUpForm.password){
-            //     console.log("Fill out all ");
-            // }
-
-            const res = await axios.post(`http://localhost:5001/api/auth/signup`, signUpForm, {withCredentials : true});
-            console.log("Sign in succesfully!");
-
-            setSignUpForm({fullName : "", email : "", password : ""});
-            
-
-
-        } catch (e) {
-            console.log("Error in submit: ", e.message);
+        if (success === true){
+            signUp(signUpForm);
         }
+
     }
 
     async function handleLogOut(){
@@ -98,8 +112,19 @@ export default function Signup(){
             </div>
 
 
-            <button className="border-1 w-[170px] h-[40px] rounded-[500px] cursor-pointer bg-white
-            hover:bg-gray-200 active:scale-95">CREATE ACCOUNT</button>
+            <button type='submit' className="border-1 w-[170px] h-[40px] rounded-[500px] cursor-pointer bg-white
+            hover:bg-gray-200 active:scale-95" disabled={isSigningUp}>
+                {
+                    isSigningUp ? (
+                        <>
+                            <Loader2 className='size-5 animate-spin'/>
+                            Loading....
+                        </>
+                    ) : ("Create Account")
+                }
+
+                
+            </button>
 
         </form>
 
