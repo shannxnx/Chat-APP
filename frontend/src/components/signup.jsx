@@ -1,7 +1,8 @@
-import { FaBeer, FaEye, FaQuestion } from 'react-icons/fa';
+import { FaBeer, FaEye, FaEyeSlash, FaQuestion } from 'react-icons/fa';
 
 import axios from "axios"
 import { useState } from 'react';
+import { Camera } from 'lucide-react';
 
 export default function Signup(){
 
@@ -83,7 +84,12 @@ export default function Signup(){
                 <div className='flex relative'>
                     <input type={showPass} className="p-3 w-[100%] h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
                     name='password' value={signUpForm.password} onChange={handleOnChange} autoComplete='off' required/>
-                    <FaEye className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer' onClick={handleShowPass}/>
+                    {
+                        showPass === "password" ? <FaEyeSlash className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer'  onClick={handleShowPass}/>
+                        : <FaEye className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer' onClick={handleShowPass}/>
+                    }
+
+                    
                 </div>
                 
 
@@ -97,12 +103,15 @@ export default function Signup(){
 
         <h1 className='mt-4'>Already have an accont? <span className='text-[#E69DB8] underline underline-offset-4'><a href="/login">Log in</a></span></h1>
 
+
         <div className='w-[90%] h-[60px] flex justify-end items-center'>
             <div className=' w-[60px] h-[100%] flex justify-center items-center scale-115 rounded-[500px] bg-[#FFFECE]'>
                 <h1 className='text-2xl lg:text-3xl text-black cursor-pointer active:scale-95' onClick={handleLogOut}><FaQuestion/></h1>
             </div>
             
         </div>
+
+        
         
 
 

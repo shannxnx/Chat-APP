@@ -1,4 +1,4 @@
-import { FaBeer, FaEye, FaQuestion } from 'react-icons/fa';
+import { FaBeer, FaEye, FaEyeSlash, FaQuestion } from 'react-icons/fa';
 
 import axios from "axios"
 import { useState } from 'react';
@@ -81,7 +81,16 @@ export default function Login(){
                     <div className='flex relative'>
                         <input type={showPass} className="p-3 w-[100%] h-[50px] bg-white border-1 focus:outline-none" placeholder="Password"
                         name='password' value={loginForm.password} onChange={handleOnChange} autoComplete='off' required/>
-                        <FaEye className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer' onClick={handleShowPass}/>
+
+                        {
+                            showPass === "password" ? <FaEyeSlash className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer'  onClick={handleShowPass}/>
+                            : <FaEye className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer' onClick={handleShowPass}/>
+                        }
+
+                        
+
+
+                        {/* <FaEye className='absolute text-2xl top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer' onClick={handleShowPass}/> */}
                     </div>
 
             </div>
@@ -92,7 +101,7 @@ export default function Login(){
 
         </form>
 
-        <h1 className='mt-8'>Don't have an account? <span className='text-[#E69DB8] underline underline-offset-4'><a href="/">Sign Up</a></span></h1>
+        <h1 className='mt-8'>Don't have an account? <span className='text-[#E69DB8] underline underline-offset-4'><a href="/signup">Sign Up</a></span></h1>
 
         <div className='w-[90%] h-[60px] flex justify-end items-center'>
             <div className=' w-[60px] h-[100%] flex justify-center items-center scale-115 rounded-[500px] bg-[#FFFECE]'>
