@@ -144,3 +144,19 @@ export const checkAuth = (req, res) => {
         res.status(500).json({message : "Server error"});
     }
 }
+
+export const getUserInfo = async (req, res) => {
+    
+
+    try {
+        const userId = req.user._id;
+
+        const userInfo = await User.find({_id : userId}).select("-password");
+
+        res.status(201).json(userInfo);
+        
+    } catch (error) {
+        console.log("Error in getting user info : ", error.message);
+        res.status(500).json({message : "Server error"});
+    }
+}

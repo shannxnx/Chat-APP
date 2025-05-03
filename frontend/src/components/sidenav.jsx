@@ -1,6 +1,7 @@
-import { LogOut, Search } from "lucide-react";
+import { FanIcon, LogOut, Search, User2 } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import SideProfile from "./side_profile";
+import { Profiler } from "react";
 
 
 
@@ -29,7 +30,9 @@ export default function Sidenav(){
 
         <div className="w-full h-full">
             <div className="text-white  flex justify-between p-3">
-                <Search className="text-black"/>
+                {/* <Search className="text-black"/> */}
+                <a href="/profile"><User2 className="cursor-pointer"/></a>
+                
                 <LogOut className="cursor-pointer" onClick={() => logOut()}/>
             </div>
         </div>
