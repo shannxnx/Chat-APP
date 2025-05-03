@@ -31,26 +31,8 @@ export default function Login(){
     async function handleOnSubmit(event){
         event.preventDefault();
 
-        
         logIn(loginForm);
-        // try {
-
-
-        //     // if (!signUpForm.fullName || !signUpForm.email || !signUpForm.password){
-        //     //     console.log("Fill out all ");
-        //     // }
-
-        //     const res = await axios.post(`http://localhost:5001/api/auth/login`, loginForm, {withCredentials : true});
-        //     console.log("Login succesfully!");
-        //     alert("Login Succesfully!");
-        //     setLoginForm({email : "", password : ""});
-            
-
-
-        // } catch (e) {
-        //     console.log("Login error: ", e.message);
-        //     // alert("Login Failed");
-        // }
+        
     }
 
     async function handleLogOut(){
