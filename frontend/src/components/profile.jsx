@@ -1,24 +1,44 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore"
 import { ArrowBigLeft, Camera, Mail, SendToBack, User } from "lucide-react";
-
+import avatar from "../../public/avatar.png"
 
 export default function Profile(){
 
     const {userInfo, userData, isUpdatingProfile, updateProfile} = useAuthStore();
 
+    const [selectedImg, setSelectedImg] = useState();
+
     useEffect(() => {
-        userInfo()
-    }, []);
+        if (!userData || !userData.data) {
+            userInfo();
+          }
+    }, [userData]);
 
     console.log(userData.data);
 
     const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = async () => {
+            const base64Image = reader.result;
+            setSelectedImg(base64Image);
+            await updateProfile({profilePic : base64Image})
+        }
+
 
     }
 
     return <div className="bg-[#F1E7E7] h-screen flex flex-col justify-center items-center relative gap-4">
         <div className="w-[100%] h-[50px] bg-black absolute top-0 flex items-center p-3">
+
+           
+
             <a href="/">
                 <ArrowBigLeft className="text-white size-[32px] cursor-pointer active:scale-95"/>
             </a>
@@ -28,16 +48,50 @@ export default function Profile(){
         {/*
             light blue - #090088
             dark blue - #0B192C
+            <img src={userData.data[0].profilePic === "" ? avatar : userData.data[0].profilePic}
         */}
         
         <div className="w-[500px] h-[250px] border-1 p-4 rounded-[24px] flex gap-4 bg-[#0B192C]">
 
             <div className="size-[200px] border-1 rounded-[500px] bg-white relative">
+            
+            {
+                userData.data ? <img src={selectedImg || userData.data[0].profilePic || avatar}
+                 className="size-[200px] rounded-[500px]"/>  
+                 : null
+            }
+
+                \
+             
+                {/* <div className="border-1 size-[48px] flex justify-center items-center absolute 
+                right-0 bottom-0 mr-3 bg-black rounded-[500px] cursor-pointer">
+                     
+                     <Camera className="text-white z-100"/>
+                     <input type="file" className="border-1 size-[48px] flex justify-center items-center absolute 
+                    right-0 bottom-0  bg-black rounded-[500px] cursor-pointer" placeholder=""/>
+                    
+                </div> */}
 
                 <div className="border-1 size-[48px] flex justify-center items-center absolute 
                 right-0 bottom-0 mr-3 bg-black rounded-[500px] cursor-pointer">
-                    <Camera className="text-white"/>
+
+                        <label
+                        htmlFor="file-upload"
+                        className="border size-[48px] flex justify-center items-center bg-black rounded-full cursor-pointer absolute right-0 bottom-0"
+                        >
+                        <Camera className="text-white z-10" />
+                        </label>
+                        <input
+                        type="file"
+                        id="file-upload"
+                        accept="image/*" 
+                        className="opacity-0 absolute inset-0 cursor-pointer"
+                        onChange={handleImageUpload}
+                        />
                 </div>
+
+
+                
             </div>
 
             {
