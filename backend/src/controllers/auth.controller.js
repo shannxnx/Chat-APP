@@ -136,6 +136,7 @@ export const updateProfile = async (req, res) => {
     }
 }
 
+
 export const checkAuth = (req, res) => {
     try {
         res.status(200).json(req.user);
@@ -144,6 +145,7 @@ export const checkAuth = (req, res) => {
         res.status(500).json({message : "Server error"});
     }
 }
+
 
 export const getUserInfo = async (req, res) => {
     
@@ -158,5 +160,21 @@ export const getUserInfo = async (req, res) => {
     } catch (error) {
         console.log("Error in getting user info : ", error.message);
         res.status(500).json({message : "Server error"});
+    }
+}
+
+
+export const getAllUsers = async (req, res) => {
+    
+    try{
+
+        const userId = req.user._id;
+        const allUsers = await User.find({_id : {$ne : userId}}).select("-password");
+        res.status(201).json(allUsers);
+
+
+    }catch(error){
+        console.log("Error in getting all users: ", error.message);
+        res.status(500).json({message : "Error server"});
     }
 }
