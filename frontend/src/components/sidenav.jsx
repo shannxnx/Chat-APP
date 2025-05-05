@@ -1,7 +1,7 @@
 import { FanIcon, LogOut, Search, User2 } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import SideProfile from "./side_profile";
-import { Profiler } from "react";
+import { Profiler, useEffect } from "react";
 
 
 
@@ -16,13 +16,25 @@ const testProfile2 = [
 
 export default function Sidenav(){
     
-    const {logOut} = useAuthStore();
+    const {logOut, allUsers, setAllUsers} = useAuthStore();
+
+    useEffect(() => {
+        setAllUsers();
+    }, [])
+
+    console.log(allUsers);
+
     return <div className="w-[400px] h-screen bg-black flex">
         
 
         <div className="w-[35%] h-full max-h-full bg-[#0B192C] flex flex-col items-center overflow-x-hidden">
-            {
+            {/* {
                 testProfile2.map((items, index) => <SideProfile profile={items} key={index}/>)
+            } */}
+
+            {
+                allUsers[0] &&
+                allUsers.map((items, index) => <SideProfile profile={items.profilePic} key={index}/>)
             }
             
             

@@ -16,8 +16,10 @@ export const useAuthStore = create((set) => ({
     isLoggingIn : false,
     isUpdatingProfile : false,
     isCheckingAuth : true,
-
     userData : {},
+    allUsers : {},
+
+
 
     checkAuth : async () => {
         try {
@@ -98,6 +100,18 @@ export const useAuthStore = create((set) => ({
             set({isUpdatingProfile:false})
         }
     },
+
+    setAllUsers : async () => {
+        try {
+            
+            const res = await axios.get("http://localhost:5001/api/auth/all-users", {withCredentials : true});
+            set({allUsers : res.data});
+
+        } catch (error) {
+            console.log("Error in getting all users: ", error);
+            toast.error(error.response.data.message, toastStyle);
+        }
+    }
 
 
 
