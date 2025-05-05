@@ -61,16 +61,7 @@ export default function Profile(){
                  : null
             }
 
-                \
-             
-                {/* <div className="border-1 size-[48px] flex justify-center items-center absolute 
-                right-0 bottom-0 mr-3 bg-black rounded-[500px] cursor-pointer">
-                     
-                     <Camera className="text-white z-100"/>
-                     <input type="file" className="border-1 size-[48px] flex justify-center items-center absolute 
-                    right-0 bottom-0  bg-black rounded-[500px] cursor-pointer" placeholder=""/>
-                    
-                </div> */}
+                
 
                 <div className="border-1 size-[48px] flex justify-center items-center absolute 
                 right-0 bottom-0 mr-3 bg-black rounded-[500px] cursor-pointer">
@@ -116,6 +107,15 @@ export default function Profile(){
                     placeholder={userData.data[0].email}/>
                 </div>
                 : null
+            }
+            
+        </div>
+
+        <div className="border-1 w-[500px] rounded-[24px] h-[60px] bg-[#0B192C] p-5 flex gap-12">
+            {
+                userData.data && <>
+                <h1 className="text-gray-400">Member Since : <span className="ml-3">{userData.data[0].createdAt?.split("T")[0]}</span></h1>
+                 <h1 className="text-gray-400">Status : <span className="text-green-400 ml-3"> ACTIVE</span></h1> </>
             }
             
         </div>

@@ -16,7 +16,7 @@ const testProfile2 = [
 
 export default function Sidenav(){
     
-    const {logOut, allUsers, setAllUsers} = useAuthStore();
+    const {logOut, allUsers, setAllUsers, checkAuth, authUser} = useAuthStore();
 
     useEffect(() => {
         setAllUsers();
@@ -44,6 +44,7 @@ export default function Sidenav(){
             <div className="text-white  flex justify-between p-3">
                 {/* <Search className="text-black"/> */}
                 <a href="/profile"><User2 className="cursor-pointer"/></a>
+                {/* <SideProfile profile={allUsers[0]}/> */}
                 
                 <LogOut className="cursor-pointer" onClick={() => logOut()}/>
             </div>

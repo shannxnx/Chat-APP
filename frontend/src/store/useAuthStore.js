@@ -9,6 +9,10 @@ const toastStyle = {
     }
 }
 
+/*
+    null = if it's data (right)
+    {} = kinda wrong    (bad but not that bad)
+*/
 
 export const useAuthStore = create((set) => ({
     authUser : null,
