@@ -34,7 +34,7 @@ export default function Sidenav(){
 
             {
                 allUsers[0] &&
-                allUsers.map((items, index) => <SideProfile profile={items.profilePic} key={index}/>)
+                allUsers.map((items, index) => <SideProfile profile={items} key={index}/>)
             }
             
             
