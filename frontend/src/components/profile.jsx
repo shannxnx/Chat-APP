@@ -64,7 +64,7 @@ export default function Profile(){
                 
 
                 <div className="border-1 size-[48px] flex justify-center items-center absolute 
-                right-0 bottom-0 mr-3 bg-black rounded-[500px] cursor-pointer">
+                right-0 bottom-0 mr-3 bg-black rounded-[500px] cursor-pointer hover:scale-105 duration-75">
 
                         <label
                         htmlFor="file-upload"

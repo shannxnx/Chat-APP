@@ -2,6 +2,7 @@ import { FanIcon, LogOut, Search, User2 } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import SideProfile from "./side_profile";
 import { Profiler, useEffect } from "react";
+import { useChatStore } from "../store/useChatStore";
 
 
 
@@ -17,12 +18,15 @@ const testProfile2 = [
 export default function Sidenav(){
     
     const {logOut, allUsers, setAllUsers, checkAuth, authUser} = useAuthStore();
+    const {users,  getUsers, isSelectedUser, setSelectedUser, isUserLoading} = useChatStore();
+
+    const onlineUsers = [];
 
     useEffect(() => {
         setAllUsers();
     }, [])
 
-    console.log(allUsers);
+    // console.log(allUsers);
 
     return <div className="w-[400px] h-screen bg-black flex">
         
