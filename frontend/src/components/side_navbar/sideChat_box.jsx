@@ -1,10 +1,9 @@
-import avatar from "../../public/avatar.png";
-import { useChatStore } from "../store/useChatStore";
+import avatar from "../../../public/avatar.png";
+import { useChatStore } from "../../store/useChatStore";
 
 export default function SideChatBox({user}){
     const {setSelectedUser, isSelectedUser, setSelectedChat, selectedChat} = useChatStore();
 
-    // console.log("state: ", isSelectedUser);
 
     return <div className={`w-full h-[70px]  flex cursor-pointer hover:bg-gray-700
     ${selectedChat?.fullName === user.fullName ? `bg-gray-700` : `bg-black`}`} onClick={() => setSelectedChat(user)}>

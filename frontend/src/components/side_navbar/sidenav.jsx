@@ -1,9 +1,9 @@
 import { FanIcon, LogOut, Search, User2 } from "lucide-react";
-import { useAuthStore } from "../store/useAuthStore";
+import { useAuthStore } from "../../store/useAuthStore";
 import SideProfile from "./side_profile";
 import { Profiler, useEffect } from "react";
-import { useChatStore } from "../store/useChatStore";
-import avatar from "../../public/avatar.png";
+import { useChatStore } from "../../store/useChatStore";
+import avatar from "../../../public/avatar.png";
 import SideChatBox from "./sideChat_box";
 
 
@@ -32,7 +32,7 @@ export default function Sidenav(){
     }, [getUsers])
 
     
-    console.log("chat (users): ", users);
+    // console.log("chat (users): ", users);
 
     return <div className="lg:w-[420px] md:w-[300px] w-[80px] h-screen bg-black flex relative">
         
@@ -40,7 +40,7 @@ export default function Sidenav(){
         <div className="lg:w-[35%] lg:h-full w-[0%] bg-[#0B192C] lg:flex flex-col items-center overflow-x-hidden
         md:hidden  sm:hidden">
             
-
+            {/*This uses the state from the auth*/}
             {
                 allUsers[0] &&
                 allUsers.map((items, index) => <SideProfile profile={items} key={index}/>)
@@ -59,6 +59,7 @@ export default function Sidenav(){
             </div>
             <div className="w-full h-[100%]  overflow-y-scroll flex flex-col gap-3">
                 
+                {/*This uses the state from the chat*/}
                 {
                     users && users.map((user) => <SideChatBox user={user} key={user._id}/>)
                 }

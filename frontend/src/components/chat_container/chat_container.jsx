@@ -1,5 +1,5 @@
 import { CircleX, Delete } from "lucide-react";
-import avatar from "../../public/avatar.png";
+import avatar from "../../../public/avatar.png"
 import MessageInput from "./message_input";
 
 
@@ -11,7 +11,7 @@ export default function ChatContainer({selectedUser}){
 
             <div className="flex  gap-3 items-center">
                 <div className="size-[64px]  rounded-[500px] ml-3 my-auto">
-                    <img src={avatar || selectedUser.profilePic}  className="size-[64px]  rounded-[500px]"/>
+                    <img src={selectedUser.profilePic || avatar}  className="size-[64px]  rounded-[500px]"/>
                 </div>
 
                 <div>
@@ -30,7 +30,6 @@ export default function ChatContainer({selectedUser}){
         </div>
 
         {/*Lower part*/}
-
         <MessageInput/>
 
 

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useAuthStore } from "../store/useAuthStore"
 import { useChatStore } from "../store/useChatStore";
-import Sidenav from "./sidenav";
+import Sidenav from "./side_navbar/sidenav";
 import { ChartArea } from "lucide-react";
 import chatIcon from "../../public/chat-svgrepo-com.svg";
-import ChatContainer from "./chat_container";
+import ChatContainer from "./chat_container/chat_container";
 
-//C:\CHAT_MERN\frontend\public\chat-svgrepo-com.svg
+
 
 
 
@@ -31,6 +31,7 @@ export default function Homepage(){
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
         <Sidenav/>
+        
         <div className="w-[100%] h-full  bg-white ">
             {
                 isSelectedUser ? <ChatContainer selectedUser={selectedChat}/>
