@@ -1,7 +1,9 @@
 import { FileInput, Send } from "lucide-react";
 
+
 export default function MessageInput () {
 
+    
 
     return <div className="w-full h-[70px]  flex p-2 gap-5 justify-center">
 

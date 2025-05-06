@@ -2,12 +2,12 @@ import avatar from "../../public/avatar.png";
 import { useChatStore } from "../store/useChatStore";
 
 export default function SideChatBox({user}){
-    const {setSelectedUser, isSelectedUser} = useChatStore();
+    const {setSelectedUser, isSelectedUser, setSelectedChat, selectedChat} = useChatStore();
 
-    console.log("state: ", isSelectedUser);
+    // console.log("state: ", isSelectedUser);
 
     return <div className={`w-full h-[70px]  flex cursor-pointer hover:bg-gray-700
-    ${isSelectedUser ? `bg-gray-700` : `bg-black`}`} onClick={setSelectedUser}>
+    ${selectedChat?.fullName === user.fullName ? `bg-gray-700` : `bg-black`}`} onClick={() => setSelectedChat(user)}>
 
         <div className="size-[64px] border-1 rounded-[100px] bg-white ml-2">
             <img src={user.profilePic || avatar}  className="size-[64px] rounded-[200px]"/>
