@@ -24,8 +24,8 @@ export default function Homepage(){
         getMessages("68191e92f10e2a50fb5465e9");
     }, [])
 
-    console.log("Users (chat): ", users);
-    console.log("Messages : ", messages);
+    // console.log("Users (chat): ", users);
+    // console.log("Messages : ", messages);
 
     return <div className="bg-[#F1E7E7] w-screen h-screen border-1 flex overflow-hidden">
         <Sidenav/>

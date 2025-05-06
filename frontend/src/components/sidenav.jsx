@@ -3,7 +3,8 @@ import { useAuthStore } from "../store/useAuthStore";
 import SideProfile from "./side_profile";
 import { Profiler, useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
-
+import avatar from "../../public/avatar.png";
+import SideChatBox from "./sideChat_box";
 
 
 
@@ -24,17 +25,22 @@ export default function Sidenav(){
 
     useEffect(() => {
         setAllUsers();
-    }, [])
+        
+    }, []);
 
-    // console.log(allUsers);
+    useEffect(() => {
+        getUsers();
+    }, [getUsers])
 
-    return <div className="w-[400px] h-screen bg-black flex">
+    
+    console.log("chat (users): ", users);
+
+    return <div className="lg:w-[420px] md:w-[300px] w-[80px] h-screen bg-black flex relative">
         
 
-        <div className="w-[35%] h-full max-h-full bg-[#0B192C] flex flex-col items-center overflow-x-hidden">
-            {/* {
-                testProfile2.map((items, index) => <SideProfile profile={items} key={index}/>)
-            } */}
+        <div className="lg:w-[35%] lg:h-full w-[0%] bg-[#0B192C] flex flex-col items-center overflow-x-hidden
+        md:hidden lg:block sm:hidden">
+            
 
             {
                 allUsers[0] &&
@@ -44,15 +50,24 @@ export default function Sidenav(){
             
         </div>
 
-        <div className="w-full h-full">
+        <div className="w-full h-full flex flex-col ">
             <div className="text-white  flex justify-between p-3">
                 {/* <Search className="text-black"/> */}
-                <a href="/profile"><User2 className="cursor-pointer"/></a>
+                <a href="/profile" className="hidden lg:block md:block"><User2 className="cursor-pointer"/></a>
                 {/* <SideProfile profile={allUsers[0]}/> */}
                 
                 <LogOut className="cursor-pointer" onClick={() => logOut()}/>
             </div>
+            <div className="w-full h-[100%]  overflow-y-scroll flex flex-col gap-3">
+                
+                {
+                    users && users.map((user) => <SideChatBox user={user} key={user._id}/>)
+                }
+
+            </div>
         </div>
+
+        
 
         
     </div>
