@@ -4,6 +4,7 @@ import { useChatStore } from "../store/useChatStore";
 import Sidenav from "./sidenav";
 import { ChartArea } from "lucide-react";
 import chatIcon from "../../public/chat-svgrepo-com.svg";
+import ChatContainer from "./chat_container";
 
 //C:\CHAT_MERN\frontend\public\chat-svgrepo-com.svg
 
@@ -27,12 +28,12 @@ export default function Homepage(){
     // console.log("Users (chat): ", users);
     // console.log("Messages : ", messages);
 
-    return <div className="bg-[#F1E7E7] w-screen h-screen border-1 flex overflow-hidden">
+    return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
         <Sidenav/>
 
-        <div className="w-[100%] h-full  bg-white border-1">
+        <div className="w-[100%] h-full  bg-white ">
             {
-                isSelectedUser ? null 
+                isSelectedUser ? <ChatContainer/>
                 : <div className="size-full border-1 flex flex-col justify-center items-center">
                     <img src={chatIcon} alt="chat icon" className="size-[200px] mb-4"/>
                     <h1>Welcome to 
@@ -41,6 +42,7 @@ export default function Homepage(){
                 </div>
 
             }
+            
         </div>
 
         

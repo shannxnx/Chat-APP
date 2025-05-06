@@ -38,8 +38,8 @@ export default function Sidenav(){
     return <div className="lg:w-[420px] md:w-[300px] w-[80px] h-screen bg-black flex relative">
         
 
-        <div className="lg:w-[35%] lg:h-full w-[0%] bg-[#0B192C] flex flex-col items-center overflow-x-hidden
-        md:hidden lg:block sm:hidden">
+        <div className="lg:w-[35%] lg:h-full w-[0%] bg-[#0B192C] lg:flex flex-col items-center overflow-x-hidden
+        md:hidden  sm:hidden">
             
 
             {
