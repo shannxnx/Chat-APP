@@ -1,17 +1,23 @@
 import { FileInput, Send } from "lucide-react";
 import { useRef, useState } from "react";
 import { useChatStore } from "../../store/useChatStore";
+import toast from "react-hot-toast";
 
 
 export default function MessageInput () {
 
     const [text, setText] = useState("");
-    const [imagePrev, setImagePrev] = useState(false);
+    const [imagePrev, setImagePrev] = useState();
     const fileInput = useRef();
     const {sendMessage} = useChatStore();
 
     const handleImageChange = (e) => {
+        const file = e.target.files[0];
 
+        if (!file.type.startsWith("image/")){
+            toast.error("Only image is allowed");
+            return;
+        }
     };
 
     const removeImage = () => {
