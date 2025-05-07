@@ -22,12 +22,10 @@ export default function Homepage(){
 
     useEffect(() => {
         getUsers();
-        getMessages("68191e92f10e2a50fb5465e9");
     }, []);
 
     console.log("Selected Chat: ", selectedChat);
-    // console.log("Users (chat): ", users);
-    // console.log("Messages : ", messages);
+    
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
         <Sidenav/>

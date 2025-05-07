@@ -39,6 +39,10 @@ export const useChatStore = create((set) => ({
         }
     },
 
+    sendMessage : async (data) => {
+
+    },
+
     setSelectedUser : (isSelectedUser) => set({isSelectedUser : true}),
 
     selectedChat : null,

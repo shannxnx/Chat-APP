@@ -22,6 +22,7 @@ export const useAuthStore = create((set) => ({
     isCheckingAuth : true,
     userData : {},
     allUsers : {},
+    isSelectedAuth : null,
 
 
 
@@ -57,10 +58,12 @@ export const useAuthStore = create((set) => ({
 
     logIn : async (data) => {
         set({isLoggingIn : true});
+        set({isSelectedAuth : false});
         try{
             const res = await axios.post("http://localhost:5001/api/auth/login", data, {withCredentials : true});
             set({authUser : res.data});
             toast.success("Logged in successfully!");
+            
         }catch(error){
             console.log("Error in logging in")
             toast.error(error.response.data.message, toastStyle);
@@ -74,6 +77,7 @@ export const useAuthStore = create((set) => ({
             await axios.post("http://localhost:5001/api/auth/logout", {}, {withCredentials: true});
             set({authUser : null});
             toast.success("Logged out successfully");
+            window.location.reload();
         } catch (error) {
             console.log("Error in logging out")
             toast.error(error.response.data.message, toastStyle);
