@@ -1,4 +1,4 @@
-import { FileInput, Send } from "lucide-react";
+import { FileInput, Send, X } from "lucide-react";
 import { useRef, useState } from "react";
 import { useChatStore } from "../../store/useChatStore";
 import toast from "react-hot-toast";
@@ -19,11 +19,11 @@ export default function MessageInput () {
             return;
         }
 
-        const redader = new FileReader();
-        redader.onload = () => {
-            setImagePrev(redader.result);
+        const reader = new FileReader();
+        reader.onload = () => {
+            setImagePrev(reader.result);
         };
-        redader.readAsDataURL(file);
+        reader.readAsDataURL(file);
 
     };
 
@@ -55,14 +55,16 @@ export default function MessageInput () {
         }
     };
     
-    return <div className={`w-full ${imagePrev ? "h-[160px]" : "h-[70px]"}  flex flex-col gap-5 justify-center` }>
+    return <div className={`w-full ${imagePrev ? "h-[160px]" : "h-[70px]"}  flex flex-col gap-5 justify-center duration-500` }>
 
 
 
         
         {
-            imagePrev && (<div className="w-full h-[90px]  bg-gray-300">
-
+            imagePrev && (<div className="w-full h-[90px] flex items-center  bg-white relative">
+                <X className="absolute right-0 top-0 mr-3 mt-3 cursor-pointer hover:scale-125 duration-200"
+                onClick={removeImage}/>
+                <img src={imagePrev} className="size-[64px] ml-4 "/>
             </div>)
         } 
         
