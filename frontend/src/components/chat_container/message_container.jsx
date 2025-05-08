@@ -16,8 +16,8 @@ export default function MessageContainer() {
         
     }, [selectedChat._id, getMessages]);
 
-    console.log("messages: ", messages);
-    console.log("auth user: ", authUser);
+    // console.log("messages: ", messages);
+    // console.log("auth user: ", authUser);
 
     return  <div className="w-full h-[500px] border-1 overflow-scroll " ref={containerRef}>
         
