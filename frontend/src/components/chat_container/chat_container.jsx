@@ -1,6 +1,7 @@
 import { CircleX, Delete } from "lucide-react";
 import avatar from "../../../public/avatar.png"
 import MessageInput from "./message_input";
+import MessageContainer from "./message_container";
 
 
 export default function ChatContainer({selectedUser}){
@@ -25,10 +26,8 @@ export default function ChatContainer({selectedUser}){
         </div>
 
         {/*Middle Part*/}
-        <div className="w-full h-[500px] border-1">
-
-        </div>
-
+       <MessageContainer/>
+    
         {/*Lower part*/}
         <MessageInput/>
 
