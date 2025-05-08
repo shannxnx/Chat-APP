@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useChatStore } from "../../store/useChatStore"
 import { useAuthStore } from "../../store/useAuthStore";
 import avatar from "../../../public/avatar.png"
+import { formatMessageTime } from "../../lib/utils.";
 
 export default function MessageContainer() {
 
@@ -31,7 +32,7 @@ export default function MessageContainer() {
 
                     <div className="chat-header mb-1">
                             {authUser._id === mess.senderId ? authUser.fullName : selectedChat.fullName}
-                            <time className="text-gray-400">{mess.createdAt.split("T")[0]}</time>
+                            <time className="text-gray-400">{formatMessageTime(mess.createdAt)}</time>
                     </div>
 
                     <div className="chat-bubble text-black mb-1">
