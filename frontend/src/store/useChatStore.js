@@ -1,14 +1,17 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { getMessages } from "../../../backend/src/controllers/message.controller";
 
-export const useChatStore = create((set) => ({
+
+
+export const useChatStore = create((set, get) => ({
     messages : [],
     users : [],
     isSelectedUser : null,
     isUserLoading : false,
     isMessagesLoading : false,
-
+    selectedChat : null,
 
 
     getUsers : async () => {
@@ -33,22 +36,32 @@ export const useChatStore = create((set) => ({
             set({messages : res.data});
         } catch (error) {
             console.log("Error in getting users (chat) : ", error.message);
-            toast.error(error.response.data.message);
+            toast.error(error.response.data.message || "Failed to fetch message");
         }finally{
             set({isMessagesLoading : false});
         }
     },
 
-    sendMessage : async (data) => {
+    sendMessage : async (messageData) => {
+        const {isSelectedUser, messages, selectedChat} = get();
 
+        try {
+            
+            const res = await axios.post(`http://localhost:5001/api/message/send/${selectedChat._id}`, messageData, {withCredentials : true});
+            set({messages: [...messages, res.data]});
+
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
     },
 
-    setSelectedUser : (isSelectedUser) => set({isSelectedUser : true}),
+    setSelectedUser : (isSelectedUser) => set({isSelectedUser}),
 
-    selectedChat : null,
+    
     setSelectedChat : (selected) => {
         set({selectedChat : selected});
         set({isSelectedUser : true});
+        get().getMessages(selected._id); //this is how you can use another object funtion inside an object function (with zustand create)
     },
 
 }))

@@ -65,6 +65,6 @@ export const sendMessage = async (req, res) => {
 
     } catch (error) {
         console.log("Error in sending messsage: ", error.message);
-        res.status(500).json({message : "Error Server"});
+        res.status(500).json({message : "Error Servers"});
     }
 }

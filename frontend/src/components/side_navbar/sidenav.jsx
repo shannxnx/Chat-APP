@@ -31,6 +31,9 @@ export default function Sidenav(){
         getUsers();
     }, [getUsers])
 
+
+    console.log("isSelectedUser: ", isSelectedUser);
+
     
     // console.log("chat (users): ", users);
 

@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 export default function MessageInput () {
 
     const [text, setText] = useState("");
-    const [imagePrev, setImagePrev] = useState();
+    const [imagePrev, setImagePrev] = useState(null);
     const fileInput = useRef();
     const {sendMessage} = useChatStore();
 
@@ -18,14 +18,41 @@ export default function MessageInput () {
             toast.error("Only image is allowed");
             return;
         }
+
+        const redader = new FileReader();
+        redader.onload = () => {
+            setImagePrev(redader.result);
+        };
+        redader.readAsDataURL(file);
+
     };
 
-    const removeImage = () => {
+    const removeImage = () => { 
+
+        setImagePrev(null);
+        if (fileInput.current) fileInput.current.value = "";
 
     };
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async (e) => {
+        e.preventDefault();
+        if (!text.trim() && !imagePrev) return;
 
+        
+        try {
+            await sendMessage({
+                text : text.trim(),
+                image : imagePrev,
+            });
+
+
+            //clear form
+            setText("");
+            setImagePrev(null);
+            if (fileInput.current) fileInput.current.value = "";
+        } catch (error) {
+            console.error("Failed to send message!", error.message);
+        }
     };
     
     return <div className={`w-full ${imagePrev ? "h-[160px]" : "h-[70px]"}  flex flex-col gap-5 justify-center` }>

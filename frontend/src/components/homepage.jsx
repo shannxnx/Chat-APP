@@ -24,7 +24,8 @@ export default function Homepage(){
         getUsers();
     }, []);
 
-    console.log("Selected Chat: ", selectedChat);
+    // console.log("Selected Chat: ", selectedChat);
+    console.log("Messages: ", messages);
     
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
