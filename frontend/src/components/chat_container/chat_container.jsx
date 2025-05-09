@@ -2,9 +2,13 @@ import { CircleX, Delete } from "lucide-react";
 import avatar from "../../../public/avatar.png"
 import MessageInput from "./message_input";
 import MessageContainer from "./message_container";
+import { useAuthStore } from "../../store/useAuthStore";
 
 
 export default function ChatContainer({selectedUser}){
+
+    const {onlineUsers} = useAuthStore();
+
     return <div className="size-full flex flex-col">
 
         {/*Upper part*/}
@@ -16,8 +20,15 @@ export default function ChatContainer({selectedUser}){
                 </div>
 
                 <div>
+
                     <h1>{selectedUser.fullName}</h1> {/*Name of selected user should be here*/}
-                    <h5 className="text-gray-500">Offline</h5>
+
+                    <h5 className={`${onlineUsers.includes(selectedUser._id) ? "text-green-500" : "text-gray-500"}`}>
+                        {
+                            onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"
+                        }
+                    </h5>
+
                 </div>
             </div>
 

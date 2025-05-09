@@ -1,8 +1,10 @@
 import avatar from "../../../public/avatar.png";
+import { useAuthStore } from "../../store/useAuthStore";
 import { useChatStore } from "../../store/useChatStore";
 
 export default function SideChatBox({user}){
-    const {setSelectedUser, isSelectedUser, setSelectedChat, selectedChat} = useChatStore();
+    const {setSelectedChat, selectedChat} = useChatStore();
+    const {onlineUsers} = useAuthStore();
 
 
     return <div className={`w-full h-[70px]  flex cursor-pointer hover:bg-gray-700
@@ -14,7 +16,13 @@ export default function SideChatBox({user}){
 
         <div className="lg:w-[70%] h-full  flex-col justify-center hidden md:block lg:flex">
             <h1 className="text-white ml-3">{user.fullName}</h1>
-            <h5 className="text-gray-400 ml-3">Offline</h5>
+            <h5 
+        className={`${onlineUsers.includes(user._id) ? "text-green-500" : "text-gray-400 "} ml-3`}>
+                {
+                    onlineUsers.includes(user._id) ? "Online" : "Offline"
+                }
+                
+            </h5>
         </div>
     
     </div>

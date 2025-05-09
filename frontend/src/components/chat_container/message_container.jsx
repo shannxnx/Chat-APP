@@ -6,15 +6,19 @@ import { formatMessageTime } from "../../lib/utils.";
 
 export default function MessageContainer() {
 
-    const {getMessages, selectedChat, messages} = useChatStore();
+    const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages} = useChatStore();
     const {authUser} = useAuthStore();
 
     const containerRef = useRef();
 
     useEffect(() => {
         getMessages(selectedChat._id);
+
+        subscribeToMessages();
+
+        return () => unsubscribeToMessages();
         
-    }, [selectedChat._id, getMessages]);
+    }, [selectedChat._id, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
