@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import {create} from "zustand";
+import {io} from "socket.io-client";
 
 const toastStyle = {
     style : {
@@ -14,7 +15,9 @@ const toastStyle = {
     {} = kinda wrong    (bad but not that bad)
 */
 
-export const useAuthStore = create((set) => ({
+const BASE_URL = "http://localhost:5001";
+
+export const useAuthStore = create((set, get) => ({
     authUser : null,
     isSigningUp : false,
     isLoggingIn : false,
@@ -23,6 +26,8 @@ export const useAuthStore = create((set) => ({
     userData : {},
     allUsers : {},
     isSelectedAuth : null,
+    onlineUsers : [],
+    socket : null,
 
 
 
@@ -31,6 +36,7 @@ export const useAuthStore = create((set) => ({
             const res = await axios.get("http://localhost:5001/api/auth/check", {withCredentials : true});
 
             set({authUser:res.data});
+            get().connectSocket();
 
         } catch (error) {
             console.log("Error in checkauths: ", error)
@@ -47,6 +53,7 @@ export const useAuthStore = create((set) => ({
             const res = await axios.post("http://localhost:5001/api/auth/signup", data, {withCredentials : true});
             set({authUser : res.data});
             toast.success("Account created successfully!");
+            get().connectSocket();
 
         } catch (error) {
             console.log("Error in signing up");
@@ -63,6 +70,7 @@ export const useAuthStore = create((set) => ({
             const res = await axios.post("http://localhost:5001/api/auth/login", data, {withCredentials : true});
             set({authUser : res.data});
             toast.success("Logged in successfully!");
+            get().connectSocket();
             
         }catch(error){
             console.log("Error in logging in")
@@ -77,6 +85,7 @@ export const useAuthStore = create((set) => ({
             await axios.post("http://localhost:5001/api/auth/logout", {}, {withCredentials: true});
             set({authUser : null});
             toast.success("Logged out successfully");
+            get().disconnectSocket();
             window.location.reload();
         } catch (error) {
             console.log("Error in logging out")
@@ -119,7 +128,22 @@ export const useAuthStore = create((set) => ({
             console.log("Error in getting all users: ", error);
             toast.error(error.response.data.message, toastStyle);
         }
-    }
+    },
+
+    connectSocket : () => {
+        const {authUser} = get();
+        if (!authUser || get().socket?.connected) return;
+
+
+
+        const socket = io(BASE_URL);
+        socket.connect();
+        set({socket: socket})
+    },
+    disconnectSocket : () => {
+        if (get().socket?.connected) get().socket.disconnect();
+    },
+
 
 
 

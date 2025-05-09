@@ -7,7 +7,7 @@ import { formatMessageTime } from "../../lib/utils.";
 export default function MessageContainer() {
 
     const {getMessages, selectedChat, messages} = useChatStore();
-    const {checkAuth, authUser} = useAuthStore();
+    const {authUser} = useAuthStore();
 
     const containerRef = useRef();
 
@@ -24,7 +24,7 @@ export default function MessageContainer() {
         {
            messages && messages.map((mess) => {
                 return <div className={`chat ${authUser._id === mess.senderId ? "chat-end" : "chat-start"} mr-4
-                ${authUser._id === mess.senderId ? "mr-4" : "ml-4"}`}>
+                ${authUser._id === mess.senderId ? "mr-4" : "ml-4"}`} key={mess._id}>
 
                     <div className="chat-image avatar">
                         <div className="w-[48px] rounded-full">
