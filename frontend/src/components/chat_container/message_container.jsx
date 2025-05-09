@@ -7,7 +7,7 @@ import { formatMessageTime } from "../../lib/utils.";
 export default function MessageContainer() {
 
     const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages} = useChatStore();
-    const {authUser} = useAuthStore();
+    const {authUser, socket} = useAuthStore();
 
     const containerRef = useRef();
 
@@ -20,6 +20,8 @@ export default function MessageContainer() {
         
     }, [selectedChat._id, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
+
+    console.log("Socket: ", socket);
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
 

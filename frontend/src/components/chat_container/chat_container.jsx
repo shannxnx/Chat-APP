@@ -1,4 +1,4 @@
-import { CircleX, Delete } from "lucide-react";
+import { CircleX, Delete, Info } from "lucide-react";
 import avatar from "../../../public/avatar.png"
 import MessageInput from "./message_input";
 import MessageContainer from "./message_container";
@@ -32,7 +32,8 @@ export default function ChatContainer({selectedUser}){
                 </div>
             </div>
 
-            <CircleX className="size-[32px] mr-4 cursor-pointer hover:scale-105"/>
+            {/* <CircleX className="size-[32px] mr-4 cursor-pointer hover:scale-105"/> */}
+            <Info className="size-[32px] mr-4 cursor-pointer hover:scale-105"/>
             
         </div>
 
