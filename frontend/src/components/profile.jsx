@@ -51,7 +51,8 @@ export default function Profile(){
             <img src={userData.data[0].profilePic === "" ? avatar : userData.data[0].profilePic}
         */}
         
-        <div className="w-[500px] h-[250px] border-1 p-4 rounded-[24px] flex gap-4 bg-[#0B192C]">
+        <div className="lg:w-[500px] lg:h-[250px] max-w-[90%] md:w-[500px] md:h-[250px] md:flex-row border-1 flex-col flex p-4 items-center rounded-[24px] lg:flex lg:flex-row 
+        gap-4 bg-[#0B192C] ">
 
             <div className="size-[200px] border-1 rounded-[500px] bg-white relative">
             
@@ -86,13 +87,13 @@ export default function Profile(){
             </div>
 
             {
-                userData.data ? <div className="w-[50%] flex flex-col gap-4 ml-4">
+                userData.data ? <div className="lg:w-[50%]  flex flex-col gap-4 lg:ml-4 ml-0">
                     <div className="flex gap-2">
                         <User className="text-white"/> 
                         <label className="text-white">Full Name</label>
                     </div>
                             
-                    <input type="text" disabled className="w-[200px] h-[50px] border-1 p-4 cursor-not-allowed
+                    <input type="text" disabled className="lg:w-[200px] md:w-[200px] w-[300px] h-[50px] border-1 p-4 cursor-not-allowed
                     bg-white" 
                     placeholder={userData.data[0].fullName}/>
 
@@ -102,7 +103,7 @@ export default function Profile(){
                         <label className="text-white">Email</label>
                     </div>
 
-                    <input type="text" disabled className="w-[200px] h-[50px] border-1 p-4 cursor-not-allowed
+                    <input type="text" disabled className="lg:w-[200px] md:w-[200px] w-[300px] h-[50px] border-1 p-4 cursor-not-allowed
                     bg-white" 
                     placeholder={userData.data[0].email}/>
                 </div>
@@ -111,7 +112,7 @@ export default function Profile(){
             
         </div>
 
-        <div className="border-1 w-[500px] rounded-[24px] h-[60px] bg-[#0B192C] p-5 flex gap-12">
+        <div className="border-1 lg:w-[500px] rounded-[24px] max-w-[90%] lg:h-[60px] bg-[#0B192C] p-5 flex gap-12">
             {
                 userData.data && <>
                 <h1 className="text-gray-400">Member Since : <span className="ml-3">{userData.data[0].createdAt?.split("T")[0]}</span></h1>
