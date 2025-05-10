@@ -24,7 +24,8 @@ app.use("/api/auth", authRoutes);       //for authentication (login, signup, log
 app.use("/api/message", messageRoutes); //for message
 
 app.get("/", (req, res) => {
-    res.send("I hope your a fuckery okay")
+    res.send("I hope your a fuckery okay");
+    
 })
 
 server.listen(PORT, () => {

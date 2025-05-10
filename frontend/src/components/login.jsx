@@ -48,11 +48,12 @@ export default function Login(){
     //bg-white border-1
     //bg-[#E69DB8] border-b-
 
-    return <div className="w-full h-screen flex flex-col items-center bg-[#F1E7E7] ">
+    return <div className="w-full h-screen flex flex-col items-center bg-[#F1E7E7] overflow-hidden">
         <h1 className="w-[90%] text-2xl lg:text-5xl mt-6 underline underline-offset-4 ">CHAT</h1>
 
-        <form onSubmit={handleOnSubmit} className="w-[30%] border-1 min-h-[350px] h-[350px] flex-col bg-[#E69DB8]  rounded-[20px] shadow-lg
-        items-center flex justify-center mt-16">
+        <form onSubmit={handleOnSubmit} className="lg:w-[30%] lg:mt-16 border-1 min-h-[350px] h-[350px] flex-col bg-[#E69DB8]  rounded-[20px] shadow-lg
+        items-center flex justify-center  md:w-[40%] md:mt-45 max-w-[85%] w-[400px] mt-40 ">
+
             <h1 className="w-[100%] text-center mt-4 text-3xl ">LOG IN</h1>
 
         
@@ -104,7 +105,7 @@ export default function Login(){
 
         <h1 className='mt-8'>Don't have an account? <span className='text-[#E69DB8] underline underline-offset-4'><a href="/signup">Sign Up</a></span></h1>
 
-        <div className='w-[90%] h-[60px] flex justify-end items-center'>
+        <div className='w-[90%] h-[60px] flex justify-end items-center md:mt-50 lg:mt-0 mb-5 absolute bottom-0 '>
             <div className=' w-[60px] h-[100%] flex justify-center items-center scale-115 rounded-[500px] bg-[#FFFECE]'>
                 <h1 className='text-2xl lg:text-3xl text-black cursor-pointer active:scale-95' onClick={handleLogOut}><FaQuestion/></h1>
             </div>
