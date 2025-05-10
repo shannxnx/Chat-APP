@@ -5,6 +5,7 @@ import { Profiler, useEffect } from "react";
 import { useChatStore } from "../../store/useChatStore";
 import avatar from "../../../public/avatar.png";
 import SideChatBox from "./sideChat_box";
+import { useResponseStore } from "../../store/useResponseStore";
 
 
 
@@ -19,7 +20,8 @@ const testProfile2 = [
 export default function Sidenav(){
     
     const {logOut, allUsers, setAllUsers, checkAuth, authUser} = useAuthStore();
-    const {users,  getUsers, isSelectedUser, setSelectedUser, isUserLoading} = useChatStore();
+    const {users,  getUsers, isSelectedUser, setSelectedUser, isUserLoading, inChat, setInCha} = useChatStore();
+    // const {inChat, setInChat} = useResponseStore();
 
     const onlineUsers = [];
 
@@ -34,10 +36,11 @@ export default function Sidenav(){
 
     console.log("isSelectedUser: ", isSelectedUser);
 
-    
+    console.log("inchat: ", inChat);
     // console.log("chat (users): ", users);
-
-    return <div className="lg:w-[420px] md:w-[300px] w-[80px] h-screen bg-black flex relative">
+    //w-[80px]
+    return <div className={`lg:w-[420px] md:w-[420px]   ${inChat ? "hidden" : "flex"} h-screen bg-black lg:flex md:flex relative
+    ${inChat ? "hidden" : "w-[80px]"}`}>
         
 
         <div className="lg:w-[35%] lg:h-full w-[0%] bg-[#0B192C] lg:flex flex-col items-center overflow-x-hidden

@@ -72,28 +72,28 @@ export default function Signup(){
     //bg-white border-1
     //bg-[#E69DB8] border-b-
 
-    return <div className="w-full h-screen flex flex-col items-center bg-[#F1E7E7] ">
+    return <div className="w-full h-screen flex flex-col items-center bg-[#F1E7E7] overflow-hidden">
         <h1 className="w-[90%] text-2xl lg:text-5xl mt-6 underline underline-offset-4 ">CHAT</h1>
 
-        <form onSubmit={handleOnSubmit} className="w-[30%] border-1 min-h-[400px] h-[450px] flex-col bg-[#E69DB8]  rounded-[20px] shadow-lg
-        items-center flex ">
+        <form onSubmit={handleOnSubmit} className="lg:w-[30%] border-1 min-h-[400px] h-[450px] flex-col bg-[#E69DB8]  rounded-[20px] shadow-lg
+        items-center flex w-[80%] mt-30 lg:mt-0 md:w-[50%] ">
             <h1 className="w-[100%] text-center mt-4 text-3xl ">SIGN UP</h1>
 
-            <div className="w-[70%] mt-5 flex flex-col">
+            <div className="lg:w-[70%] mt-5 flex flex-col  w-[85%]">
 
                 <label htmlFor="" className="mb-3">Full Name</label>
                 <input type="text" className="rounded p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Full Name" 
                 name='fullName' value={signUpForm.fullName} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
-            <div className="w-[70%] mt-2  flex flex-col">
+            <div className="lg:w-[70%] mt-2  flex flex-col  w-[85%]">
 
                 <label htmlFor="" className="mb-3">Email</label>
                 <input type="text" className="rounded p-3  h-[50px] bg-white border-1 focus:outline-none" placeholder="Email"
                 name='email' value={signUpForm.email} onChange={handleOnChange} autoComplete='off' required/>
 
             </div>
-            <div className="w-[70%] mt-2 flex flex-col mb-8">
+            <div className="lg:w-[70%] mt-2 flex flex-col mb-8 w-[85%]">
 
                 <label htmlFor="" className="mb-3">Password</label>
 
@@ -132,7 +132,7 @@ export default function Signup(){
         <h1 className='mt-4'>Already have an accont? <span className='text-[#E69DB8] underline underline-offset-4'><a href="/login">Log in</a></span></h1>
 
 
-        <div className='w-[90%] h-[60px] flex justify-end items-center'>
+        <div className='w-[90%] h-[60px] flex justify-end items-center absolute bottom-0 mb-5'>
             <div className=' w-[60px] h-[100%] flex justify-center items-center scale-115 rounded-[500px] bg-[#FFFECE]'>
                 <h1 className='text-2xl lg:text-3xl text-black cursor-pointer active:scale-95' onClick={handleLogOut}><FaQuestion/></h1>
             </div>

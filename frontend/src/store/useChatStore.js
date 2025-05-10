@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useAuthStore } from "./useAuthStore";
 import io from "socket.io-client"
+import { useResponseStore } from "./useResponseStore";
 
 
 
@@ -13,7 +14,7 @@ export const useChatStore = create((set, get) => ({
     isUserLoading : false,
     isMessagesLoading : false,
     selectedChat : null,
-
+    inChat : false,
 
     getUsers : async () => {
         set({isUserLoading : true})
@@ -77,9 +78,20 @@ export const useChatStore = create((set, get) => ({
 
     setSelectedUser : (isSelectedUser) => set({isSelectedUser}),
     setSelectedChat : (selected) => {
+       
         set({selectedChat : selected});
         set({isSelectedUser : true});
         get().getMessages(selected._id); //this is how you can use another object funtion inside an object function (with zustand create)
+        get().setInChat();
+        
     },
+
+    setInChat : () => {
+        set({inChat : true});
+    },
+
+    backChat : () => {
+        set({inChat : false});
+    }
 
 }))

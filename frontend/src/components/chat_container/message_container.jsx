@@ -25,7 +25,7 @@ export default function MessageContainer() {
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
 
-    return  <div className="w-full h-[500px] border-1 overflow-scroll " ref={containerRef}>
+    return  <div className="w-[100%] lg-h-[500px]  overflow-scroll h-full " ref={containerRef}>
         
         {
            messages && messages.map((mess) => {
