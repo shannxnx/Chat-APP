@@ -1,4 +1,4 @@
-import { FanIcon, LogOut, Search, User2 } from "lucide-react";
+import { FanIcon, LogOut, Plus, Search, User2 } from "lucide-react";
 import { useAuthStore } from "../../store/useAuthStore";
 import SideProfile from "./side_profile";
 import { Profiler, useEffect } from "react";
@@ -45,12 +45,15 @@ export default function Sidenav(){
 
         <div className="lg:w-[35%] lg:h-full w-[0%] bg-[#0B192C] lg:flex flex-col items-center overflow-x-hidden
         md:hidden  sm:hidden">
+
+            {/* still don't know what im gonna do with this */}
+            <Plus className="text-white mt-4 cursor-pointer hover:scale-125 duration-300" size={48}/>
             
             {/*This uses the state from the auth*/}
-            {
+            {/* {
                 allUsers[0] &&
                 allUsers.map((items, index) => <SideProfile profile={items} key={index}/>)
-            }
+            } */}
             
             
         </div>

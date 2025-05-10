@@ -20,7 +20,7 @@ export default function MessageContainer() {
         
     }, [selectedChat._id, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
-    useEffect(() => {
+    useEffect(() => {     
         containerRef.current?.scrollIntoView({behavior : "smooth", });
     }, [messages])
 
@@ -34,7 +34,7 @@ export default function MessageContainer() {
         {
            messages && messages.map((mess) => {
                 return <div className={`chat ${authUser._id === mess.senderId ? "chat-end" : "chat-start"} mr-4
-                ${authUser._id === mess.senderId ? "mr-4" : "ml-4"}`} key={mess._id} ref={containerRef}>
+                ${authUser._id === mess.senderId ? "mr-4" : "ml-4"} scroll-smooth`} key={mess._id} ref={containerRef}>
 
                     <div className="chat-image avatar">
                         <div className="w-[48px] rounded-full">

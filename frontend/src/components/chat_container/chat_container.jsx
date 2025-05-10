@@ -1,4 +1,4 @@
-import { ArrowLeft, CircleX, Delete, Info } from "lucide-react";
+import { ArrowLeft, CircleX, Delete, Edit, Info } from "lucide-react";
 import avatar from "../../../public/avatar.png"
 import MessageInput from "./message_input";
 import MessageContainer from "./message_container";
@@ -40,7 +40,11 @@ export default function ChatContainer({selectedUser}){
 
             {/* <CircleX className="size-[32px] mr-4 cursor-pointer hover:scale-105"/> */}
             {/* <Info className="size-[32px] mr-4 cursor-pointer hover:scale-105"/> */}
-            <ArrowLeft className="size-[32px] mr-4 cursor-pointer hover:scale-105" onClick={backChat}/>
+            <div className="flex ">
+                <Edit className="size-[32px] mr-2 cursor-pointer hover:scale-105"/>
+                <ArrowLeft className="size-[32px] mr-4 cursor-pointer hover:scale-105" onClick={backChat}/>
+            </div>
+            
             
             
         </div>
