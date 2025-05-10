@@ -9,7 +9,7 @@ export default function MessageContainer() {
     const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages} = useChatStore();
     const {authUser, socket} = useAuthStore();
 
-    const containerRef = useRef();
+    const containerRef = useRef(null);
 
     useEffect(() => {
         getMessages(selectedChat._id);
@@ -20,17 +20,21 @@ export default function MessageContainer() {
         
     }, [selectedChat._id, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
+    useEffect(() => {
+        containerRef.current?.scrollIntoView({behavior : "smooth", });
+    }, [messages])
+
 
     console.log("Socket: ", socket);
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
 
-    return  <div className="w-[100%] lg-h-[500px]  overflow-scroll h-full " ref={containerRef}>
+    return  <div className="w-[100%] lg-h-[500px]  overflow-scroll h-full  " >
         
         {
            messages && messages.map((mess) => {
                 return <div className={`chat ${authUser._id === mess.senderId ? "chat-end" : "chat-start"} mr-4
-                ${authUser._id === mess.senderId ? "mr-4" : "ml-4"}`} key={mess._id}>
+                ${authUser._id === mess.senderId ? "mr-4" : "ml-4"}`} key={mess._id} ref={containerRef}>
 
                     <div className="chat-image avatar">
                         <div className="w-[48px] rounded-full">

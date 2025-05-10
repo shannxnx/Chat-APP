@@ -71,7 +71,7 @@ export default function MessageInput () {
 
 
         <form className="w-full h-[70px] flex p-2 gap-5 justify-center">
-            <input type="text" className="lg:w-[80%] h-full border-1 rounded-3xl p-3 overflow-scroll w-[300px]"
+            <input type="text" className="lg:w-[80%] h-full border-1 rounded-3xl p-3 overflow-scroll w-[90%] md:w-[400px]"
             placeholder="Type your message..." value={text} onChange={(e) => setText(e.target.value)}/>
 
             <div className="flex items-center justify-center gap-5">

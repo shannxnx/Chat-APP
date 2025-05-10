@@ -13,7 +13,7 @@ export default function ChatContainer({selectedUser}){
     const {inChat, setInChat, backChat} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
-    console.log("inchat: ", inChat);
+    
 
     return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"}`}>
 
