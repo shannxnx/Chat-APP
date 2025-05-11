@@ -16,6 +16,7 @@ export const useChatStore = create((set, get) => ({
     selectedChat : null,
     inChat : false,
     showModal : false,
+    chatBgColor : "",
 
     getUsers : async () => {
         set({isUserLoading : true})
@@ -99,6 +100,11 @@ export const useChatStore = create((set, get) => ({
 
     setModal : () => {
         set({showModal : !get().showModal})
+    },
+
+    setBgColor : (color) => {
+        set({chatBgColor : color});
+        get().setModal();
     }
 
 }))

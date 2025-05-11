@@ -9,7 +9,7 @@ export default function MessageInput () {
     const [text, setText] = useState("");
     const [imagePrev, setImagePrev] = useState(null);
     const fileInput = useRef();
-    const {sendMessage} = useChatStore();
+    const {sendMessage, chatBgColor} = useChatStore();
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -70,14 +70,14 @@ export default function MessageInput () {
         
 
 
-        <form className="w-full h-[70px] flex p-2 gap-5 justify-center">
-            <input type="text" className="lg:w-[80%] h-full border-1 rounded-3xl p-3 overflow-scroll w-[90%] md:w-[400px]"
+        <form className="w-full h-[70px] flex p-2 gap-5 justify-center" style={{backgroundColor:chatBgColor}}>
+            <input type="text" className="lg:w-[80%] h-full border-1 rounded-3xl p-3 overflow-scroll w-[90%] md:w-[400px] bg-white"
             placeholder="Type your message..." value={text} onChange={(e) => setText(e.target.value)}/>
 
             <div className="flex items-center justify-center gap-5">
 
                 <input type="file" accept="image/*" className="hidden" ref={fileInput} onChange={handleImageChange}/>
-                <button type="button" className="size-[32px] cursor-pointer hover:scale-110"
+                <button type="button" className="size-[32px] cursor-pointer hover:scale-110 "
                 onClick={() => fileInput.current?.click()}>
                     <FileInput className="size-[32px] cursor-pointer hover:scale-110"/>
                 </button>

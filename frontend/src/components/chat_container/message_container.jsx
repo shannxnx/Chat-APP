@@ -6,11 +6,11 @@ import { formatMessageTime } from "../../lib/utils.";
 
 export default function MessageContainer() {
 
-    const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages} = useChatStore();
+    const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages, chatBgColor} = useChatStore();
     const {authUser, socket} = useAuthStore();
 
     const containerRef = useRef(null);
-
+    console.log("bgColor:", chatBgColor);
     
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function MessageContainer() {
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
 
-    return  <div className={`w-[100%] lg-h-[500px] overflow-scroll  h-full  relative`} >
+    return  <div className={`w-[100%] lg-h-[500px] overflow-scroll  h-full  relative `} style={{backgroundColor : chatBgColor}} >
 
         {/* {
             showModal && <div className="w-full h-full bg-gray-100">
