@@ -5,15 +5,16 @@ import MessageContainer from "./message_container";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useResponseStore } from "../../store/useResponseStore";
 import { useChatStore } from "../../store/useChatStore";
+import { useState } from "react";
 
 
 export default function ChatContainer({selectedUser}){
 
 
-    const {inChat, setInChat, backChat} = useChatStore();
+    const {inChat, setInChat, backChat, showModal, setModal} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
-    
+    console.log("showModal: ", showModal);
 
     return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"}`}>
 
@@ -41,7 +42,7 @@ export default function ChatContainer({selectedUser}){
             {/* <CircleX className="size-[32px] mr-4 cursor-pointer hover:scale-105"/> */}
             {/* <Info className="size-[32px] mr-4 cursor-pointer hover:scale-105"/> */}
             <div className="flex ">
-                <Edit className="size-[32px] mr-2 cursor-pointer hover:scale-105"/>
+                <Edit className="size-[32px] mr-2 cursor-pointer hover:scale-105" onClick={setModal}/>
                 <ArrowLeft className="size-[32px] mr-4 cursor-pointer hover:scale-105" onClick={backChat}/>
             </div>
             

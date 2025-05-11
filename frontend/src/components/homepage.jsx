@@ -17,7 +17,7 @@ import ChatContainer from "./chat_container/chat_container";
 
 export default function Homepage(){
     const {logOut} = useAuthStore();
-    const {messages, users, getMessages, getUsers, isSelectedUser, selectedChat} = useChatStore();
+    const {messages, users, getMessages, getUsers, isSelectedUser, selectedChat, showModal, setModal} = useChatStore();
     
 
     useEffect(() => {
@@ -29,6 +29,15 @@ export default function Homepage(){
     
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
+        {
+            showModal && <div className="size-full bg-black absolute z-90 opacity-50">
+                <div className="lg:size-[400px] md:size-[400px] size-[300px] border-1 bg-white absolute top-1/2 left-1/2 -translate-1/2
+                z-100 rounded" onClick={setModal}>
+
+                </div>
+            </div>
+        }
+
         <Sidenav/>
         
         <div className="w-[100%] h-full  bg-white ">

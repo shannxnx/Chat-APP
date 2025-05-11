@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useChatStore } from "../../store/useChatStore"
 import { useAuthStore } from "../../store/useAuthStore";
 import avatar from "../../../public/avatar.png"
@@ -10,6 +10,8 @@ export default function MessageContainer() {
     const {authUser, socket} = useAuthStore();
 
     const containerRef = useRef(null);
+
+    
 
     useEffect(() => {
         getMessages(selectedChat._id);
@@ -25,11 +27,24 @@ export default function MessageContainer() {
     }, [messages])
 
 
+   
+
+    
+
     console.log("Socket: ", socket);
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
 
-    return  <div className="w-[100%] lg-h-[500px]  overflow-scroll h-full  " >
+    return  <div className={`w-[100%] lg-h-[500px] overflow-scroll  h-full  relative`} >
+
+        {/* {
+            showModal && <div className="w-full h-full bg-gray-100">
+                <div className="size-[300px] border-1 bg-gray-300 absolute top-1/2 left-1/2 -translate-1/2
+                z-100 rounded" >
+
+                </div>
+            </div>
+        } */}
         
         {
            messages && messages.map((mess) => {
@@ -48,7 +63,7 @@ export default function MessageContainer() {
                             <time className="text-gray-400">{formatMessageTime(mess.createdAt)}</time>
                     </div>
 
-                    <div className="chat-bubble text-black mb-1 flex flex-col">
+                    <div className="chat-bubble text-black mb-1 flex flex-col ">
                         {
                             mess.image ? <img src={mess.image} alt="some image"  className="size-[92px]"/> : null
                         }

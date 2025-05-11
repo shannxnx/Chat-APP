@@ -15,6 +15,7 @@ export const useChatStore = create((set, get) => ({
     isMessagesLoading : false,
     selectedChat : null,
     inChat : false,
+    showModal : false,
 
     getUsers : async () => {
         set({isUserLoading : true})
@@ -94,6 +95,10 @@ export const useChatStore = create((set, get) => ({
 
     backChat : () => {
         set({inChat : false});
+    },
+
+    setModal : () => {
+        set({showModal : !get().showModal})
     }
 
 }))
