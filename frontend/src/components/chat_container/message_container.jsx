@@ -35,7 +35,7 @@ export default function MessageContainer() {
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
 
-    return  <div className={`w-[100%] lg-h-[500px] overflow-scroll  h-full  relative `} style={{backgroundColor : chatBgColor}} >
+    return  <div className={`w-[100%] lg-h-[500px] overflow-y-scroll  h-full  relative `} style={{backgroundColor : chatBgColor}} >
 
         {/* {
             showModal && <div className="w-full h-full bg-gray-100">

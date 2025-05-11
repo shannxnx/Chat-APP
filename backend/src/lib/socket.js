@@ -13,13 +13,14 @@ const io = new Server(server, {
 });
 
 
-export function getRecieverSocketId(userId){
-    return userSocketMap[userId];
-}
+
 
 //for online usersss
 const userSocketMap = {}; 
 
+export function getRecieverSocketId(userId){
+    return userSocketMap[userId];
+}
 
 //this is a listen shit just like the app.listen on the index
 io.on("connection", (socket) => {
