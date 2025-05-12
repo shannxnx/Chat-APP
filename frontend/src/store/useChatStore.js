@@ -17,6 +17,7 @@ export const useChatStore = create((set, get) => ({
     inChat : false,
     showModal : false,
     chatBgColor : "",
+    ChatBgColorData : null,
 
     getUsers : async () => {
         set({isUserLoading : true})
@@ -105,6 +106,23 @@ export const useChatStore = create((set, get) => ({
     setBgColor : (color) => {
         set({chatBgColor : color});
         get().setModal();
+    },
+
+    
+    ChangeBgColor : async (data) => {
+        const {selectedChat} = get();
+        // const selectedId = get().selectedChat._id;
+        try {
+            if (selectedChat._id){
+                const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
+                set({ ChatBgColorData : res.data})
+            }
+           
+        } catch (error) {
+            console.log("Error in change BG color : ", error.message);
+            toast.error(error?.response?.data?.message, );
+            
+        }
     }
 
 }))
