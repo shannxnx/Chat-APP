@@ -7,6 +7,9 @@ import chatIcon from "../../public/chat-svgrepo-com.svg";
 import ChatContainer from "./chat_container/chat_container";
 import { Colors } from "../lib/colorCustomize";
 import ColorDiv from "./chat_container/customColor";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 
 
@@ -20,14 +23,37 @@ import ColorDiv from "./chat_container/customColor";
 export default function Homepage(){
     const {logOut} = useAuthStore();
     const {messages, users, getMessages, getUsers, isSelectedUser, selectedChat, showModal, setModal} = useChatStore();
-    
+    const [bgCol, setBgCol] = useState({});
+
+    async function fetchbgColor(){
+        try {
+            
+            if (selectedChat._id){
+                const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
+                setBgCol(res.data);
+            }else{
+                return;
+            }
+            
+            
+
+        } catch (error) {
+            console.log("Error in fetching bgColor", error.message);
+            toast.error(error?.response?.data?.message);
+            
+        }
+    }
 
     useEffect(() => {
         getUsers();
-    }, []);
+        fetchbgColor();
+    }, [selectedChat]);
 
     // console.log("Selected Chat: ", selectedChat);
     console.log("Messages: ", messages);
+    console.log("bgCol : ", bgCol);
+    
+    
     
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
@@ -58,14 +84,16 @@ export default function Homepage(){
                 <div className="fixed inset-0 bg-black opacity-50 z-20"></div>
 
                 {/* Modal */}
-                <div
+                <form
                     className="lg:w-[400px] md:w-[400px] w-[300px] border border-gray-300 bg-white fixed z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                                 rounded-lg flex flex-col items-center shadow-lg"
                 >
+                   <button>
                     <X
                     className="absolute right-3 top-3 w-8 h-8 cursor-pointer hover:scale-110"
                     onClick={setModal}
-                    />
+                    />  
+                    </button> 
 
                     <h1 className="mt-10 ml-3 text-red-600">Customize your chat</h1>
 
@@ -75,7 +103,7 @@ export default function Homepage(){
                         ))}
                     </div>
 
-                </div>
+                </form>
                 </>
         )}
 
