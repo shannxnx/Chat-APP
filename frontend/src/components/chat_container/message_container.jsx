@@ -10,7 +10,7 @@ export default function MessageContainer() {
     const {authUser, socket} = useAuthStore();
 
     const containerRef = useRef(null);
-    console.log("bgColor:", chatBgColor);
+    // console.log("bgColor:", chatBgColor);
     
 
     useEffect(() => {
@@ -37,14 +37,7 @@ export default function MessageContainer() {
 
     return  <div className={`w-[100%] lg-h-[500px] overflow-y-scroll  h-full  relative `}  >
 
-        {/* {
-            showModal && <div className="w-full h-full bg-gray-100">
-                <div className="size-[300px] border-1 bg-gray-300 absolute top-1/2 left-1/2 -translate-1/2
-                z-100 rounded" >
-
-                </div>
-            </div>
-        } */}
+        
         
         {
            messages && messages.map((mess) => {

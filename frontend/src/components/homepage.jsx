@@ -49,34 +49,14 @@ export default function Homepage(){
         fetchbgColor();
     }, [selectedChat]);
 
-    // console.log("Selected Chat: ", selectedChat);
-    // console.log("Messages: ", messages);
+    
     console.log("bgCol : ", bgCol);
     
     
     
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
-        {/* {
-            showModal && <div className="size-full bg-black absolute z-100 " style={{backgroundColor : "rgba(0, 0, 0, 0.5)"}}>
-                <div className="lg:size-[400px] md:size-[400px] size-[300px] border-1 bg-white absolute top-1/2 left-1/2 -translate-1/2
-                 rounded flex flex-col  items-center" >
-                    <X className="absolute right-0 mr-3 mt-3 size-[32px] cursor-pointer hover:scale-110" onClick={setModal}/>
-
-                    <h1 className="mt-10 ml-3 ">Customize your chat</h1>
-
-                    <div className="size-[90%]  m-5 grid grid-cols-4 items-center place-items-center">
-
-                        {
-                            Colors.map((color, index) => <ColorDiv color={color} key={index}/>)
-                        }
-                        
-
-                    </div>
-
-                </div>
-            </div>
-        } */}
+        
 
         { showModal && (
                 <>

@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 export default function ColorDiv({color}){
 
-    const {setBgColor, chatBgColor, selectedChat, ChangeBgColor, ChatBgColorData} = useChatStore();
+    const {setBgColor,  ChangeBgColor, ChatBgColorData} = useChatStore();
     const {authUser} = useAuthStore();
 
     const [bgData, setBgData] = useState({});
@@ -16,19 +16,7 @@ export default function ColorDiv({color}){
         setBgColor(color)
     }
 
-    // async function ChangeBgColor(data) {
-    //     try {
-    //         if (selectedChat._id){
-    //             const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
-    //             setBgData(res.data);
-    //         }
-           
-    //     } catch (error) {
-    //         console.log("Error in change BG color : ", error.message);
-    //         toast.error(error?.response?.data?.message);
-            
-    //     }
-    // }
+   
 
     
 

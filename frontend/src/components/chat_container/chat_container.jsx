@@ -14,11 +14,11 @@ export default function ChatContainer({selectedUser}){
     const {inChat, setInChat, backChat, showModal, setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
-    // console.log("showModal: ", showModal);
+    
 
     useEffect(() => {
         getBgColor();
-    }, [selectedChat]);
+    }, [selectedChat, ChatBgGet?.backgroundColor, ChatBgColorData]);
 
 
     console.log("chatBG: ",  ChatBgGet?.backgroundColor);
