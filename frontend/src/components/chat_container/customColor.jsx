@@ -39,13 +39,7 @@ export default function ColorDiv({color}){
         
     }
 
-    console.log("ChangeBgColorData", ChatBgColorData);
-
-    
-
-    
-    
-    
+    console.log("ChangeBgColorData", ChatBgColorData);    
 
     
 

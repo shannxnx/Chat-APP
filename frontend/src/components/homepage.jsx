@@ -39,7 +39,7 @@ export default function Homepage(){
 
         } catch (error) {
             console.log("Error in fetching bgColor", error.message);
-            toast.error(error?.response?.data?.message);
+            // toast.error(error?.response?.data?.message);
             
         }
     }
@@ -50,7 +50,7 @@ export default function Homepage(){
     }, [selectedChat]);
 
     // console.log("Selected Chat: ", selectedChat);
-    console.log("Messages: ", messages);
+    // console.log("Messages: ", messages);
     console.log("bgCol : ", bgCol);
     
     

@@ -5,18 +5,27 @@ import MessageContainer from "./message_container";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useResponseStore } from "../../store/useResponseStore";
 import { useChatStore } from "../../store/useChatStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function ChatContainer({selectedUser}){
 
 
-    const {inChat, setInChat, backChat, showModal, setModal, chatBgColor} = useChatStore();
+    const {inChat, setInChat, backChat, showModal, setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
-    console.log("showModal: ", showModal);
+    // console.log("showModal: ", showModal);
 
-    return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"}`} >
+    useEffect(() => {
+        getBgColor();
+    }, [ChatBgGet?.backgroundColor]);
+
+
+    console.log("chatBG: ",  ChatBgGet?.backgroundColor);
+
+    return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"} `} style={{backgroundColor : ChatBgGet?.backgroundColor ? 
+        ChatBgGet?.backgroundColor : "white"
+    }} >
 
         {/*Upper part*/}
         <div className="w-full h-[70px] border-1 lg:border-0  border-black flex justify-between items-center" style={{backgroundColor:chatBgColor}}>

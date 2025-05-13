@@ -34,9 +34,8 @@ export default function Sidenav(){
     }, [getUsers])
 
 
-    console.log("isSelectedUser: ", isSelectedUser);
-
-    console.log("inchat: ", inChat);
+    // console.log("isSelectedUser: ", isSelectedUser);
+    // console.log("inchat: ", inChat);
     // console.log("chat (users): ", users);
     //w-[80px]
     return <div className={`lg:w-[420px] md:w-[420px]   ${inChat ? "hidden" : "flex"} h-screen bg-black lg:flex md:flex relative
