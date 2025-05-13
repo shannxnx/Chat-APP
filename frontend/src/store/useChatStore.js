@@ -89,6 +89,7 @@ export const useChatStore = create((set, get) => ({
         set({isSelectedUser : true});
         get().getMessages(selected._id); //this is how you can use another object funtion inside an object function (with zustand create)
         get().setInChat();
+        get().getBgColor();
         
     },
 
@@ -117,7 +118,7 @@ export const useChatStore = create((set, get) => ({
             if (selectedChat._id){
                 const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
                 set({ ChatBgColorData : res.data})
-                set({ChatBgGet : res.data});
+                // set({ChatBgGet : res.data});
             }
            
         } catch (error) {
@@ -133,7 +134,7 @@ export const useChatStore = create((set, get) => ({
             
             if (selectedChat._id){
                 const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
-                set({ChatBgGet : res.data});
+                set({ChatBgGet : res?.data || "white"});
             }else{
                 return;
             }

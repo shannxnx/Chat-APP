@@ -31,7 +31,7 @@ export default function MessageContainer() {
 
     
 
-    console.log("Socket: ", socket);
+    // console.log("Socket: ", socket);
     // console.log("messages: ", messages);
     // console.log("auth user: ", authUser);
 

@@ -11,14 +11,14 @@ import { useEffect, useState } from "react";
 export default function ChatContainer({selectedUser}){
 
 
-    const {inChat, setInChat, backChat, showModal, setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet} = useChatStore();
+    const {inChat, setInChat, backChat, showModal, setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
     // console.log("showModal: ", showModal);
 
     useEffect(() => {
         getBgColor();
-    }, [ChatBgGet?.backgroundColor]);
+    }, [selectedChat]);
 
 
     console.log("chatBG: ",  ChatBgGet?.backgroundColor);

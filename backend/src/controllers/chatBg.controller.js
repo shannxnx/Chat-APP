@@ -10,7 +10,7 @@ export const getChatBg = async (req, res) => {
         }).populate("participants", "fullName email");
 
         if (!chatBg){
-            return res.status(404).json({message : "No chat bg found"});
+            return res.status(404).json({message : "No chat bg found",});
 
         }
 
