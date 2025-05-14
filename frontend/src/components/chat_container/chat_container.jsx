@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export default function ChatContainer({selectedUser}){
 
 
-    const {inChat, setInChat, backChat, showModal, setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat} = useChatStore();
+    const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, currentConvoRoom} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
     
@@ -22,6 +22,7 @@ export default function ChatContainer({selectedUser}){
 
 
     console.log("chatBG: ",  ChatBgGet?.backgroundColor);
+    console.log("currentConvoRoom : ", currentConvoRoom);
 
     return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"} `} style={{backgroundColor : ChatBgGet?.backgroundColor ? 
         ChatBgGet?.backgroundColor : "white"

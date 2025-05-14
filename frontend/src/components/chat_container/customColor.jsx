@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 export default function ColorDiv({color}){
 
-    const {setBgColor,  ChangeBgColor, ChatBgColorData} = useChatStore();
+    const {setBgColor,  ChangeBgColor, ChatBgColorData, changeBackground} = useChatStore();
     const {authUser} = useAuthStore();
 
     const [bgData, setBgData] = useState({});
@@ -24,6 +24,7 @@ export default function ColorDiv({color}){
         e.preventDefault;
         const data = {chatBackground : color};
         ChangeBgColor(data);
+        changeBackground(color);
         
     }
 

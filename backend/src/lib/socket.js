@@ -39,6 +39,11 @@ io.on("connection", (socket) => {
         console.log(`User ${socket.id} joined room : ${convoId}`);
     })
 
+    socket.on("changeBackground", ({convoId, color}) => {
+        console.log(`Changing chat background in room  ${convoId} to ${color}`);
+        io.to(convoId).emit("updatebackground", color);
+    });
+
 
     //used to send event to all connected clients
     io.emit("getOnlineUsers", Object.keys(userSocketMap));

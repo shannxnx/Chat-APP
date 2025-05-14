@@ -19,6 +19,7 @@ export const useChatStore = create((set, get) => ({
     chatBgColor : "",
     ChatBgColorData : null,
     ChatBgGet : null,
+    currentConvoRoom : null,
 
     getUsers : async () => {
         set({isUserLoading : true})
@@ -97,18 +98,15 @@ export const useChatStore = create((set, get) => ({
         const user = useAuthStore.getState().authUser;
         const recieverId_3 = selected._id.substring(0, 6);
         const userId_3 = user._id.substring(0, 6);
-        const convoId = recieverId_3 + userId_3;
-
-
-
+        const convoId = [recieverId_3, userId_3].sort().join("");
         
-
         set({selectedChat : selected});
         set({isSelectedUser : true});
         get().getMessages(selected._id); //this is how you can use another object funtion inside an object function (with zustand create)
         get().setInChat();
         get().getBgColor();
         get().joinConvoRoom(convoId);
+        set({currentConvoRoom : convoId});
         
     },
 
@@ -131,10 +129,10 @@ export const useChatStore = create((set, get) => ({
 
     
     ChangeBgColor : async (data) => {
-        const {selectedChat} = get();
+        const {selectedChat, currentConvoRoom} = get();
         // const selectedId = get().selectedChat._id;
         try {
-            if (selectedChat._id){
+            if (selectedChat._id || currentConvoRoom){
                 const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
                 set({ ChatBgColorData : res.data})
                 set({ChatBgGet : res.data});
@@ -148,14 +146,14 @@ export const useChatStore = create((set, get) => ({
     },
 
     getBgColor : async () => {
-        const {selectedChat, ChatBgGet} = get();
+        const {selectedChat} = get();
 
          if (!selectedChat?._id) return;
 
          try {
             
             const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
-            set({ChatBgGet : res    .data || "white"});
+            set({ChatBgGet : res.data || "white"});
 
         } catch (error) {
             set({ChatBgGet : "white"})
@@ -164,6 +162,29 @@ export const useChatStore = create((set, get) => ({
             
         }
     },
+
+    //this is for socket.io
+    changeBackground : (color) => {
+        const {currentConvoRoom} = get();
+        const socket = useAuthStore.getState().socket;
+        if (!currentConvoRoom) return ;
+        socket.emit("changeBackground", {convoId : currentConvoRoom, color});
+    },
+
+    subscribeToBackgroundChange : () => {
+        const socket = useAuthStore.getState().socket;
+
+        socket.on("updateBackground", (color) => {
+            console.log("Background updated to:", color);
+            set({ChatBgGet : color});
+        })
+
+    },
+
+    unsubscribeToBackgroundChange : () => {
+        const socket = useAuthStore.getState().socket;
+        socket.off("updatedBackground")
+    }
 
 
 
