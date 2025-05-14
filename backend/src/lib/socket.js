@@ -1,6 +1,7 @@
 import {Server} from "socket.io";
 import http from "http";
 import express from "express";
+import { Socket } from "dgram";
 
 
 const app = express();
@@ -22,15 +23,21 @@ export function getRecieverSocketId(userId){
     return userSocketMap[userId];
 }
 
-//this is a listen shit just like the app.listen on the index
+//this is a listen shit just like the app.listen on the index.js
+
 io.on("connection", (socket) => {
     console.log("A user connected: ", socket.id);
 
     const userId = socket.handshake.query.userId;
-
+    console.log("User id: ", userId);
     if (userId){
         userSocketMap[userId] = socket.id;
     }
+
+    socket.on("joinConvo", (convoId) => {
+        socket.join(convoId);
+        console.log(`User ${socket.id} joined room : ${convoId}`);
+    })
 
 
     //used to send event to all connected clients

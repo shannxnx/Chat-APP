@@ -80,16 +80,35 @@ export const useChatStore = create((set, get) => ({
         socket.off("newMessage");
     },
 
+    joinConvoRoom : (convoId) => {
+        const {selectedChat} = get();
+        if (!selectedChat) return;
+
+        const socket = useAuthStore.getState().socket;
+
+        socket.emit("joinConvo", convoId);
+    },
 
 
     setSelectedUser : (isSelectedUser) => set({isSelectedUser}),
     setSelectedChat : (selected) => {
        
+        
+        const user = useAuthStore.getState().authUser;
+        const recieverId_3 = selected._id.substring(0, 6);
+        const userId_3 = user._id.substring(0, 6);
+        const convoId = recieverId_3 + userId_3;
+
+
+
+        
+
         set({selectedChat : selected});
         set({isSelectedUser : true});
         get().getMessages(selected._id); //this is how you can use another object funtion inside an object function (with zustand create)
         get().setInChat();
         get().getBgColor();
+        get().joinConvoRoom(convoId);
         
     },
 
@@ -135,12 +154,8 @@ export const useChatStore = create((set, get) => ({
 
          try {
             
-            
-                const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
-                set({ChatBgGet : res    .data || "white"});
-            
-            
-            
+            const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
+            set({ChatBgGet : res    .data || "white"});
 
         } catch (error) {
             set({ChatBgGet : "white"})
@@ -148,6 +163,8 @@ export const useChatStore = create((set, get) => ({
             // toast.error(error?.response?.data?.message);
             
         }
-    }
+    },
+
+
 
 }))
