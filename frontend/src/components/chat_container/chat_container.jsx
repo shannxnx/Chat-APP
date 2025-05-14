@@ -11,13 +11,19 @@ import { useEffect, useState } from "react";
 export default function ChatContainer({selectedUser}){
 
 
-    const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, currentConvoRoom} = useChatStore();
+    const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, 
+    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
     
 
     useEffect(() => {
         getBgColor();
+        subscribeToBackgroundChange();
+
+        return () => unsubscribeToBackgroundChange()
+
+
     }, [selectedChat, ChatBgGet?.backgroundColor, ChatBgColorData]);
 
 

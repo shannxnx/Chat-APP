@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
 
     socket.on("changeBackground", ({convoId, color}) => {
         console.log(`Changing chat background in room  ${convoId} to ${color}`);
-        io.to(convoId).emit("updatebackground", color);
+        io.to(convoId).emit("updateBackground", color);
     });
 
 
