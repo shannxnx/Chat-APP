@@ -21,7 +21,7 @@ export default function ChatContainer({selectedUser}){
         getBgColor();
         subscribeToBackgroundChange();
 
-        return () => unsubscribeToBackgroundChange()
+        return () => unsubscribeToBackgroundChange();
 
 
     }, [selectedChat, ChatBgGet?.backgroundColor, ChatBgColorData]);

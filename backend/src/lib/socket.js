@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
     socket.on("joinConvo", (convoId) => {
         socket.join(convoId);
         console.log(`User ${socket.id} joined room : ${convoId}`);
-    })
+    });
 
     socket.on("changeBackground", ({convoId, color}) => {
         console.log(`Changing chat background in room  ${convoId} to ${color}`);

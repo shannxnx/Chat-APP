@@ -169,6 +169,7 @@ export const useChatStore = create((set, get) => ({
         const socket = useAuthStore.getState().socket;
         if (!currentConvoRoom) return ;
         socket.emit("changeBackground", {convoId : currentConvoRoom, color});
+        
     },
 
     subscribeToBackgroundChange : () => {
