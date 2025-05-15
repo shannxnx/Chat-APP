@@ -53,7 +53,7 @@ export default function Homepage(){
 
     
     console.log("bgCol : ", bgCol);
-    
+    console.log("selectedChat : ", selectedChat);
     
     
 

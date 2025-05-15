@@ -14,13 +14,13 @@ export default function MessageContainer() {
     
 
     useEffect(() => {
-        getMessages(selectedChat._id);
+        getMessages(selectedChat?._id);
 
         subscribeToMessages();
 
         return () => unsubscribeToMessages();
         
-    }, [selectedChat._id, getMessages, subscribeToMessages, unsubscribeToMessages]);
+    }, [selectedChat?._id, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
     useEffect(() => {     
         containerRef.current?.scrollIntoView({behavior : "smooth", });
@@ -46,13 +46,13 @@ export default function MessageContainer() {
 
                     <div className="chat-image avatar">
                         <div className="w-[48px] rounded-full">
-                            <img src={authUser._id === mess.senderId ? authUser.profilePic : selectedChat.profilePic 
+                            <img src={authUser._id === mess.senderId ? authUser.profilePic : selectedChat?.profilePic 
                                 || avatar} alt="profile" />
                         </div>
                     </div>
 
                     <div className="chat-header mb-1">
-                            {authUser._id === mess.senderId ? authUser.fullName : selectedChat.fullName}
+                            {authUser._id === mess.senderId ? authUser.fullName : selectedChat?.fullName}
                             <time className="text-gray-400">{formatMessageTime(mess.createdAt)}</time>
                     </div>
 

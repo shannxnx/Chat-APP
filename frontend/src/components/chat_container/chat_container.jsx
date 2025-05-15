@@ -39,16 +39,16 @@ export default function ChatContainer({selectedUser}){
 
             <div className="flex  gap-3 items-center">
                 <div className="size-[64px]  rounded-[500px] ml-3 my-auto scale-80 lg:scale-90">
-                    <img src={selectedUser.profilePic || avatar}  className="size-[64px]  rounded-[500px]"/>
+                    <img src={selectedUser?.profilePic || avatar}  className="size-[64px]  rounded-[500px]"/>
                 </div>
 
                 <div>
 
-                    <h1>{selectedUser.fullName}</h1> {/*Name of selected user should be here*/}
+                    <h1>{selectedUser?.fullName}</h1> {/*Name of selected user should be here*/}
 
-                    <h5 className={`${onlineUsers.includes(selectedUser._id) ? "text-green-500" : "text-gray-500"}`}>
+                    <h5 className={`${onlineUsers.includes(selectedUser?._id) ? "text-green-500" : "text-gray-500"}`}>
                         {
-                            onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"
+                            onlineUsers.includes(selectedUser?._id) ? "Online" : "Offline"
                         }
                     </h5>
 

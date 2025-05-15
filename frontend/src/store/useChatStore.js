@@ -133,6 +133,8 @@ export const useChatStore = create((set, get) => ({
 
     backChat : () => {
         set({inChat : false});
+        // window.location.reload();
+        // set({selectedChat : null})
     },
 
     setModal : () => {
