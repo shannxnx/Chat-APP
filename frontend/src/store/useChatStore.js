@@ -114,7 +114,9 @@ export const useChatStore = create((set, get) => ({
     },
 
     setInNickNames : () => {
-        set({inNickNames : !get().inNickNames})
+        set({inNickNames : !get().inNickNames});
+        set({inNnEditModeUser : false});
+        set({inNnEditModeReciever : false});
     },
 
     setInNnEditModeUser : () => {

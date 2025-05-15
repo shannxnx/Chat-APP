@@ -29,7 +29,8 @@ export default function AddNickname(){
                     <img src={authUser.profilePic} className="size-[64px] rounded-full" />
                     <div>
                         {
-                            inNnEditModeUser ? <input type="text" placeholder={authUser.fullName} className="text-[20px] text-black w-[90%] "/>
+                            inNnEditModeUser ? <input type="text" placeholder={authUser.fullName} 
+                            className="text-[20px] text-black w-[90%] p-2"/>
                             : <h1 className="text-[20px]">{authUser.fullName}</h1>
                         }
                         {/* <h1 className="text-[20px]">{authUser.fullName}</h1> */}
@@ -55,7 +56,7 @@ export default function AddNickname(){
                     <div>
                         {
                             inNnEditModeReciever ? <input type="text" placeholder={selectedChat.fullName} 
-                            className="text-[20px] text-black w-[90%] "/> : <h1 className="text-[20px]">{selectedChat.fullName}</h1>
+                            className="text-[20px] text-black w-[90%] p-2"/> : <h1 className="text-[20px]">{selectedChat.fullName}</h1>
                         }
                         
                         
