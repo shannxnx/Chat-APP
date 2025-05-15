@@ -21,7 +21,8 @@ export const useChatStore = create((set, get) => ({
     ChatBgGet : null,
     currentConvoRoom : null,
     inNickNames : false,
-    inNnEditMode : false,
+    inNnEditModeUser : false,
+    inNnEditModeReciever : false,
 
     getUsers : async () => {
         set({isUserLoading : true})
@@ -116,8 +117,12 @@ export const useChatStore = create((set, get) => ({
         set({inNickNames : !get().inNickNames})
     },
 
-    setInNnEditMode : () => {
-        set({inNnEditMode : !get().inNnEditMode})
+    setInNnEditModeUser : () => {
+        set({inNnEditModeUser : !get().inNnEditModeUser})
+    },
+
+    setinNnEditModeReciever : () => {
+        set({inNnEditModeReciever : !get().inNnEditModeReciever})
     },
 
     setInChat : () => {

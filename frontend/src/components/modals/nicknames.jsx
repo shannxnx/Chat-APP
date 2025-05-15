@@ -4,7 +4,8 @@ import { useChatStore } from "../../store/useChatStore";
 
 export default function AddNickname(){
 
-    const {selectedChat, setInNickNames, inNnEditMode, setInNnEditMode} = useChatStore();
+    const {selectedChat, setInNickNames, inNnEditModeUser, setInNnEditModeUser, 
+    inNnEditModeReciever, setinNnEditModeReciever} = useChatStore();
     const {authUser} = useAuthStore();
 
 
@@ -28,18 +29,20 @@ export default function AddNickname(){
                     <img src={authUser.profilePic} className="size-[64px] rounded-full" />
                     <div>
                         {
-                            inNnEditMode ? <input type="text" placeholder={authUser.fullName} className="text-[20px] text-black w-[90%] "/>
+                            inNnEditModeUser ? <input type="text" placeholder={authUser.fullName} className="text-[20px] text-black w-[90%] "/>
                             : <h1 className="text-[20px]">{authUser.fullName}</h1>
                         }
                         {/* <h1 className="text-[20px]">{authUser.fullName}</h1> */}
                         
+                        {
+                            inNnEditModeUser ? null : <h6 className="text-[12px] text-gray-500">Set Nickname</h6>
+                        }
                         
-                        <h6 className="text-[12px] text-gray-500">Set Nickname</h6>
                     </div>
 
                     {
-                        inNnEditMode ? <Check className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditMode}/> 
-                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditMode}/>
+                        inNnEditModeUser ? <Check className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/> 
+                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/>
                     }
 
                     
@@ -50,14 +53,27 @@ export default function AddNickname(){
                 <div className="flex items-center items w-[100%] h-[50%] gap-3 relative">
                     <img src={selectedChat.profilePic} className="size-[64px] rounded-full" />
                     <div>
-                        <h1 className="text-[20px]">{selectedChat.fullName}</h1>
+                        {
+                            inNnEditModeReciever ? <input type="text" placeholder={selectedChat.fullName} 
+                            className="text-[20px] text-black w-[90%] "/> : <h1 className="text-[20px]">{selectedChat.fullName}</h1>
+                        }
                         
-                        <h6 className="text-[12px] text-gray-500">Set Nickname</h6>
+                        
+                        {
+                            inNnEditModeReciever ? null : <h6 className="text-[12px] text-gray-500">Set Nickname</h6>
+                        }
+
                     </div>
 
-                    <Pencil className="absolute right-0 cursor-pointer hover:scale-110"/>
+                    {
+                        inNnEditModeReciever ? <Check className="absolute right-0 cursor-pointer hover:scale-110" onClick={setinNnEditModeReciever}/> 
+                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setinNnEditModeReciever}/>
+                    }
+
+                    {/* <Pencil className="absolute right-0 cursor-pointer hover:scale-110"/> */}
                     
                 </div>
+
             </div>
 
 
