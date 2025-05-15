@@ -12,7 +12,7 @@ export default function ChatContainer({selectedUser}){
 
 
     const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, 
-    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange} = useChatStore();
+    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, setInNickNames} = useChatStore();
     const {onlineUsers} = useAuthStore();
 
     
@@ -58,7 +58,7 @@ export default function ChatContainer({selectedUser}){
             {/* <CircleX className="size-[32px] mr-4 cursor-pointer hover:scale-105"/> */}
             {/* <Info className="size-[32px] mr-4 cursor-pointer hover:scale-105"/> */}
             <div className="flex ">
-                <Pencil className="size-[32px] mr-2 cursor-pointer hover:scale-105"/>
+                <Pencil className="size-[32px] mr-2 cursor-pointer hover:scale-105" onClick={setInNickNames}/>
                 <Edit className="size-[32px] mr-2 cursor-pointer hover:scale-105" onClick={setModal}/>
                 <ArrowLeft className="size-[32px] mr-4 cursor-pointer hover:scale-105" onClick={backChat}/>
             </div>

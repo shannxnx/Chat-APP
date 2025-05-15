@@ -11,6 +11,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import ChangeBgModal from "./modals/backround_chat";
+import AddNickname from "./modals/nicknames";
 
 
 
@@ -23,7 +24,7 @@ import ChangeBgModal from "./modals/backround_chat";
 
 export default function Homepage(){
     const {logOut} = useAuthStore();
-    const {messages, users, getMessages, getUsers, isSelectedUser, selectedChat, showModal, setModal} = useChatStore();
+    const {getUsers, isSelectedUser, selectedChat, showModal, setModal, inNickNames} = useChatStore();
     const [bgCol, setBgCol] = useState({});
 
     async function fetchbgColor(){
@@ -60,7 +61,8 @@ export default function Homepage(){
         
 
         { showModal && <ChangeBgModal/>}
-
+        { inNickNames && <AddNickname/> }
+        
 
         <Sidenav/>
         

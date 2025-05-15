@@ -20,6 +20,8 @@ export const useChatStore = create((set, get) => ({
     ChatBgColorData : null,
     ChatBgGet : null,
     currentConvoRoom : null,
+    inNickNames : false,
+    inNnEditMode : false,
 
     getUsers : async () => {
         set({isUserLoading : true})
@@ -108,6 +110,14 @@ export const useChatStore = create((set, get) => ({
         get().joinConvoRoom(convoId);
         set({currentConvoRoom : convoId});
         
+    },
+
+    setInNickNames : () => {
+        set({inNickNames : !get().inNickNames})
+    },
+
+    setInNnEditMode : () => {
+        set({inNnEditMode : !get().inNnEditMode})
     },
 
     setInChat : () => {
