@@ -34,6 +34,7 @@ io.on("connection", (socket) => {
         userSocketMap[userId] = socket.id;
     }
 
+    //socket.on is the reaction
     socket.on("joinConvo", (convoId) => {
         socket.join(convoId);
         console.log(`User ${socket.id} joined room : ${convoId}`);
