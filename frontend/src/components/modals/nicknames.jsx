@@ -12,7 +12,7 @@ export default function AddNickname(){
     return <>
     <div className="fixed inset-0 bg-black opacity-50 z-20"></div>
 
-    <div className="lg:w-[500px] lg:h-[250px] md:w-[400px] w-[300px] border border-gray-300 bg-white fixed z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+    <div className="lg:w-[500px] lg:h-[250px] md:w-[400px] md:h-[250px] h-[250px] w-[94%] border border-gray-300 bg-white fixed z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                         rounded-lg flex flex-col items-center shadow-l">
             
             <div className="w-[100%] flex flex-col items-center relative justify-center">
@@ -25,12 +25,12 @@ export default function AddNickname(){
             
 
             <div className="w-[90%] h-[60%] mt-6 flex flex-col">
-                <div className="flex items-center items w-[100%] h-[50%] gap-3 relative">
+                <div className="flex items-center items w-[100%] h-[50%]  gap-3 relative">
                     <img src={authUser.profilePic} className="size-[64px] rounded-full" />
                     <div>
                         {
                             inNnEditModeUser ? <input type="text" placeholder={authUser.fullName} 
-                            className="text-[20px] text-black w-[90%] p-2"/>
+                            className="text-[20px] text-black lg:w-[90%] md:w-[90%] w-[85%] p-2"/>
                             : <h1 className="text-[20px]">{authUser.fullName}</h1>
                         }
                         {/* <h1 className="text-[20px]">{authUser.fullName}</h1> */}
