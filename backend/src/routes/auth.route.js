@@ -1,7 +1,8 @@
 //this is the route
 
 import express from "express";
-import { signup, login, logout, updateProfile, checkAuth, getUserInfo, getAllUsers } from "../controllers/auth.controller.js";
+import { signup, login, logout, updateProfile, checkAuth, getUserInfo, getAllUsers, 
+updateNickNameChat } from "../controllers/auth.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
 
 
@@ -17,7 +18,7 @@ router.get("/userInfo", protectRoute, getUserInfo);
 router.get("/all-users", protectRoute, getAllUsers);
 
 //--------TEST-----------
-// router.put("/set-NickName", protectRoute, updateNickNameChat);
+router.post("/set-NickName", protectRoute, updateNickNameChat);
 
 
 

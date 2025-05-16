@@ -12,8 +12,8 @@ export default function ChatContainer({selectedUser}){
 
 
     const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, 
-    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, setInNickNames} = useChatStore();
-    const {onlineUsers} = useAuthStore();
+    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, setInNickNames, } = useChatStore();
+    const {onlineUsers, authUser} = useAuthStore();
 
     
 
@@ -27,8 +27,9 @@ export default function ChatContainer({selectedUser}){
     }, [selectedChat, ChatBgGet?.backgroundColor, ChatBgColorData]);
 
 
-    console.log("chatBG: ",  ChatBgGet?.backgroundColor);
-    console.log("currentConvoRoom : ", currentConvoRoom);
+    // console.log("chatBG: ",  ChatBgGet?.backgroundColor);
+    // console.log("currentConvoRoom : ", currentConvoRoom);
+    console.log("AuthUser: ", authUser);
 
     return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"} `} style={{backgroundColor : ChatBgGet?.backgroundColor ? 
         ChatBgGet?.backgroundColor : "white"
@@ -44,7 +45,11 @@ export default function ChatContainer({selectedUser}){
 
                 <div>
 
-                    <h1>{selectedUser?.fullName}</h1> {/*Name of selected user should be here*/}
+                    {
+                        selectedUser?.nickName === "" ?  <h1>{selectedUser?.fullName }</h1> : <h1>{ selectedUser?.nickName}</h1>
+                    }
+
+                    {/* <h1>{selectedUser?.fullName }</h1>  //Name of selected user should be here */}
 
                     <h5 className={`${onlineUsers.includes(selectedUser?._id) ? "text-green-500" : "text-gray-500"}`}>
                         {

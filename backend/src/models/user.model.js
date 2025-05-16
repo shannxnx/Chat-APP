@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
         profilePic : {
             type : String,
             default : "",
+        },
+        nickName : {
+            type : String,
+            default : ""
         }
     },
     {

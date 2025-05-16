@@ -46,7 +46,7 @@ export default function MessageContainer() {
 
                     <div className="chat-image avatar">
                         <div className="w-[48px] rounded-full">
-                            <img src={authUser._id === mess.senderId ? authUser.profilePic : selectedChat?.profilePic 
+                            <img src={authUser._id === mess.senderId ? authUser?.profilePic ? authUser?.profilePic : avatar : selectedChat?.profilePic 
                                 || avatar} alt="profile" />
                         </div>
                     </div>

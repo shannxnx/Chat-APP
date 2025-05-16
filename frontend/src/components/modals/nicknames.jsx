@@ -1,6 +1,7 @@
 import { Check, Pencil, X } from "lucide-react";
 import { useAuthStore } from "../../store/useAuthStore"
 import { useChatStore } from "../../store/useChatStore";
+import avatar from "../../../public/avatar.png"
 
 export default function AddNickname(){
 
@@ -26,7 +27,7 @@ export default function AddNickname(){
 
             <div className="w-[90%] h-[60%] mt-6 flex flex-col">
                 <div className="flex items-center items w-[100%] h-[50%]  gap-3 relative">
-                    <img src={authUser.profilePic} className="size-[64px] rounded-full" />
+                    <img src={authUser.profilePic || avatar} className="size-[64px] rounded-full" />
                     <div>
                         {
                             inNnEditModeUser ? <input type="text" placeholder={authUser.fullName} 
@@ -52,7 +53,7 @@ export default function AddNickname(){
                 </div>
 
                 <div className="flex items-center items w-[100%] h-[50%] gap-3 relative">
-                    <img src={selectedChat.profilePic} className="size-[64px] rounded-full" />
+                    <img src={selectedChat.profilePic || avatar} className="size-[64px] rounded-full" />
                     <div>
                         {
                             inNnEditModeReciever ? <input type="text" placeholder={selectedChat.fullName} 

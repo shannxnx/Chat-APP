@@ -94,7 +94,7 @@ export const login = async (req, res) => {
             fullName : user.fullName,
             email : user.email,
             profilePic : user.profilePic
-        });
+        }); 
 
         
 
