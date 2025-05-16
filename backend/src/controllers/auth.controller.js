@@ -48,7 +48,8 @@ export const signup = async (req, res) => {
                 _id : newUser._id,
                 fullName : newUser.fullName,
                 email : newUser.email,
-                profilePic : newUser.profilePic
+                profilePic : newUser.profilePic,
+                
             })
 
         }
@@ -74,8 +75,8 @@ export const login = async (req, res) => {
     const {email, password} = req.body;
 
     try {
-       const user = await User.findOne({email});
-
+        const user = await User.findOne({email});
+        const userNn = await User.findOne({email}).select("nickName");
        //check if the user is in the database
         if (!user){
             res.status(400).json({message: "Invalid credentials"});
@@ -93,7 +94,8 @@ export const login = async (req, res) => {
             _id : user._id,
             fullName : user.fullName,
             email : user.email,
-            profilePic : user.profilePic
+            profilePic : user.profilePic,
+            
         }); 
 
         
@@ -139,9 +141,13 @@ export const updateProfile = async (req, res) => {
 }
 
 
-export const checkAuth = (req, res) => {
+export const checkAuth = async (req, res) => {
     try {
-        res.status(200).json(req.user);
+        const userId = req.user._id;
+        const authUserData = await User.findById(userId).select("-password");
+        res.status(200).json(authUserData);
+        
+        // res.status(200).json(req.user);   //this shi is allowed too
     } catch (error) {
         console.log("Error in checkAuth controller : ", error.message);
         res.status(500).json({message : "Server error"});

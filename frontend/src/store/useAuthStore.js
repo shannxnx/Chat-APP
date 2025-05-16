@@ -70,6 +70,7 @@ export const useAuthStore = create((set, get) => ({
         try{
             const res = await axios.post("http://localhost:5001/api/auth/login", data, {withCredentials : true});
             set({authUser : res.data});
+            await get().checkAuth();
             toast.success("Logged in successfully!");
             get().connectSocket();
             

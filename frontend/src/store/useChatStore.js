@@ -111,6 +111,7 @@ export const useChatStore = create((set, get) => ({
         get().joinConvoRoom(convoId);
         set({currentConvoRoom : convoId});
         
+        
     },
 
     setInNickNames : () => {

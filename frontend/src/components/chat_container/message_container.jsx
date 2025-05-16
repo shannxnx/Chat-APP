@@ -7,7 +7,7 @@ import { formatMessageTime } from "../../lib/utils.";
 export default function MessageContainer() {
 
     const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages, chatBgColor} = useChatStore();
-    const {authUser, socket} = useAuthStore();
+    const {authUser, userData} = useAuthStore();
 
     const containerRef = useRef(null);
     // console.log("bgColor:", chatBgColor);
@@ -33,7 +33,7 @@ export default function MessageContainer() {
 
     // console.log("Socket: ", socket);
     // console.log("messages: ", messages);
-    // console.log("auth user: ", authUser);
+    console.log("auth user: ", userData);
 
     return  <div className={`w-[100%] lg-h-[500px] overflow-y-scroll  h-full  relative `}  >
 
@@ -64,8 +64,8 @@ export default function MessageContainer() {
 
                             {   
                                 authUser._id === mess.senderId ? 
-                                authUser.nickName === "" ? authUser.fullName : authUser.nickName
-                                : selectedChat.nickName === "" ? selectedChat?.fullName : selectedChat.nickName
+                                authUser?.nickName === "" ? authUser.fullName : authUser.nickName
+                                : selectedChat?.nickName === "" ? selectedChat?.fullName : selectedChat.nickName
                             }
 
                             <time className="text-gray-400">{formatMessageTime(mess.createdAt)}</time>
