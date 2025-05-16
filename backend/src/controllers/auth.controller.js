@@ -12,7 +12,7 @@ export const signup = async (req, res) => {
 
         //check first if all the req is filled out
         if (!fullName || !email || !password){
-            res.status(400).json({message : "You must provide all information!"});
+            return res.status(400).json({message : "You must provide all information!"});
         }
 
         //check if the password is greater than 6
@@ -37,9 +37,11 @@ export const signup = async (req, res) => {
         });
 
         if (newUser){
+
+            //this means you are authenticated
             //generate jwt token
             generateToken(newUser._id, res);
-            await newUser.save();
+            await newUser.save();              //save the new user data to the database
             
 
             res.status(201).json({
@@ -51,7 +53,7 @@ export const signup = async (req, res) => {
 
         }
         else{
-            res.status(400).json({message : "Invalid User Data"});
+           return res.status(400).json({message : "Invalid User Data"});
         }
 
 
@@ -104,7 +106,7 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
     try {
-        res.cookie("jwt", "", {maxAge: 0});                          //were just removing the token
+        res.cookie("jwt", "", {maxAge: 0});                          //were just removing the token, means you are no longer authenticated
         res.status(200).json({message : "Loged out succesfully"});
     } catch (error) {
         console.log("Error in logout controller : ", error.message);
@@ -169,7 +171,7 @@ export const getAllUsers = async (req, res) => {
     try{
 
         const userId = req.user._id;
-        const allUsers = await User.find({_id : {$ne : userId}}).select("-password");
+        const allUsers = await User.find({_id : {$ne : userId}}).select("-password"); //this will return all users except urself or the authenticated user
         res.status(201).json(allUsers);
 
 
