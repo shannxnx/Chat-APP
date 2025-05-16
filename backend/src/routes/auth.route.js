@@ -16,6 +16,9 @@ router.get("/check", protectRoute, checkAuth);
 router.get("/userInfo", protectRoute, getUserInfo);
 router.get("/all-users", protectRoute, getAllUsers);
 
+//--------TEST-----------
+// router.put("/set-NickName", protectRoute, updateNickNameChat);
+
 
 
 export default router;

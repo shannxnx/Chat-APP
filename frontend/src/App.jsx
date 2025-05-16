@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+  }, [checkAuth]); //question this - (i know that this is a dependencies but what exactly is gonna happen if the function is inside of that)
 
   // console.log({authUser});
 

@@ -180,3 +180,40 @@ export const getAllUsers = async (req, res) => {
         res.status(500).json({message : "Error server"});
     }
 }
+
+//------------TEST-----------------
+export const updateNickNameChat = async (req, res) => {
+    const {nickName} = req.body;
+
+    try {
+        
+        const userId = req.user._id;
+
+        const updateNn = await User.findByIdAndUpdate(userId, {nickName : nickName}, {new : true});
+
+        res.status(200).json(updateNn);
+
+    } catch (error) {
+        console.log("Error in updating nickname: ", error.message);
+        res.status(400).json({message : "Error Server"});
+    }
+
+
+};
+
+export const getNickNameChat = async (req, res) => {
+    const {id : recieverId} = req.params;
+    try {
+        
+        const userId = req.user._id;
+
+        const nickNames = await User.find({$and : [recieverId, userId]}).select("nickName fullName");
+
+        res.status(200).json(nickNames);
+        
+
+    } catch (error) {
+        console.log("Error in getting NickName : ", error.message);
+        res.status(400).json({message : "Server Error"});
+    }
+}
