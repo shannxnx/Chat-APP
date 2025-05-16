@@ -2,7 +2,7 @@
 
 import express from "express";
 import { signup, login, logout, updateProfile, checkAuth, getUserInfo, getAllUsers, 
-updateNickNameChat } from "../controllers/auth.controller.js";
+updateNickName } from "../controllers/auth.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
 
 
@@ -18,7 +18,7 @@ router.get("/userInfo", protectRoute, getUserInfo);
 router.get("/all-users", protectRoute, getAllUsers);
 
 //--------TEST-----------
-router.post("/set-NickName", protectRoute, updateNickNameChat);
+router.post("/set-NickName", protectRoute, updateNickName);
 
 
 

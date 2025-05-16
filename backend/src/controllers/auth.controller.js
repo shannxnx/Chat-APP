@@ -182,7 +182,9 @@ export const getAllUsers = async (req, res) => {
 }
 
 //------------TEST-----------------
-export const updateNickNameChat = async (req, res) => {
+//change of plan this is not for nickName chat this for nickName that's in the profile
+//where everybody can see   
+export const updateNickName = async (req, res) => {
     const {nickName} = req.body;
 
     try {

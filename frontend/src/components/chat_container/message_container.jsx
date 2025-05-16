@@ -46,13 +46,28 @@ export default function MessageContainer() {
 
                     <div className="chat-image avatar">
                         <div className="w-[48px] rounded-full">
-                            <img src={authUser._id === mess.senderId ? authUser?.profilePic ? authUser?.profilePic : avatar : selectedChat?.profilePic 
-                                || avatar} alt="profile" />
+
+                            <img src=
+                            {
+                                authUser._id === mess.senderId ?
+                                authUser?.profilePic ? authUser?.profilePic : avatar 
+                                : selectedChat?.profilePic 
+                                || avatar
+                            } 
+                            alt="profile" />
+
+
                         </div>
                     </div>
 
                     <div className="chat-header mb-1">
-                            {authUser._id === mess.senderId ? authUser.fullName : selectedChat?.fullName}
+
+                            {   
+                                authUser._id === mess.senderId ? 
+                                authUser.nickName === "" ? authUser.fullName : authUser.nickName
+                                : selectedChat.nickName === "" ? selectedChat?.fullName : selectedChat.nickName
+                            }
+
                             <time className="text-gray-400">{formatMessageTime(mess.createdAt)}</time>
                     </div>
 

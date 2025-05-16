@@ -7,7 +7,7 @@ import { useChatStore } from "../../store/useChatStore";
 
 export default function SideChatBox({user}){
     const {setSelectedChat, selectedChat, inChat} = useChatStore();
-    const {onlineUsers} = useAuthStore();
+    const {onlineUsers, } = useAuthStore();
 
 
     return <div className={`w-full h-[70px]  flex cursor-pointer hover:bg-gray-700
@@ -18,7 +18,11 @@ export default function SideChatBox({user}){
         </div>
 
         <div className="lg:w-[70%] h-full  flex-col justify-center hidden md:block lg:flex">
-            <h1 className="text-white ml-3">{user.fullName}</h1>
+            <h1 className="text-white ml-3">
+                {
+                    user.nickName === "" ?  user.fullName : user.nickName
+                }
+            </h1>
             <h5 
         className={`${onlineUsers.includes(user._id) ? "text-green-500" : "text-gray-400 "} ml-3`}>
                 {

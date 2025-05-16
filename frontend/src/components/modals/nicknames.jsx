@@ -30,9 +30,10 @@ export default function AddNickname(){
                     <img src={authUser.profilePic || avatar} className="size-[64px] rounded-full" />
                     <div>
                         {
-                            inNnEditModeUser ? <input type="text" placeholder={authUser.fullName} 
+                            inNnEditModeUser ? <input type="text" 
+                            placeholder={authUser.nickName === "" ? authUser.fullName : authUser.nickName} 
                             className="text-[20px] text-black lg:w-[90%] md:w-[90%] w-[85%] p-2"/>
-                            : <h1 className="text-[20px]">{authUser.fullName}</h1>
+                            : <h1 className="text-[20px]">{authUser.nickName === "" ? authUser.fullName : authUser.nickName}</h1>
                         }
                         {/* <h1 className="text-[20px]">{authUser.fullName}</h1> */}
                         
@@ -56,8 +57,10 @@ export default function AddNickname(){
                     <img src={selectedChat.profilePic || avatar} className="size-[64px] rounded-full" />
                     <div>
                         {
-                            inNnEditModeReciever ? <input type="text" placeholder={selectedChat.fullName} 
-                            className="text-[20px] text-black w-[90%] p-2"/> : <h1 className="text-[20px]">{selectedChat.fullName}</h1>
+                            inNnEditModeReciever ? <input type="text" 
+                            placeholder={selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName} 
+                            className="text-[20px] text-black w-[90%] p-2"/> 
+                            : <h1 className="text-[20px]">{selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName}</h1>
                         }
                         
                         
