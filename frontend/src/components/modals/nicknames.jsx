@@ -17,7 +17,7 @@ export default function AddNickname(){
                         rounded-lg flex flex-col items-center shadow-l">
             
             <div className="w-[100%] flex flex-col items-center relative justify-center">
-                <h1 className="text-red-500 text-[24px] mt-3">NICKNAMES</h1>
+                <h1 className="text-black text-[24px] mt-3">NICKNAMES</h1>
                 <div className="w-[100%]">
                     <hr />
                 </div>
