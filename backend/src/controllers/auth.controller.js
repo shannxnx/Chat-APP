@@ -15,7 +15,7 @@ export const signup = async (req, res) => {
             return res.status(400).json({message : "You must provide all information!"});
         }
 
-        //check if the password is greater than 6
+        //check if the password is greater than 6  
         if (password.length < 6){
             return res.status(400).json({message : "Password must be at least 6 characters"});
         }
@@ -75,11 +75,19 @@ export const login = async (req, res) => {
     const {email, password} = req.body;
 
     try {
-        const user = await User.findOne({email});
+        const user = await User.findOne({email})  
         const userNn = await User.findOne({email}).select("nickName");
+
+        
        //check if the user is in the database
         if (!user){
             res.status(400).json({message: "Invalid credentials"});
+        }
+
+        //THIS IS A TEST CODE
+        const userInfo = null;
+        if (user){
+            userInfo = await User.findById(user._id).select("-password");
         }
 
 
@@ -96,7 +104,10 @@ export const login = async (req, res) => {
             email : user.email,
             profilePic : user.profilePic,
             
-        }); 
+        });
+        
+        //THIS IS A TEST CODE
+        // res.status(201).json({userInfo});
 
         
 
