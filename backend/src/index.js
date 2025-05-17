@@ -9,7 +9,6 @@ import { app, server } from "./lib/socket.js";
 import chatBgRoutes from "./routes/chatBg.route.js";
 
 
-
 dotenv.config();                        //because of this we can use (process.env.PORT)
 
 const PORT = process.env.PORT;    

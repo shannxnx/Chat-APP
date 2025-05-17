@@ -30,7 +30,6 @@ export const changeChatBg = async (req, res) => {
         const {chatBackground} = req.body;
         
         const existing = await ChatBg.findOne({participants : { $all: [loggedInUserId, participantId] } });
-
         if (existing){
              const updatedBg = await ChatBg.findOneAndUpdate(
                 { participants: { $all: [loggedInUserId, participantId] } },
@@ -46,6 +45,8 @@ export const changeChatBg = async (req, res) => {
 
 
         }
+
+
         const newBg = new ChatBg({
             participants: [loggedInUserId, participantId],
             chatBackground
