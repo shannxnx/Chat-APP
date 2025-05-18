@@ -7,6 +7,10 @@ const chatBgSchema = new mongoose.Schema({
         type : String,
         default : "#FFFFFF",
     },
+    chatNickNames : {
+        type : String,
+        default : ""
+    }
 });
 
 

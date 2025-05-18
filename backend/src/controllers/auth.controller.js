@@ -76,7 +76,7 @@ export const login = async (req, res) => {
 
     try {
         const user = await User.findOne({email})  
-        const userNn = await User.findOne({email}).select("nickName");
+        // const userNn = await User.findOne({email}).select("nickName");
 
         
        //check if the user is in the database
@@ -85,10 +85,10 @@ export const login = async (req, res) => {
         }
 
         //THIS IS A TEST CODE
-        const userInfo = null;
-        if (user){
-            userInfo = await User.findById(user._id).select("-password");
-        }
+        // const userInfo = null;
+        // if (user){
+        //     userInfo = await User.findById(user._id).select("-password");
+        // }
 
 
         //check if the password is correct
