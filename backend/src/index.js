@@ -7,6 +7,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { app, server } from "./lib/socket.js";
 import chatBgRoutes from "./routes/chatBg.route.js";
+import chatNn from "./routes/chatNickName.route.js"
 
 
 dotenv.config();                        //because of this we can use (process.env.PORT)
@@ -24,6 +25,7 @@ app.use(cookieParser());                //allows to parse the cookie
 app.use("/api/auth", authRoutes);       //for authentication (login, signup, logout);
 app.use("/api/message", messageRoutes); //for message
 app.use("/api/chatBg", chatBgRoutes);
+app.use("api/chat-nickname", chatNn);
 
 app.get("/", (req, res) => {
     res.send("I hope your a fuckery okay");
