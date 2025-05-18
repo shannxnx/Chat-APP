@@ -67,3 +67,32 @@ export const changeChatBg = async (req, res) => {
         res.status(500).json({message : "Error server"})
     }
 }
+
+
+export const changeChatNn = async (req, res) =>{
+    try {
+        const {NickName} = req.body;
+        const loggedInUserID = req.user._id;
+        const partnerID = req.params.id;
+
+        const chatNN = await ChatBg.findOne({
+            participants : {$all : [loggedInUserID, partnerID]}
+        })
+        
+        if (!chatNN){
+            const newNn = new ChatBg({
+                participants : [loggedInUserID, partnerID],
+                chatNickName : NickName,
+            });
+
+            await newNn.save();
+            res.status(201).json(newNn);
+        };
+
+
+
+    } catch (error) {
+        console.log("Error in changing NICKNAME : ", error.message);
+        res.status(500).json({message : "Server Error"})
+    }
+}
