@@ -96,8 +96,6 @@ export const useChatStore = create((set, get) => ({
 
     setSelectedUser : (isSelectedUser) => set({isSelectedUser}),
     setSelectedChat : (selected) => {
-       
-        
         const user = useAuthStore.getState().authUser;
         const recieverId_3 = selected._id.substring(0, 6);
         const userId_3 = user._id.substring(0, 6);
@@ -110,6 +108,7 @@ export const useChatStore = create((set, get) => ({
         get().getBgColor();
         get().joinConvoRoom(convoId);
         set({currentConvoRoom : convoId});
+        get().createNickName(user._id, selected._id);
         
         
     },
@@ -207,6 +206,23 @@ export const useChatStore = create((set, get) => ({
     unsubscribeToBackgroundChange : () => {
         const socket = useAuthStore.getState().socket;
         socket.off("updatedBackground")
+    },
+
+    //----------------NICKNAMES STUFF------------------
+    createdNickName : null,
+    createNickName : async (userID, partnerID) => {
+        try {
+
+
+            const data = {userId : userID, partnerId : partnerID};
+            const res = await axios.post(`http://localhost:5001/api/chat-nickname/create-NickName`, data, {withCredentials : true});
+            set({createdNickName : res.data});
+
+
+        } catch (error) {
+            console.log("Error in create nn: ", error.message);
+            toast.error("Error in Create NickName")
+        }
     }
 
 

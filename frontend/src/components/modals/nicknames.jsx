@@ -6,8 +6,11 @@ import avatar from "../../../public/avatar.png"
 export default function AddNickname(){
 
     const {selectedChat, setInNickNames, inNnEditModeUser, setInNnEditModeUser, 
-    inNnEditModeReciever, setinNnEditModeReciever} = useChatStore();
+    inNnEditModeReciever, setinNnEditModeReciever, createdNickName} = useChatStore();
     const {authUser} = useAuthStore();
+
+
+    // console.log("Created: ", createdNickName);
 
 
     return <>

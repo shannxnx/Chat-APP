@@ -24,7 +24,7 @@ import AddNickname from "./modals/nicknames";
 
 export default function Homepage(){
     const {logOut} = useAuthStore();
-    const {getUsers, isSelectedUser, selectedChat, showModal, setModal, inNickNames} = useChatStore();
+    const {getUsers, isSelectedUser, selectedChat, showModal, setModal, inNickNames, createdNickName} = useChatStore();
     const [bgCol, setBgCol] = useState({});
 
     async function fetchbgColor(){
@@ -54,6 +54,7 @@ export default function Homepage(){
     
     console.log("bgCol : ", bgCol);
     console.log("selectedChat : ", selectedChat);
+    console.log("Created: ", createdNickName);
     
     
 
