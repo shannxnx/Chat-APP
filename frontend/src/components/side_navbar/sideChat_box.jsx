@@ -7,7 +7,7 @@ import { useChatStore } from "../../store/useChatStore";
 //${selectedChat?.fullName === user.fullName ? `bg-gray-700` : `bg-black`}
 
 export default function SideChatBox({user}){
-    const {setSelectedChat, selectedChat, inChat, createNickName} = useChatStore();
+    const {setSelectedChat, selectedChat, inChat} = useChatStore();
     const {onlineUsers, authUser} = useAuthStore();
 
     

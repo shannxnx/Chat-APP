@@ -209,7 +209,7 @@ export const useChatStore = create((set, get) => ({
     },
 
     //----------------NICKNAMES STUFF------------------
-    createdNickName : null,
+    createdNickNameData : {},
     createNickName : async (userID, partnerID, userName, partnerName) => {
         
         try {
@@ -222,9 +222,12 @@ export const useChatStore = create((set, get) => ({
                 partnerName : partnerName
             };
             
-            const res = await axios.post(`http://localhost:5001/api/chat-nickname/create-NickName`, data, {withCredentials : true});
-            // console.log("Nickname creation response:", res.data);
-            set({createdNickName : res});
+            const res = await axios.post(
+                `http://localhost:5001/api/chat-nickname/create-NickName`,
+                 data, 
+                 {withCredentials : true});
+                 
+            set({createdNickName : res.data});
 
 
         } catch (error) {

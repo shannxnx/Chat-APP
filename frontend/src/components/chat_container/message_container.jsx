@@ -33,7 +33,7 @@ export default function MessageContainer() {
 
     // console.log("Socket: ", socket);
     // console.log("messages: ", messages);
-    console.log("auth user: ", userData);
+    // console.log("auth user: ", userData);
 
     return  <div className={`w-[100%] lg-h-[500px] overflow-y-scroll  h-full  relative `}  >
 

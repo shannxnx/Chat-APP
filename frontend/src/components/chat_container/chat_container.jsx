@@ -13,7 +13,7 @@ export default function ChatContainer({selectedUser}){
 
     const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, 
     currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, 
-    setInNickNames, createdNickName, createNickName} = useChatStore();
+    setInNickNames, createdNickNameData, createNickName} = useChatStore();
     const {onlineUsers, authUser} = useAuthStore();
 
     
@@ -30,7 +30,7 @@ export default function ChatContainer({selectedUser}){
 
     // console.log("chatBG: ",  ChatBgGet?.backgroundColor);
     // console.log("currentConvoRoom : ", currentConvoRoom);
-    console.log("CreatedNN: ", createdNickName);
+    
     
     
 

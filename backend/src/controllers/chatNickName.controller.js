@@ -36,9 +36,9 @@ export const createNickNames = async (req, res) => {
       userId: { $in: [userId, partnerId] }
     });
 
-    if (existingNickNames.length > 0) {
-      return res.status(400).json({ message: "Nicknames already exist for one or both users" });
-    }
+    // if (existingNickNames.length > 0) {
+    //   return res.status(400).json({ message: "Nicknames already exist for one or both users" });
+    // }
 
     // Create nickname documents for both users
     const newNickNames = await ChatNickName.insertMany([
