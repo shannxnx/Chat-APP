@@ -24,6 +24,10 @@ const chatNickNameSchema = mongoose.Schema(
       ref: "User",
       required: true
     },
+    name : {
+        type : String,
+        required : true
+    },
     nickname: {
       type: String,
       default: ""

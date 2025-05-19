@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import avatar from "../../../public/avatar.png";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useChatStore } from "../../store/useChatStore";
@@ -6,8 +7,10 @@ import { useChatStore } from "../../store/useChatStore";
 //${selectedChat?.fullName === user.fullName ? `bg-gray-700` : `bg-black`}
 
 export default function SideChatBox({user}){
-    const {setSelectedChat, selectedChat, inChat} = useChatStore();
-    const {onlineUsers, } = useAuthStore();
+    const {setSelectedChat, selectedChat, inChat, createNickName} = useChatStore();
+    const {onlineUsers, authUser} = useAuthStore();
+
+    
 
     
 

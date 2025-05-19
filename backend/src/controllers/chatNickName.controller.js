@@ -25,9 +25,9 @@ import  ChatNickName from "../models/chatNickName.model.js";
 export const createNickNames = async (req, res) => {
   try {
     
-    const { userId, partnerId } = req.body;
+    const { userId, partnerId, userName, partnerName } = req.body;
 
-    if (!userId || !partnerId) {
+    if (!userId || !partnerId || !userName || !partnerName) {
       return res.status(400).json({ message: "Fill out all details" });
     }
 
@@ -42,10 +42,10 @@ export const createNickNames = async (req, res) => {
 
     // Create nickname documents for both users
     const newNickNames = await ChatNickName.insertMany([
-      { userId, nickname: "" },
-      { userId: partnerId, nickname: "" }
+      { userId, nickname: "", name : userName },
+      { userId: partnerId, nickname: "", name : partnerName }
     ]);
-    await newNickNames.save();
+    
     res.status(201).json(newNickNames);
 
   } catch (error) {

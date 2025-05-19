@@ -108,7 +108,7 @@ export const useChatStore = create((set, get) => ({
         get().getBgColor();
         get().joinConvoRoom(convoId);
         set({currentConvoRoom : convoId});
-        get().createNickName(user._id, selected._id);
+        get().createNickName(user._id, selected._id, user.fullName, selected.fullName);
         
         
     },
@@ -210,16 +210,21 @@ export const useChatStore = create((set, get) => ({
 
     //----------------NICKNAMES STUFF------------------
     createdNickName : null,
-    createNickName : async (userID, partnerID) => {
+    createNickName : async (userID, partnerID, userName, partnerName) => {
         
         try {
 
             console.log("Creating nickname for:", userID, partnerID);
-            const data = {userId : userID, partnerId : partnerID};
+            const data = {
+                userId : userID, 
+                partnerId : partnerID, 
+                userName : userName,
+                partnerName : partnerName
+            };
             
             const res = await axios.post(`http://localhost:5001/api/chat-nickname/create-NickName`, data, {withCredentials : true});
-            console.log("Nickname creation response:", res.data);
-            set({createdNickName : res.data});
+            // console.log("Nickname creation response:", res.data);
+            set({createdNickName : res});
 
 
         } catch (error) {

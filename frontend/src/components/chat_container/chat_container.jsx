@@ -12,7 +12,8 @@ export default function ChatContainer({selectedUser}){
 
 
     const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, 
-    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, setInNickNames, createdNickName} = useChatStore();
+    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, 
+    setInNickNames, createdNickName, createNickName} = useChatStore();
     const {onlineUsers, authUser} = useAuthStore();
 
     
@@ -20,7 +21,7 @@ export default function ChatContainer({selectedUser}){
     useEffect(() => {
         getBgColor();
         subscribeToBackgroundChange();
-
+        
         return () => unsubscribeToBackgroundChange();
 
 
