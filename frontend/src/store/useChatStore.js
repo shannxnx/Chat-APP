@@ -211,17 +211,22 @@ export const useChatStore = create((set, get) => ({
     //----------------NICKNAMES STUFF------------------
     createdNickName : null,
     createNickName : async (userID, partnerID) => {
+        
         try {
 
-
+            console.log("Creating nickname for:", userID, partnerID);
             const data = {userId : userID, partnerId : partnerID};
+            
             const res = await axios.post(`http://localhost:5001/api/chat-nickname/create-NickName`, data, {withCredentials : true});
+            console.log("Nickname creation response:", res.data);
             set({createdNickName : res.data});
 
 
         } catch (error) {
             console.log("Error in create nn: ", error.message);
-            toast.error("Error in Create NickName")
+            // toast.error("Error in Create NickName: ", error.message);
+           
+            
         }
     }
 

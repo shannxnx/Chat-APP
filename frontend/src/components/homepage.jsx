@@ -52,9 +52,9 @@ export default function Homepage(){
     }, [selectedChat]);
 
     
-    console.log("bgCol : ", bgCol);
-    console.log("selectedChat : ", selectedChat);
-    console.log("Created: ", createdNickName);
+    // console.log("bgCol : ", bgCol);
+    // console.log("selectedChat : ", selectedChat);
+    // console.log("Created: ", createdNickName);
     
     
 

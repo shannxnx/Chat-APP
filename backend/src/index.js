@@ -25,7 +25,7 @@ app.use(cookieParser());                //allows to parse the cookie
 app.use("/api/auth", authRoutes);       //for authentication (login, signup, logout);
 app.use("/api/message", messageRoutes); //for message
 app.use("/api/chatBg", chatBgRoutes);
-app.use("api/chat-nickname", chatNn);
+app.use("/api/chat-nickname", chatNn);
 
 app.get("/", (req, res) => {
     res.send("I hope your a fuckery okay");

@@ -9,6 +9,8 @@ export default function SideChatBox({user}){
     const {setSelectedChat, selectedChat, inChat} = useChatStore();
     const {onlineUsers, } = useAuthStore();
 
+    
+
 
     return <div className={`w-full h-[70px]  flex cursor-pointer hover:bg-gray-700
     ${inChat && selectedChat?.fullName === user.fullName ? `bg-gray-700` : `bg-black`}`} onClick={() => setSelectedChat(user)}>

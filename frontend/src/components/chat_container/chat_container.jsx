@@ -12,7 +12,7 @@ export default function ChatContainer({selectedUser}){
 
 
     const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, 
-    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, setInNickNames, } = useChatStore();
+    currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, setInNickNames, createdNickName} = useChatStore();
     const {onlineUsers, authUser} = useAuthStore();
 
     
@@ -29,7 +29,9 @@ export default function ChatContainer({selectedUser}){
 
     // console.log("chatBG: ",  ChatBgGet?.backgroundColor);
     // console.log("currentConvoRoom : ", currentConvoRoom);
-    console.log("AuthUser: ", authUser);
+    console.log("CreatedNN: ", createdNickName);
+    
+    
 
     return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"} `} style={{backgroundColor : ChatBgGet?.backgroundColor ? 
         ChatBgGet?.backgroundColor : "white"
