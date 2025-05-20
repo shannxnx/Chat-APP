@@ -31,14 +31,6 @@ export const createNickNames = async (req, res) => {
       return res.status(400).json({ message: "Fill out all details" });
     }
 
-    // Check if nickname documents already exist for both users
-    // const existingNickNames = await ChatNickName.find({
-    //   userId: { $in: [userId, partnerId] }
-    // });
-
-    // if (existingNickNames.length > 0) {
-    //   return res.status(400).json({ message: "Nicknames already exist for one or both users" });
-    // }
 
     const existing = await ChatNickName.find({
       $or : [
@@ -47,8 +39,24 @@ export const createNickNames = async (req, res) => {
       ]
     });
 
-    if (existing){
-      res.status(400).json({message : "Already created in the database"})
+    if (existing.length > 0){
+      // res.status(400).json({message : "Already created in the database"});
+      const updatedNickNames = await ChatNickName.bulkWrite([
+        {
+          updateOne : {
+            filter : {userId : userId, partnerId : partnerId},
+            update : {$set : {userNickName : userNickName}}
+            
+          }
+        },
+        {
+          updateOne : {
+            filter : {userId : partnerId, partnerId : userId},
+            update : {$set : {partnerNickName : partnerNickName}}
+          }
+        }
+      ]);
+      return res.status(200).json(updatedNickNames)
     };
 
     

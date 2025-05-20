@@ -108,7 +108,7 @@ export const useChatStore = create((set, get) => ({
         get().getBgColor();
         get().joinConvoRoom(convoId);
         set({currentConvoRoom : convoId});
-        get().createNickName(user._id, selected._id, user.fullName, selected.fullName);
+        get().createNickName(user._id, selected._id, user.fullName, selected.fullName, "", "");
         
         
     },
@@ -210,7 +210,7 @@ export const useChatStore = create((set, get) => ({
 
     //----------------NICKNAMES STUFF------------------
     createdNickNameData : {},
-    createNickName : async (userID, partnerID, userName, partnerName) => {
+    createNickName : async (userID, partnerID, userName, partnerName, userNickName, partnerNickName) => {
         
         try {
 
@@ -219,7 +219,9 @@ export const useChatStore = create((set, get) => ({
                 userId : userID, 
                 partnerId : partnerID, 
                 userName : userName,
-                partnerName : partnerName
+                partnerName : partnerName,
+                userNickName : userNickName,
+                partnerNickName : partnerNickName
             };
             
             const res = await axios.post(

@@ -55,7 +55,7 @@ export default function Homepage(){
     
     // console.log("bgCol : ", bgCol);
     // console.log("selectedChat : ", selectedChat);
-    console.log("Created: ", createdNickNameData);
+    // console.log("Created: ", createdNickNameData);
     
     
 
