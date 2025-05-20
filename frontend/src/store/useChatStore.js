@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAuthStore } from "./useAuthStore";
 import io from "socket.io-client"
 import { useResponseStore } from "./useResponseStore";
+import { getNickNames } from "../../../backend/src/controllers/chatNickName.controller";
 
 
 
@@ -114,9 +115,11 @@ export const useChatStore = create((set, get) => ({
     },
 
     setInNickNames : () => {
+        const {selectedChat} = get();
         set({inNickNames : !get().inNickNames});
         set({inNnEditModeUser : false});
         set({inNnEditModeReciever : false});
+        get().getNickNames(selectedChat._id);
     },
 
     setInNnEditModeUser : () => {
@@ -210,6 +213,7 @@ export const useChatStore = create((set, get) => ({
 
     //----------------NICKNAMES STUFF------------------
     createdNickNameData : {},
+    getNickNamesData : null,
     createNickName : async (userID, partnerID, userName, partnerName, userNickName, partnerNickName) => {
         
         try {
@@ -237,6 +241,16 @@ export const useChatStore = create((set, get) => ({
             // toast.error("Error in Create NickName: ", error.message);
            
             
+        }
+    },
+    getNickNames : async (partnerId) => {
+        try {
+            const res = await axios.get(`http://localhost:5001/api/chat-nickname/get-NickName/${partnerId}`, {withCredentials : true});
+            set({getNickNamesData : res.data});
+
+        } catch (error) {
+            console.log("Error in getting nn: ", error.message);
+            toast.error(error?.response?.data?.message);
         }
     }
 

@@ -1,11 +1,12 @@
 import express from "express";
-import { createNickNames } from "../controllers/chatNickName.controller.js";
-
+import { createNickNames, getNickNames } from "../controllers/chatNickName.controller.js";
+import {protectRoute} from "../middleware/auth.middleware.js"
 
 const router = express.Router();
 
 
-router.post("/create-NickName", createNickNames);
+router.post("/create-NickName", protectRoute, createNickNames);
+router.get("/get-NickName/:id", protectRoute, getNickNames)
 
 
 

@@ -87,3 +87,33 @@ export const createNickNames = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+
+export const getNickNames = async (req, res) => {
+  try {
+    
+    const {id : partnerId} = req.params;
+    const userId = req.user._id;
+
+    const nicknamesData = await ChatNickName.find({
+      $or : [
+        {userId : userId, partnerId : partnerId}, 
+        {userId : partnerId, partnerId : userId}
+      ]
+    });
+
+    if (nicknamesData.length > 0){
+      return res.status(200).json(nicknamesData);
+    }
+
+    res.status(404).json({message : "Nicknames not in database"});
+
+    if (nicknamesData.length <= 0){
+      return res.status(404).json({message : "Nicknames not in database"})
+    }
+
+  } catch (error) {
+    console.log("Error in getting NickNames: ", error.message);
+    res.status(500).json({message : "Server Error"});
+  }
+}
