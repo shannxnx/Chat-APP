@@ -25,25 +25,51 @@ import  ChatNickName from "../models/chatNickName.model.js";
 export const createNickNames = async (req, res) => {
   try {
     
-    const { userId, partnerId, userName, partnerName } = req.body;
+    const { userId, partnerId, userName, partnerName, userNickName, partnerNickName} = req.body;
 
     if (!userId || !partnerId || !userName || !partnerName) {
       return res.status(400).json({ message: "Fill out all details" });
     }
 
     // Check if nickname documents already exist for both users
-    const existingNickNames = await ChatNickName.find({
-      userId: { $in: [userId, partnerId] }
-    });
+    // const existingNickNames = await ChatNickName.find({
+    //   userId: { $in: [userId, partnerId] }
+    // });
 
     // if (existingNickNames.length > 0) {
     //   return res.status(400).json({ message: "Nicknames already exist for one or both users" });
     // }
 
+    const existing = await ChatNickName.find({
+      $or : [
+        {userId : userId, partnerId : userId},
+        {userId : partnerId, partnerId : userId}
+      ]
+    });
+
+    if (existing){
+      res.status(400).json({message : "Already created in the database"})
+    };
+
+    
+
     // Create nickname documents for both users
     const newNickNames = await ChatNickName.insertMany([
-      { userId, nickname: "", name : userName },
-      { userId: partnerId, nickname: "", name : partnerName }
+      { 
+        userId,
+        partnerId : partnerId, 
+        nickname: "", 
+        userName : userName, 
+        partnerName : partnerName 
+      },
+
+      { 
+        userId: partnerId,
+        partnerId : userId, 
+        nickname: "", 
+        userName : partnerName, 
+        partnerName : userName 
+      }
     ]);
     
     res.status(201).json(newNickNames);

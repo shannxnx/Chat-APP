@@ -19,20 +19,32 @@ import mongoose from "mongoose";
 
 const chatNickNameSchema = mongoose.Schema(
     {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true
-    },
-    name : {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+      },
+      partnerId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User",
+        required : true
+      },
+      userName : {
+          type : String,
+          required : true
+      },
+      partnerName : {
         type : String,
         required : true
-    },
-    nickname: {
-      type: String,
-      default: ""
-    }
-
+      },
+      userNickName: {
+        type: String,
+        default: ""
+      },
+      partnerNickName : {
+        type : String,
+        default : ""
+      }
     },
     {
         timestamps : true
