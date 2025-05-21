@@ -50,11 +50,19 @@ export default function ChatContainer({selectedUser}){
 
                     {
                         getNickNamesData === null ? 
+                        selectedUser?.nickName === "" ?  <h1>{selectedUser?.fullName }</h1> : <h1>{ selectedUser?.nickName}</h1> 
+                        :getNickNamesData?.partnerNickName === "" ?  <h1>{getNickNamesData?.partnerName }</h1> 
+                        : <h1>{ getNickNamesData?.partnerNickName}</h1>
+                    }
+                     
+                     {/*For array returns*/}
+                    {/* { /
+                        getNickNamesData === null ? 
                         selectedUser?.nickName === "" ?  <h1>{selectedUser?.fullName }</h1> : <h1>{ selectedUser?.nickName}</h1> :
                         getNickNamesData[0]?.partnerNickName === "" ?  <h1>{getNickNamesData[0]?.partnerName }</h1> 
                         : <h1>{ getNickNamesData[0]?.partnerNickName}</h1>
-                    }
-                     
+                    } */}
+
                     {/* {
                          selectedUser?.nickName === "" ?  <h1>{selectedUser?.fullName }</h1> : <h1>{ selectedUser?.nickName}</h1>
                     }     */}

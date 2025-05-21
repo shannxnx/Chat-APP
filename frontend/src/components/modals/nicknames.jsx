@@ -7,12 +7,15 @@ export default function AddNickname(){
 
     const {selectedChat, setInNickNames, inNnEditModeUser, setInNnEditModeUser, 
     inNnEditModeReciever, setinNnEditModeReciever, createdNickName, createNickName, toSendNn, setToSendNn,
-toSendNnPartner, setToSendNnPartner} = useChatStore();
+    toSendNnPartner, setToSendNnPartner, getNickNamesData, setInNnEditModeUser2, setinNnEditModeReciever2,
+    userNickName, partnerNickName} = useChatStore();
     const {authUser} = useAuthStore();
 
 
-    // console.log("Created: ", createdNickName);
-    
+    // console.log("Created: ", createdNickName);   
+//    console.log("Tosend NN: ", toSendNn);
+//    console.log("TosendPartner NN: ", toSendNnPartner);
+   console.log("userNickName : ", userNickName);
     
 
     return <>
@@ -31,7 +34,12 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
 
 
            
-            
+             {/* 
+                placeholder={selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName}  
+                placeholder={getNickNamesData.partnerNickName === "" ? selectedChat.nickName === "" ? 
+                                selectedChat.fullName : selectedChat.nickName 
+                                : getNickNamesData.partnerNickName} 
+             */}
 
             <div className="w-[90%] h-[60%] mt-6 flex flex-col">
                  <div className="flex items-center items w-[100%] h-[50%] gap-3 relative">
@@ -39,13 +47,30 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
                     <div>
                         {
                             inNnEditModeReciever ? <input type="text" 
-                            placeholder={selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName} 
+                            placeholder={getNickNamesData.partnerNickName === "" ? selectedChat.nickName === "" ? 
+                                selectedChat.fullName : selectedChat.nickName 
+                                : getNickNamesData.partnerNickName} 
+
                             className="text-[20px] text-black w-[90%] p-2" value={toSendNnPartner}
                             onChange={setToSendNnPartner}/> 
                             :   <h1 className="text-[20px]">
                                     {/* {selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName} */}
-                                    {toSendNnPartner === "" ? selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName 
-                                    : toSendNnPartner}
+                                    {/* {
+                                    toSendNnPartner === "" ? selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName 
+                                    : toSendNnPartner} */}
+
+                                    {   
+                                        getNickNamesData.partnerNickName === "" ? selectedChat.nickName === "" ? 
+                                        selectedChat.fullName : selectedChat.nickName 
+                                        : getNickNamesData.partnerNickName
+                                    } 
+
+                                    {/* {
+                                        partnerNickName === null ? 
+                                        selectedChat.nickName === "" ? 
+                                        selectedChat.fullName : selectedChat.nickName 
+                                        : partnerNickName
+                                    } */}
                                 </h1>
                         }
                         
@@ -58,7 +83,7 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
 
                     {
                         inNnEditModeReciever ? <Check className="absolute right-0 cursor-pointer hover:scale-110" onClick={setinNnEditModeReciever}/> 
-                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setinNnEditModeReciever}/>
+                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setinNnEditModeReciever2}/>
                     }
 
                     {/* <Pencil className="absolute right-0 cursor-pointer hover:scale-110"/> */}
@@ -68,14 +93,34 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
                 <div className="flex items-center items w-[100%] h-[50%]  gap-3 relative">
                     <img src={authUser.profilePic || avatar} className="size-[64px] rounded-full" />
                     <div>
+
+                        {/* placeholder={getNickNamesData.partnerNickName === "" ? selectedChat.nickName === "" ? 
+                                selectedChat.fullName : selectedChat.nickName 
+                                : getNickNamesData.partnerNickName} */}
                         {
                             inNnEditModeUser ? <input type="text" 
-                            placeholder={authUser.nickName === "" ? authUser.fullName : authUser.nickName} 
+                            placeholder={
+                                getNickNamesData.userNickName === "" ? 
+                                authUser.nickName === "" ? authUser.fullName : authUser.nickName
+                                :  getNickNamesData.userNickName
+                            } 
                             className="text-[20px] text-black lg:w-[90%] md:w-[90%] w-[85%] p-2"
                            value={toSendNn} onChange={setToSendNn}/>
                             : <h1 className="text-[20px]">
                                 {/* {authUser.nickName === "" ? authUser.fullName : authUser.nickName} */}
-                                {toSendNn === "" ? authUser.nickName === "" ? authUser.fullName : authUser.nickName : toSendNn}
+                                {/* {toSendNn === "" ? authUser.nickName === "" ? authUser.fullName : authUser.nickName : toSendNn} */}
+                                {
+                                    getNickNamesData.userNickName === "" ? 
+                                    authUser.nickName === "" ? authUser.fullName : authUser.nickName 
+                                    :  getNickNamesData.userNickName
+                                } 
+
+
+                                {/* {  // still on process
+                                    userNickName === "" ? 
+                                    authUser.nickName === "" ? authUser.fullName : authUser.nickName 
+                                    :  userNickName
+                                } */}
                             </h1>
                         }
 
@@ -90,7 +135,7 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
 
                     {
                         inNnEditModeUser ? <Check className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/> 
-                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/>
+                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser2}/>
                     }
 
                     

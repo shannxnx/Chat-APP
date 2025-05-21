@@ -111,8 +111,8 @@ export const useChatStore = create((set, get) => ({
         const userId_3 = user._id.substring(0, 6);
         const convoId = [recieverId_3, userId_3].sort().join("");
         
-        set({toSendNn : ""});
-        set({toSendNnPartner : ""});
+        // set({toSendNn : ""});
+        // set({toSendNnPartner : ""});
         set({selectedChat : selected});
         set({isSelectedUser : true});
         get().getMessages(selected._id); //this is how you can use another object funtion inside an object function (with zustand create)
@@ -122,21 +122,38 @@ export const useChatStore = create((set, get) => ({
         set({currentConvoRoom : convoId});
         await get().createNickName(user._id, selected._id, user.fullName, selected.fullName);
         await get().getNickNames(selected._id);
+        get().setUserNickName();
         
         
     },
 
-    setInNickNames : () => {
+    setInNickNames : async () => {
         const {selectedChat} = get();
         set({inNickNames : !get().inNickNames});
         set({inNnEditModeUser : false});
         set({inNnEditModeReciever : false});
         get().getNickNames(selectedChat._id);
-        // get().getNickNames(selectedChat._id);
+         
+        
     },
 
-    setInNnEditModeUser : () => {
-        set({inNnEditModeUser : !get().inNnEditModeUser})
+    setInNnEditModeUser : async () => {
+        const user = useAuthStore.getState().authUser;
+        const {toSendNn, toSendNnPartner, selectedChat} = get();
+        set({inNnEditModeUser : !get().inNnEditModeUser});
+        await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
+        get().getNickNames(selectedChat._id);
+        get().setUserNickName();
+        
+        
+        
+         
+    },
+    setInNnEditModeUser2 : () => {
+        set({inNnEditModeUser : !get().inNnEditModeUser});
+    },
+    setinNnEditModeReciever2 : () => {
+        set({inNnEditModeReciever : !get().inNnEditModeReciever});
     },
 
     setinNnEditModeReciever : async () => {
@@ -144,7 +161,9 @@ export const useChatStore = create((set, get) => ({
         const {toSendNn, toSendNnPartner, selectedChat} = get();
         set({inNnEditModeReciever : !get().inNnEditModeReciever});
         await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
+        get().setUserNickName();
         get().getNickNames(selectedChat._id);
+        
 
     },
 
@@ -265,11 +284,28 @@ export const useChatStore = create((set, get) => ({
         try {
             const res = await axios.get(`http://localhost:5001/api/chat-nickname/get-NickName/${partnerId}`, {withCredentials : true});
             set({getNickNamesData : res.data});
+            
 
         } catch (error) {
             console.log("Error in getting nn: ", error.message);
             toast.error(error?.response?.data?.message);
         }
+    },
+
+    //----------------------------TEST MODE
+    userNickName : "",
+    partnerNickName : "",
+    setUserNickName : () => {
+        const {getNickNamesData} = get();
+
+        set({userNickName : getNickNamesData.userNickName});
+
+    },
+    setUserPartnerNickName : () => {
+        const {getNickNamesData} = get();
+
+        set({ partnerNickName: getNickNamesData.partnerNickName});
+
     }
 
 

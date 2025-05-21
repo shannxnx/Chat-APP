@@ -66,8 +66,13 @@ export default function MessageContainer() {
 
                             {   
                                 authUser._id === mess.senderId ? 
-                                authUser?.nickName === "" ? authUser.fullName : authUser.nickName
-                                : selectedChat?.nickName === "" ? selectedChat?.fullName : selectedChat.nickName
+                                getNickNamesData?.userNickName === "" ? 
+                                authUser?.nickName === "" ? authUser.fullName : authUser.nickName 
+                                : getNickNamesData?.userNickName
+
+                                : getNickNamesData?.partnerNickName  === "" ?
+                                selectedChat?.nickName === "" ? selectedChat?.fullName : selectedChat.nickName
+                                : getNickNamesData?.partnerNickName
                             }
                             {/* {   
                                 authUser._id === mess.senderId ? 

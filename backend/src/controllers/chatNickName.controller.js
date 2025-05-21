@@ -95,23 +95,34 @@ export const getNickNames = async (req, res) => {
     const {id : partnerId} = req.params;
     const userId = req.user._id;
 
-    const nicknamesData = await ChatNickName.find({
-      $or : [
-        {userId : userId, partnerId : partnerId}, 
-        {userId : partnerId, partnerId : userId}
-      ]
-    });
+    // const nicknamesData = await ChatNickName.find({
+    //   $or : [
+    //     {userId : userId, partnerId : partnerId}, 
+    //     {userId : partnerId, partnerId : userId}
+    //   ]
+    // });
 
-    if (nicknamesData.length > 0){
+    const nicknamesData = await ChatNickName.findOne({
+      userId : userId,
+      partnerId : partnerId
+    })
 
-      //test
-      const nickname = await ChatNickName.find({
-        userId : userId,
-        partnerId : partnerId
-      })
-      return res.status(200).json(nickname);
-      // return res.status(200).json(nicknamesData);
+    if (nicknamesData){
+      return res.status(200).json(nicknamesData);
     }
+
+    // if (nicknamesData.length > 0){
+
+    //   //test
+    //   const nickname = await ChatNickName.find({
+    //     userId : userId,
+    //     partnerId : partnerId
+    //   })
+    //   return res.status(200).json(nickname);
+    //   // return res.status(200).json(nicknamesData);
+    // }
+
+
 
     res.status(404).json({message : "Nicknames not in database"});
 
