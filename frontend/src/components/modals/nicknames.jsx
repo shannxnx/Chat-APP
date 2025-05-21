@@ -12,7 +12,7 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
 
 
     // console.log("Created: ", createdNickName);
-    console.log("Send Nn: ", toSendNn);
+    
     
 
     return <>
@@ -30,10 +30,6 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
             </div>
 
 
-
-
-
-
            
             
 
@@ -44,8 +40,13 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
                         {
                             inNnEditModeReciever ? <input type="text" 
                             placeholder={selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName} 
-                            className="text-[20px] text-black w-[90%] p-2"/> 
-                            : <h1 className="text-[20px]">{selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName}</h1>
+                            className="text-[20px] text-black w-[90%] p-2" value={toSendNnPartner}
+                            onChange={setToSendNnPartner}/> 
+                            :   <h1 className="text-[20px]">
+                                    {/* {selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName} */}
+                                    {toSendNnPartner === "" ? selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName 
+                                    : toSendNnPartner}
+                                </h1>
                         }
                         
                         
@@ -62,7 +63,7 @@ toSendNnPartner, setToSendNnPartner} = useChatStore();
 
                     {/* <Pencil className="absolute right-0 cursor-pointer hover:scale-110"/> */}
                     
-            </div>
+                </div>
 
                 <div className="flex items-center items w-[100%] h-[50%]  gap-3 relative">
                     <img src={authUser.profilePic || avatar} className="size-[64px] rounded-full" />

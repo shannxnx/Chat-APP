@@ -3,10 +3,12 @@ import { useChatStore } from "../../store/useChatStore"
 import { useAuthStore } from "../../store/useAuthStore";
 import avatar from "../../../public/avatar.png"
 import { formatMessageTime } from "../../lib/utils.";
+import { getNickNames } from "../../../../backend/src/controllers/chatNickName.controller";
 
 export default function MessageContainer() {
 
-    const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages, chatBgColor} = useChatStore();
+    const {getMessages, selectedChat, messages, subscribeToMessages, unsubscribeToMessages, chatBgColor,
+    getNickNamesData } = useChatStore();
     const {authUser, userData} = useAuthStore();
 
     const containerRef = useRef(null);
@@ -67,6 +69,13 @@ export default function MessageContainer() {
                                 authUser?.nickName === "" ? authUser.fullName : authUser.nickName
                                 : selectedChat?.nickName === "" ? selectedChat?.fullName : selectedChat.nickName
                             }
+                            {/* {   
+                                authUser._id === mess.senderId ? 
+                                authUser?.nickName === "" ? authUser.fullName : authUser.nickName
+                                : getNickNamesData[0]?.partnerNickname === "" ?  
+                                selectedChat?.nickName === "" ? selectedChat?.fullName : selectedChat.nickName
+                                : getNickNamesData[0]?.partnerNickname 
+                            } */}
 
                             <time className="text-gray-400">{formatMessageTime(mess.createdAt)}</time>
                     </div>

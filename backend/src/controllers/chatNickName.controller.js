@@ -45,14 +45,14 @@ export const createNickNames = async (req, res) => {
         {
           updateOne : {
             filter : {userId : userId, partnerId : partnerId},
-            update : {$set : {userNickName : userNickName}}
+            update : {$set : {userNickName : userNickName, partnerNickName : partnerNickName}}
             
           }
         },
         {
           updateOne : {
             filter : {userId : partnerId, partnerId : userId},
-            update : {$set : {partnerNickName : partnerNickName}}
+            update : {$set : {partnerNickName : userNickName, userNickName: partnerNickName}}
           }
         }
       ]);

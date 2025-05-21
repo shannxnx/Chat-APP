@@ -120,7 +120,7 @@ export const useChatStore = create((set, get) => ({
         get().getBgColor();
         get().joinConvoRoom(convoId);
         set({currentConvoRoom : convoId});
-        await get().createNickName(user._id, selected._id, user.fullName, selected.fullName, "", "");
+        await get().createNickName(user._id, selected._id, user.fullName, selected.fullName);
         await get().getNickNames(selected._id);
         
         
@@ -131,6 +131,7 @@ export const useChatStore = create((set, get) => ({
         set({inNickNames : !get().inNickNames});
         set({inNnEditModeUser : false});
         set({inNnEditModeReciever : false});
+        get().getNickNames(selectedChat._id);
         // get().getNickNames(selectedChat._id);
     },
 
@@ -138,8 +139,13 @@ export const useChatStore = create((set, get) => ({
         set({inNnEditModeUser : !get().inNnEditModeUser})
     },
 
-    setinNnEditModeReciever : () => {
-        set({inNnEditModeReciever : !get().inNnEditModeReciever})
+    setinNnEditModeReciever : async () => {
+        const user = useAuthStore.getState().authUser;
+        const {toSendNn, toSendNnPartner, selectedChat} = get();
+        set({inNnEditModeReciever : !get().inNnEditModeReciever});
+        await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
+        get().getNickNames(selectedChat._id);
+
     },
 
     setInChat : () => {
