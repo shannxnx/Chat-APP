@@ -13,10 +13,10 @@ export default function ChatContainer({selectedUser}){
 
     const {inChat,  backChat,  setModal, chatBgColor, ChatBgColorData, getBgColor,  ChatBgGet, selectedChat, 
     currentConvoRoom, subscribeToBackgroundChange, unsubscribeToBackgroundChange, 
-    setInNickNames, createdNickNameData, createNickName} = useChatStore();
+    setInNickNames, createdNickNameData, createNickName, getNickNamesData} = useChatStore();
     const {onlineUsers, authUser} = useAuthStore();
 
-    
+        
 
     useEffect(() => {
         getBgColor();
@@ -31,7 +31,7 @@ export default function ChatContainer({selectedUser}){
     // console.log("chatBG: ",  ChatBgGet?.backgroundColor);
     // console.log("currentConvoRoom : ", currentConvoRoom);
     
-    
+    console.log("Nicknames (get): ", getNickNamesData)
     
 
     return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"} `} style={{backgroundColor : ChatBgGet?.backgroundColor ? 
@@ -49,10 +49,23 @@ export default function ChatContainer({selectedUser}){
                 <div>
 
                     {
-                        selectedUser?.nickName === "" ?  <h1>{selectedUser?.fullName }</h1> : <h1>{ selectedUser?.nickName}</h1>
+                        getNickNamesData === null ? 
+                        selectedUser?.nickName === "" ?  <h1>{selectedUser?.fullName }</h1> : <h1>{ selectedUser?.nickName}</h1> :
+                        getNickNamesData[0]?.partnerNickName === "" ?  <h1>{getNickNamesData[0]?.partnerName }</h1> 
+                        : <h1>{ getNickNamesData[0]?.partnerNickName}</h1>
                     }
+                     
+                    {/* {
+                         selectedUser?.nickName === "" ?  <h1>{selectedUser?.fullName }</h1> : <h1>{ selectedUser?.nickName}</h1>
+                    }     */}
+                        
+                    
+                    {/* {
+                        getNickNamesData[0]?.partnerNickName === "" ?  <h1>{getNickNamesData[0]?.partnerName }</h1> 
+                        : <h1>{ getNickNamesData[0]?.partnerNickName}</h1>
+                    } */}
 
-                    {/* <h1>{selectedUser?.fullName }</h1>  //Name of selected user should be here */}
+                    
 
                     <h5 className={`${onlineUsers.includes(selectedUser?._id) ? "text-green-500" : "text-gray-500"}`}>
                         {

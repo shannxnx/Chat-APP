@@ -6,12 +6,14 @@ import avatar from "../../../public/avatar.png"
 export default function AddNickname(){
 
     const {selectedChat, setInNickNames, inNnEditModeUser, setInNnEditModeUser, 
-    inNnEditModeReciever, setinNnEditModeReciever, createdNickName} = useChatStore();
+    inNnEditModeReciever, setinNnEditModeReciever, createdNickName, createNickName, toSendNn, setToSendNn,
+toSendNnPartner, setToSendNnPartner} = useChatStore();
     const {authUser} = useAuthStore();
 
 
     // console.log("Created: ", createdNickName);
-
+    console.log("Send Nn: ", toSendNn);
+    
 
     return <>
     <div className="fixed inset-0 bg-black opacity-50 z-20"></div>
@@ -26,37 +28,17 @@ export default function AddNickname(){
                 </div>
                 <X className="absolute right-0 mr-2 size-[32px] hover:scale-105 cursor-pointer" onClick={setInNickNames}/>
             </div>
+
+
+
+
+
+
+           
             
 
             <div className="w-[90%] h-[60%] mt-6 flex flex-col">
-                <div className="flex items-center items w-[100%] h-[50%]  gap-3 relative">
-                    <img src={authUser.profilePic || avatar} className="size-[64px] rounded-full" />
-                    <div>
-                        {
-                            inNnEditModeUser ? <input type="text" 
-                            placeholder={authUser.nickName === "" ? authUser.fullName : authUser.nickName} 
-                            className="text-[20px] text-black lg:w-[90%] md:w-[90%] w-[85%] p-2"/>
-                            : <h1 className="text-[20px]">{authUser.nickName === "" ? authUser.fullName : authUser.nickName}</h1>
-                        }
-                        {/* <h1 className="text-[20px]">{authUser.fullName}</h1> */}
-                        
-                        {
-                            inNnEditModeUser ? null : <h6 className="text-[12px] text-gray-500">Set Nickname</h6>
-                        }
-                        
-                    </div>
-
-                    {
-                        inNnEditModeUser ? <Check className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/> 
-                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/>
-                    }
-
-                    
-
-
-                </div>
-
-                <div className="flex items-center items w-[100%] h-[50%] gap-3 relative">
+                 <div className="flex items-center items w-[100%] h-[50%] gap-3 relative">
                     <img src={selectedChat.profilePic || avatar} className="size-[64px] rounded-full" />
                     <div>
                         {
@@ -80,7 +62,42 @@ export default function AddNickname(){
 
                     {/* <Pencil className="absolute right-0 cursor-pointer hover:scale-110"/> */}
                     
+            </div>
+
+                <div className="flex items-center items w-[100%] h-[50%]  gap-3 relative">
+                    <img src={authUser.profilePic || avatar} className="size-[64px] rounded-full" />
+                    <div>
+                        {
+                            inNnEditModeUser ? <input type="text" 
+                            placeholder={authUser.nickName === "" ? authUser.fullName : authUser.nickName} 
+                            className="text-[20px] text-black lg:w-[90%] md:w-[90%] w-[85%] p-2"
+                           value={toSendNn} onChange={setToSendNn}/>
+                            : <h1 className="text-[20px]">
+                                {/* {authUser.nickName === "" ? authUser.fullName : authUser.nickName} */}
+                                {toSendNn === "" ? authUser.nickName === "" ? authUser.fullName : authUser.nickName : toSendNn}
+                            </h1>
+                        }
+
+
+                        {/* <h1 className="text-[20px]">{authUser.fullName}</h1> */}
+                        
+                        {
+                            inNnEditModeUser ? null : <h6 className="text-[12px] text-gray-500">Set Nickname</h6>
+                        }
+                        
+                    </div>
+
+                    {
+                        inNnEditModeUser ? <Check className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/> 
+                        : <Pencil className="absolute right-0 cursor-pointer hover:scale-110" onClick={setInNnEditModeUser}/>
+                    }
+
+                    
+
+
                 </div>
+
+                
 
             </div>
 

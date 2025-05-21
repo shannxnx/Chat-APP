@@ -52,15 +52,13 @@ export default function Homepage(){
         fetchbgColor();
     }, [selectedChat]);
 
-    // useEffect(() => {
-    //     getNickNames();
-    // }, [inNickNames, selectedChat])
+    
 
     
     // console.log("bgCol : ", bgCol);
     // console.log("selectedChat : ", selectedChat);
     // console.log("Created: ", createdNickNameData);
-    console.log("Nicknames (get): ", getNickNamesData)
+    // console.log("Nicknames (get): ", getNickNamesData);
     
     
 

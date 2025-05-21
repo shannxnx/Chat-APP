@@ -103,7 +103,14 @@ export const getNickNames = async (req, res) => {
     });
 
     if (nicknamesData.length > 0){
-      return res.status(200).json(nicknamesData);
+
+      //test
+      const nickname = await ChatNickName.find({
+        userId : userId,
+        partnerId : partnerId
+      })
+      return res.status(200).json(nickname);
+      // return res.status(200).json(nicknamesData);
     }
 
     res.status(404).json({message : "Nicknames not in database"});
