@@ -150,7 +150,8 @@ export const useChatStore = create((set, get) => ({
         const user = useAuthStore.getState().authUser;
         const {toSendNn, toSendNnPartner, selectedChat, getNickNamesData} = get();
         set({inNnEditModeUser : !get().inNnEditModeUser});
-        await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
+        // await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
+        await get().updateUserNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn);
         await get().getNickNames(selectedChat._id);
         get().setUserNickName();
         get().changeNnRealTime();
@@ -182,7 +183,8 @@ export const useChatStore = create((set, get) => ({
         const {toSendNn, toSendNnPartner, selectedChat, getNickNamesData} = get();
         set({inNnEditModeReciever : !get().inNnEditModeReciever});
         await get().getNickNames(selectedChat._id);    
-        await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);    
+        // await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);    
+        await get().updatePartnerNickName(user._id, selectedChat._id, user.fullName, selectedChat._id, toSendNnPartner)
         get().setUserNickName();
         get().changeNnRealTime();
         
@@ -303,7 +305,51 @@ export const useChatStore = create((set, get) => ({
     },
     
 
+    updatePartnerNickName : async (userID, partnerID, userName, partnerName, partnerNickName) => {
+        try {
+            const data = {
+                userId : userID,
+                partnerId : partnerID,
+                userName : userName,
+                partnerName : partnerName,
+                partnerNickName : partnerNickName
+            };
 
+            const res = await axios.post(
+                `http://localhost:5001/api/chat-nickname/update-PartnerNickName`,
+                data,
+                {withCredentials : true}
+            );
+            set({getNickNamesData : res.data});
+
+        } catch (error) {
+            console.log("Error in updating Partner NickName (frontend): ", error.message);
+            toast.error("Error in updating Partner NickName (frontend)");
+        }
+    },
+
+    updateUserNickName : async (userID, partnerID, userName, partnerName, userNickName) => {
+        try {
+            const data = {
+                userId : userID,
+                partnerId : partnerID,
+                userName : userName,
+                partnerName : partnerName,
+                userNickName : userNickName
+            };
+
+            const res = await axios.post(
+                `http://localhost:5001/api/chat-nickname/update-UserNickName`,
+                data,
+                {withCredentials : true}
+            );
+            set({getNickNamesData : res.data});
+
+        } catch (error) {
+            console.log("Error in updating User NickName (frontend): ", error.message);
+            toast.error("Error in updating User NickName (frontend)");
+        }
+    },
 
 
     createNickName : async (userID, partnerID, userName, partnerName, userNickName, partnerNickName) => {
