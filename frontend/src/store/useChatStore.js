@@ -147,35 +147,43 @@ export const useChatStore = create((set, get) => ({
     },
 
     setInNnEditModeUser : async () => {
-        const {getNickNamesData} = get();
         const user = useAuthStore.getState().authUser;
-        const {toSendNn, toSendNnPartner, selectedChat} = get();
+        const {toSendNn, toSendNnPartner, selectedChat, getNickNamesData} = get();
         set({inNnEditModeUser : !get().inNnEditModeUser});
         await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
-        get().getNickNames(selectedChat._id);
+        await get().getNickNames(selectedChat._id);
         get().setUserNickName();
-        set({toSendNn : getNickNamesData.userNickName});
-        set({toSendNnPartner : getNickNamesData.partnerNickName});
         get().changeNnRealTime();
         
         
         
          
     },
-    setInNnEditModeUser2 : () => {
+    setInNnEditModeUser2 : async () => {
+        const {getNickNamesData, selectedChat} = get();
         set({inNnEditModeUser : !get().inNnEditModeUser});
+        get().getNickNames(selectedChat._id);
+        get().setUserNickName();
+        set({toSendNn : getNickNamesData.userNickName});
+        // set({toSendNnPartner : getNickNamesData.partnerNickName});
     },
-    setinNnEditModeReciever2 : () => {
+    setinNnEditModeReciever2 : async () => {
+        const {getNickNamesData, selectedChat} = get();
         set({inNnEditModeReciever : !get().inNnEditModeReciever});
+        get().getNickNames(selectedChat._id);
+        get().setUserNickName();
+        // set({toSendNn : getNickNamesData.userNickName});
+        set({toSendNnPartner : getNickNamesData.partnerNickName});
     },
 
     setinNnEditModeReciever : async () => {
+        
         const user = useAuthStore.getState().authUser;
-        const {toSendNn, toSendNnPartner, selectedChat} = get();
+        const {toSendNn, toSendNnPartner, selectedChat, getNickNamesData} = get();
         set({inNnEditModeReciever : !get().inNnEditModeReciever});
-        await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
+        await get().getNickNames(selectedChat._id);    
+        await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);    
         get().setUserNickName();
-        get().getNickNames(selectedChat._id);
         get().changeNnRealTime();
         
 
