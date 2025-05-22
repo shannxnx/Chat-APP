@@ -17,9 +17,7 @@ export default function MessageContainer() {
 
     useEffect(() => {
         getMessages(selectedChat?._id);
-
         subscribeToMessages();
-
         return () => unsubscribeToMessages();
         
     }, [selectedChat?._id, getMessages, subscribeToMessages, unsubscribeToMessages]);

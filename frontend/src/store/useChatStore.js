@@ -150,7 +150,6 @@ export const useChatStore = create((set, get) => ({
         const user = useAuthStore.getState().authUser;
         const {toSendNn, toSendNnPartner, selectedChat, getNickNamesData} = get();
         set({inNnEditModeUser : !get().inNnEditModeUser});
-        // await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
         await get().updateUserNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn);
         await get().getNickNames(selectedChat._id);
         get().setUserNickName();
@@ -182,8 +181,7 @@ export const useChatStore = create((set, get) => ({
         const user = useAuthStore.getState().authUser;
         const {toSendNn, toSendNnPartner, selectedChat, getNickNamesData} = get();
         set({inNnEditModeReciever : !get().inNnEditModeReciever});
-        await get().getNickNames(selectedChat._id);    
-        // await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);    
+        await get().getNickNames(selectedChat._id);       
         await get().updatePartnerNickName(user._id, selectedChat._id, user.fullName, selectedChat._id, toSendNnPartner)
         get().setUserNickName();
         get().changeNnRealTime();
@@ -197,8 +195,6 @@ export const useChatStore = create((set, get) => ({
 
     backChat : () => {
         set({inChat : false});
-        // window.location.reload();
-        // set({selectedChat : null})
     },
 
     setModal : () => {
@@ -213,7 +209,6 @@ export const useChatStore = create((set, get) => ({
     
     ChangeBgColor : async (data) => {
         const {selectedChat, currentConvoRoom} = get();
-        // const selectedId = get().selectedChat._id;
         try {
             if (selectedChat._id || currentConvoRoom){
                 const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
@@ -393,7 +388,7 @@ export const useChatStore = create((set, get) => ({
         }
     },
 
-    //----------------------------TEST MODE
+    //----------------------------TEST MODE ---------------------------
     userNickName : "",
     partnerNickName : "",
     setUserNickName : () => {

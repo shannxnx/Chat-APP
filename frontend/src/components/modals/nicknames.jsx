@@ -16,11 +16,6 @@ export default function AddNickname(){
    console.log("Tosend NN: ", toSendNn);
    console.log("TosendPartner NN: ", toSendNnPartner);
 
-    // useEffect(() => {
-    //     subscribeToChangeNn();
-
-    //     return () => unsubscribeToChangeNn();
-    // }, [selectedChat, getNickNamesData]);
    
     
 
