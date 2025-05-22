@@ -2,6 +2,7 @@ import {Server} from "socket.io";
 import http from "http";
 import express from "express";
 import { Socket } from "dgram";
+import { console } from "inspector";
 
 
 const app = express();
@@ -43,6 +44,11 @@ io.on("connection", (socket) => {
     socket.on("changeBackground", ({convoId, color}) => {
         console.log(`Changing chat background in room  ${convoId} to ${color}`);
         io.to(convoId).emit("updateBackground", color);
+    });
+
+    socket.on("changeNickNames", ({convoId, userNn, partnerNn}) => {
+        console.log(`Changing NickNames in room ${convoId}`);
+        io.to(convoId).emit("updateNickNames", userNn, partnerNn)
     });
 
 

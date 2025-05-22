@@ -8,13 +8,19 @@ export default function AddNickname(){
     const {selectedChat, setInNickNames, inNnEditModeUser, setInNnEditModeUser, 
     inNnEditModeReciever, setinNnEditModeReciever, createdNickName, createNickName, toSendNn, setToSendNn,
     toSendNnPartner, setToSendNnPartner, getNickNamesData, setInNnEditModeUser2, setinNnEditModeReciever2,
-    userNickName, partnerNickName} = useChatStore();
+    userNickName, partnerNickName, subscribeToChangeNn, unsubscribeToChangeNn} = useChatStore();
     const {authUser} = useAuthStore();
 
 
     // console.log("Created: ", createdNickName);   
 //    console.log("Tosend NN: ", toSendNn);
 //    console.log("TosendPartner NN: ", toSendNnPartner);
+
+    // useEffect(() => {
+    //     subscribeToChangeNn();
+
+    //     return () => unsubscribeToChangeNn();
+    // }, [selectedChat, getNickNamesData]);
    
     
 

@@ -5,6 +5,7 @@ import { useAuthStore } from "./useAuthStore";
 import io from "socket.io-client"
 import { useResponseStore } from "./useResponseStore";
 import { getNickNames } from "../../../backend/src/controllers/chatNickName.controller";
+// import { subscribe, unsubscribe } from "diagnostics_channel";
 
 
 
@@ -155,6 +156,7 @@ export const useChatStore = create((set, get) => ({
         get().setUserNickName();
         set({toSendNn : getNickNamesData.userNickName});
         set({toSendNnPartner : getNickNamesData.partnerNickName});
+        get().changeNnRealTime();
         
         
         
@@ -174,6 +176,7 @@ export const useChatStore = create((set, get) => ({
         await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
         get().setUserNickName();
         get().getNickNames(selectedChat._id);
+        get().changeNnRealTime();
         
 
     },
@@ -233,7 +236,7 @@ export const useChatStore = create((set, get) => ({
         }
     },
 
-    //this is for socket.io
+    //this is for socket.io CHANGE BG
     changeBackground : (color) => {
         const {currentConvoRoom} = get();
         const socket = useAuthStore.getState().socket;
@@ -256,12 +259,45 @@ export const useChatStore = create((set, get) => ({
 
     unsubscribeToBackgroundChange : () => {
         const socket = useAuthStore.getState().socket;
-        socket.off("updatedBackground")
+        socket.off("updatedBackground");
     },
 
     //----------------NICKNAMES STUFF------------------
     createdNickNameData : {},
     getNickNamesData : null,
+
+    changeNnRealTime : () => {
+        const {currentConvoRoom, getNickNamesData} = get();
+        const socket = useAuthStore.getState().socket;
+        if (!currentConvoRoom) return ;
+
+        socket.emit("changeNickNames", 
+            {   
+                convoId : currentConvoRoom, 
+                userNn : getNickNamesData.userNickName,
+                partnerNn : getNickNamesData.partnerNickName,
+            })
+
+    },
+
+    subscribeToChangeNn : () => {
+        const {getNickNamesData, selectedChat} = get();
+        const socket = useAuthStore.getState().socket;
+        socket.on("updateNickNames", (userNn, partnerNn) => {
+            console.log("Nicknames updated? :", userNn);
+            get().getNickNames(selectedChat._id);
+        })
+    },
+
+    unsubscribeToChangeNn : () => {
+        const socket = useAuthStore.getState().socket;
+        socket.off("updateNickNames");
+    },
+    
+
+
+
+
     createNickName : async (userID, partnerID, userName, partnerName, userNickName, partnerNickName) => {
         
         try {
