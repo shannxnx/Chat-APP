@@ -21,7 +21,6 @@ export default function ChatContainer({selectedUser}){
     useEffect(() => {
         getBgColor();
         subscribeToBackgroundChange();
-        
         return () => unsubscribeToBackgroundChange();
 
 
@@ -30,8 +29,7 @@ export default function ChatContainer({selectedUser}){
 
     // console.log("chatBG: ",  ChatBgGet?.backgroundColor);
     // console.log("currentConvoRoom : ", currentConvoRoom);
-    
-    console.log("Nicknames (get): ", getNickNamesData)
+    // console.log("Nicknames (get): ", getNickNamesData)
     
 
     return <div className={`size-full flex flex-col ${inChat ? "flex" : "hidden"} `} style={{backgroundColor : ChatBgGet?.backgroundColor ? 

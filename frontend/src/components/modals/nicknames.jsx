@@ -15,7 +15,7 @@ export default function AddNickname(){
     // console.log("Created: ", createdNickName);   
 //    console.log("Tosend NN: ", toSendNn);
 //    console.log("TosendPartner NN: ", toSendNnPartner);
-   console.log("userNickName : ", userNickName);
+   
     
 
     return <>

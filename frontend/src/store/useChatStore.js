@@ -106,6 +106,7 @@ export const useChatStore = create((set, get) => ({
 
     setSelectedUser : (isSelectedUser) => set({isSelectedUser}),
     setSelectedChat : async (selected) => {
+        const {getNickNamesData} = get();
         const user = useAuthStore.getState().authUser;
         const recieverId_3 = selected._id.substring(0, 6);
         const userId_3 = user._id.substring(0, 6);
@@ -123,27 +124,37 @@ export const useChatStore = create((set, get) => ({
         await get().createNickName(user._id, selected._id, user.fullName, selected.fullName);
         await get().getNickNames(selected._id);
         get().setUserNickName();
+
+        set({toSendNn : getNickNamesData.userNickName});
+        set({toSendNnPartner : getNickNamesData.partnerNickName});
+
         
         
     },
 
     setInNickNames : async () => {
+        const {getNickNamesData} = get();
         const {selectedChat} = get();
         set({inNickNames : !get().inNickNames});
         set({inNnEditModeUser : false});
         set({inNnEditModeReciever : false});
         get().getNickNames(selectedChat._id);
+        set({toSendNn : getNickNamesData.userNickName});
+        set({toSendNnPartner : getNickNamesData.partnerNickName});
          
         
     },
 
     setInNnEditModeUser : async () => {
+        const {getNickNamesData} = get();
         const user = useAuthStore.getState().authUser;
         const {toSendNn, toSendNnPartner, selectedChat} = get();
         set({inNnEditModeUser : !get().inNnEditModeUser});
         await get().createNickName(user._id, selectedChat._id, user.fullName, selectedChat.fullName, toSendNn, toSendNnPartner);
         get().getNickNames(selectedChat._id);
         get().setUserNickName();
+        set({toSendNn : getNickNamesData.userNickName});
+        set({toSendNnPartner : getNickNamesData.partnerNickName});
         
         
         
