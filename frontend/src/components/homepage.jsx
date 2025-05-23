@@ -25,7 +25,7 @@ import AddNickname from "./modals/nicknames";
 export default function Homepage(){
     const {logOut} = useAuthStore();
     const {getUsers, isSelectedUser, selectedChat, showModal, 
-        setModal, inNickNames, createdNickNameData, getNickNamesData, getNickNames} = useChatStore();
+        setModal, inNickNames, createdNickNameData, getNickNamesData, getNickNames, showHomePage} = useChatStore();
     const [bgCol, setBgCol] = useState({});
 
     async function fetchbgColor(){
@@ -60,7 +60,7 @@ export default function Homepage(){
     // console.log("Created: ", createdNickNameData);
     // console.log("Nicknames (get): ", getNickNamesData);
     
-    
+    console.log("ShowHomePage: ", showHomePage);
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
         
@@ -70,10 +70,11 @@ export default function Homepage(){
         
 
         <Sidenav/>
+
         
-        <div className="w-[100%] h-full  bg-white ">
+        <div className="w-[100%] h-full  bg-white z-10">
             {
-                isSelectedUser ? <ChatContainer selectedUser={selectedChat}/>
+                isSelectedUser && !showHomePage ? <ChatContainer selectedUser={selectedChat}/>
                 : <div className="size-full border-1 flex flex-col justify-center items-center">
                     <img src={chatIcon} alt="chat icon" className="size-[200px] mb-4"/>
                     <h1>Welcome to 

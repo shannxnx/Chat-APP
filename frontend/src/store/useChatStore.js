@@ -27,6 +27,7 @@ export const useChatStore = create((set, get) => ({
     inNnEditModeReciever : false,
     toSendNn : "",
     toSendNnPartner : "",
+    showHomePage : true,
 
     setToSendNn : (e) => {
         set({toSendNn : e.target.value})
@@ -107,14 +108,14 @@ export const useChatStore = create((set, get) => ({
 
     setSelectedUser : (isSelectedUser) => set({isSelectedUser}),
     setSelectedChat : async (selected) => {
-        const {getNickNamesData} = get();
+        set({showHomePage : false});
+        const {getNickNamesData, } = get();
         const user = useAuthStore.getState().authUser;
         const recieverId_3 = selected._id.substring(0, 6);
         const userId_3 = user._id.substring(0, 6);
         const convoId = [recieverId_3, userId_3].sort().join("");
         
-        // set({toSendNn : ""});
-        // set({toSendNnPartner : ""});
+
         set({selectedChat : selected});
         set({isSelectedUser : true});
         get().getMessages(selected._id); //this is how you can use another object funtion inside an object function (with zustand create)
@@ -125,9 +126,9 @@ export const useChatStore = create((set, get) => ({
         await get().createNickName(user._id, selected._id, user.fullName, selected.fullName);
         await get().getNickNames(selected._id);
         get().setUserNickName();
-
-        set({toSendNn : getNickNamesData.userNickName});
-        set({toSendNnPartner : getNickNamesData.partnerNickName});
+        set({toSendNn : getNickNamesData?.userNickName});
+        set({toSendNnPartner : getNickNamesData?.partnerNickName});
+        
 
         
         
@@ -195,6 +196,7 @@ export const useChatStore = create((set, get) => ({
 
     backChat : () => {
         set({inChat : false});
+        set({showHomePage : true})
     },
 
     setModal : () => {
