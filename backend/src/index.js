@@ -17,13 +17,15 @@ dotenv.config();                        //because of this we can use (process.en
 const PORT = process.env.PORT;    
 const __dirname = path.resolve();
 
+app.use(express.json());                //so we can get json in the body
+app.use(cookieParser());                //allows to parse the cookie
+
 app.use(cors({                          //important because this will allow the backend to talk to the frontend
     origin : "http://localhost:5173",
     credentials : true
 }));
 
-app.use(express.json());                //so we can get json in the body
-app.use(cookieParser());                //allows to parse the cookie
+
 
 app.use("/api/auth", authRoutes);       //for authentication (login, signup, logout);
 app.use("/api/message", messageRoutes); //for message

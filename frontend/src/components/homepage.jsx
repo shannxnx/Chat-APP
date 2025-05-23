@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import ChangeBgModal from "./modals/backround_chat";
 import AddNickname from "./modals/nicknames";
+import { axiosInstance } from "../lib/axios";
 
 
 
