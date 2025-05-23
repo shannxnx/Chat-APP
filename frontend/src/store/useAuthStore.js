@@ -56,7 +56,7 @@ export const useAuthStore = create((set, get) => ({
         set({isSigningUp : true});
         try {
             // const res = await axios.post("http://localhost:5001/api/auth/signup", data, {withCredentials : true});
-            const res = await axiosInstance.post("/auth/signup");
+            const res = await axiosInstance.post("/auth/signup", data);
             set({authUser : res.data});
             toast.success("Account created successfully!");
             get().connectSocket();
@@ -75,7 +75,7 @@ export const useAuthStore = create((set, get) => ({
         try{
             // const res = await axios.post("http://localhost:5001/api/auth/login", data, {withCredentials : true});
             
-            const res = await axiosInstance.post("/auth/login");
+            const res = await axiosInstance.post("/auth/login", data);
             set({authUser : res.data});
             await get().checkAuth();
             toast.success("Logged in successfully!");
@@ -120,7 +120,7 @@ export const useAuthStore = create((set, get) => ({
 
         try {
             // const res = await axios.put("http://localhost:5001/api/auth/update-profile", data, {withCredentials : true});
-            const res = await axiosInstance.put("/auth/update-profile");
+            const res = await axiosInstance.put("/auth/update-profile", data);
 
             set({userData : res.data});
             toast.success("Profile updated successfully");

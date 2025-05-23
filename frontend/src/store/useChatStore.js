@@ -74,7 +74,7 @@ export const useChatStore = create((set, get) => ({
         try {
             
             // const res = await axios.post(`http://localhost:5001/api/message/send/${selectedChat._id}`, messageData, {withCredentials : true});
-            const res = await axiosInstance.post(`/message/send/${selectedChat._id}`);
+            const res = await axiosInstance.post(`/message/send/${selectedChat._id}`, messageData);
             set({messages: [...messages, res.data]});
 
         } catch (error) {
@@ -218,7 +218,7 @@ export const useChatStore = create((set, get) => ({
         try {
             if (selectedChat._id || currentConvoRoom){
                 // const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
-                const res = await axiosInstance.post(`/chatBg/change-ChatBg/${selectedChat._id}`);
+                const res = await axiosInstance.post(`/chatBg/change-ChatBg/${selectedChat._id}`, data);
                 set({ ChatBgColorData : res.data})
                 set({ChatBgGet : res.data});
             }
@@ -324,7 +324,7 @@ export const useChatStore = create((set, get) => ({
             //     {withCredentials : true}
             // );
 
-            const res = await axiosInstance.post(`/chat-nickname/update-PartnerNickName`);
+            const res = await axiosInstance.post(`/chat-nickname/update-PartnerNickName`, data);
             set({getNickNamesData : res.data});
 
         } catch (error) {
@@ -348,7 +348,7 @@ export const useChatStore = create((set, get) => ({
             //     data,
             //     {withCredentials : true}
             // );
-            const res = await axiosInstance.post(`/chat-nickname/update-UserNickName`);
+            const res = await axiosInstance.post(`/chat-nickname/update-UserNickName`, data);
             set({getNickNamesData : res.data});
 
         } catch (error) {
@@ -377,7 +377,7 @@ export const useChatStore = create((set, get) => ({
             //      data, 
             //      {withCredentials : true});
             
-            const res = await axiosInstance.post(`/chat-nickname/create-NickName`);
+            const res = await axiosInstance.post(`/chat-nickname/create-NickName`, data);
                  
             set({createdNickName : res.data});
 
