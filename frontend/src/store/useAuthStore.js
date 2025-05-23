@@ -2,6 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import {create} from "zustand";
 import {io} from "socket.io-client";
+import { axiosInstance } from "../lib/axios";
 
 const toastStyle = {
     style : {
@@ -15,7 +16,8 @@ const toastStyle = {
     {} = kinda wrong    (bad but not that bad)
 */
 
-const BASE_URL = "http://localhost:5001";
+// const BASE_URL = "http://localhost:5001";
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
 
 export const useAuthStore = create((set, get) => ({
     authUser : null,
@@ -29,12 +31,14 @@ export const useAuthStore = create((set, get) => ({
     onlineUsers : [],
     socket : null,
     
-
+    
 
 
     checkAuth : async () => {
         try {
-            const res = await axios.get("http://localhost:5001/api/auth/check", {withCredentials : true});
+            // const res = await axios.get("http://localhost:5001/api/auth/check", {withCredentials : true});
+
+            const res = await axiosInstance.get("/auth/check");
 
             set({authUser:res.data});
             get().connectSocket();
@@ -51,7 +55,8 @@ export const useAuthStore = create((set, get) => ({
 
         set({isSigningUp : true});
         try {
-            const res = await axios.post("http://localhost:5001/api/auth/signup", data, {withCredentials : true});
+            // const res = await axios.post("http://localhost:5001/api/auth/signup", data, {withCredentials : true});
+            const res = await axiosInstance.post("/auth/signup");
             set({authUser : res.data});
             toast.success("Account created successfully!");
             get().connectSocket();
@@ -68,7 +73,9 @@ export const useAuthStore = create((set, get) => ({
         set({isLoggingIn : true});
         set({isSelectedAuth : false});
         try{
-            const res = await axios.post("http://localhost:5001/api/auth/login", data, {withCredentials : true});
+            // const res = await axios.post("http://localhost:5001/api/auth/login", data, {withCredentials : true});
+            
+            const res = await axiosInstance.post("/auth/login");
             set({authUser : res.data});
             await get().checkAuth();
             toast.success("Logged in successfully!");
@@ -84,7 +91,9 @@ export const useAuthStore = create((set, get) => ({
 
     logOut : async () => {
         try {
-            await axios.post("http://localhost:5001/api/auth/logout", {}, {withCredentials: true});
+            // await axios.post("http://localhost:5001/api/auth/logout", {}, {withCredentials: true});
+
+            const res = await axiosInstance.post("/auth/logout");
             set({authUser : null});
             toast.success("Logged out successfully");
             get().disconnectSocket();
@@ -97,7 +106,8 @@ export const useAuthStore = create((set, get) => ({
 
     userInfo : async () => {
         try {
-            const res = await axios.get("http://localhost:5001/api/auth/userInfo", {withCredentials: true});
+            // const res = await axios.get("http://localhost:5001/api/auth/userInfo", {withCredentials: true});
+            const res = await axiosInstance.get("/auth/userInfo");
             set({userData : res});
         } catch (error) {
             console.log("Error in getting user info")
@@ -109,7 +119,9 @@ export const useAuthStore = create((set, get) => ({
         set({isUpdatingProfile : true});
 
         try {
-            const res = await axios.put("http://localhost:5001/api/auth/update-profile", data, {withCredentials : true});
+            // const res = await axios.put("http://localhost:5001/api/auth/update-profile", data, {withCredentials : true});
+            const res = await axiosInstance.put("/auth/update-profile");
+
             set({userData : res.data});
             toast.success("Profile updated successfully");
         } catch (error) {
@@ -123,7 +135,8 @@ export const useAuthStore = create((set, get) => ({
     setAllUsers : async () => {
         try {
             
-            const res = await axios.get("http://localhost:5001/api/auth/all-users", {withCredentials : true});
+            // const res = await axios.get("http://localhost:5001/api/auth/all-users", {withCredentials : true});
+            const res = await axiosInstance.get("/auth/all-users");
             set({allUsers : res.data});
 
         } catch (error) {

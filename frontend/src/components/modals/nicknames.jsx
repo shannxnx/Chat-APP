@@ -12,9 +12,6 @@ export default function AddNickname(){
     const {authUser} = useAuthStore();
 
 
-    // console.log("Created: ", createdNickName);   
-   console.log("Tosend NN: ", toSendNn);
-   console.log("TosendPartner NN: ", toSendNnPartner);
 
    
     
@@ -34,13 +31,7 @@ export default function AddNickname(){
             </div>
 
 
-           
-             {/* 
-                placeholder={selectedChat.nickName === "" ? selectedChat.fullName : selectedChat.nickName}  
-                placeholder={getNickNamesData.partnerNickName === "" ? selectedChat.nickName === "" ? 
-                                selectedChat.fullName : selectedChat.nickName 
-                                : getNickNamesData.partnerNickName} 
-             */}
+        
 
             <div className="w-[90%] h-[60%] mt-6 flex flex-col">
                  <div className="flex items-center items w-[100%] h-[50%] gap-3 relative">

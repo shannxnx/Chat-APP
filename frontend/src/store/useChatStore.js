@@ -5,6 +5,7 @@ import { useAuthStore } from "./useAuthStore";
 import io from "socket.io-client"
 import { useResponseStore } from "./useResponseStore";
 import { getNickNames } from "../../../backend/src/controllers/chatNickName.controller";
+import { axiosInstance } from "../lib/axios";
 // import { subscribe, unsubscribe } from "diagnostics_channel";
 
 
@@ -39,7 +40,8 @@ export const useChatStore = create((set, get) => ({
     getUsers : async () => {
         set({isUserLoading : true})
         try {
-            const res = await axios.get("http://localhost:5001/api/message/users", {withCredentials : true});
+            // const res = await axios.get("http://localhost:5001/api/message/users", {withCredentials : true});
+            const res = await axiosInstance.get(`/message/users`);
             set({users : res.data});
             
         } catch (error) {
@@ -54,7 +56,9 @@ export const useChatStore = create((set, get) => ({
         set({isMessagesLoading : true});
         try {
             
-            const res = await axios.get(`http://localhost:5001/api/message/${userId}`, {withCredentials : true});
+            // const res = await axios.get(`http://localhost:5001/api/message/${userId}`, {withCredentials : true});
+
+            const res = await axiosInstance.get(`/message/${userId}`);
             set({messages : res.data});
         } catch (error) {
             console.log("Error in getting users (chat) : ", error.message);
@@ -69,7 +73,8 @@ export const useChatStore = create((set, get) => ({
 
         try {
             
-            const res = await axios.post(`http://localhost:5001/api/message/send/${selectedChat._id}`, messageData, {withCredentials : true});
+            // const res = await axios.post(`http://localhost:5001/api/message/send/${selectedChat._id}`, messageData, {withCredentials : true});
+            const res = await axiosInstance.post(`/message/send/${selectedChat._id}`);
             set({messages: [...messages, res.data]});
 
         } catch (error) {
@@ -166,14 +171,13 @@ export const useChatStore = create((set, get) => ({
         get().getNickNames(selectedChat._id);
         get().setUserNickName();
         set({toSendNn : getNickNamesData.userNickName});
-        // set({toSendNnPartner : getNickNamesData.partnerNickName});
+        
     },
     setinNnEditModeReciever2 : async () => {
         const {getNickNamesData, selectedChat} = get();
         set({inNnEditModeReciever : !get().inNnEditModeReciever});
         get().getNickNames(selectedChat._id);
         get().setUserNickName();
-        // set({toSendNn : getNickNamesData.userNickName});
         set({toSendNnPartner : getNickNamesData.partnerNickName});
     },
 
@@ -213,7 +217,8 @@ export const useChatStore = create((set, get) => ({
         const {selectedChat, currentConvoRoom} = get();
         try {
             if (selectedChat._id || currentConvoRoom){
-                const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
+                // const res = await axios.post(`http://localhost:5001/api/chatBg/change-ChatBg/${selectedChat._id}`, data, {withCredentials : true});
+                const res = await axiosInstance.post(`/chatBg/change-ChatBg/${selectedChat._id}`);
                 set({ ChatBgColorData : res.data})
                 set({ChatBgGet : res.data});
             }
@@ -232,7 +237,8 @@ export const useChatStore = create((set, get) => ({
 
          try {
             
-            const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
+            // const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
+            const res = await axiosInstance.get(`/chatBg/get-ChatBg/${selectedChat._id}`);
             set({ChatBgGet : res.data || "white"});
 
         } catch (error) {
@@ -312,11 +318,13 @@ export const useChatStore = create((set, get) => ({
                 partnerNickName : partnerNickName
             };
 
-            const res = await axios.post(
-                `http://localhost:5001/api/chat-nickname/update-PartnerNickName`,
-                data,
-                {withCredentials : true}
-            );
+            // const res = await axios.post(
+            //     `http://localhost:5001/api/chat-nickname/update-PartnerNickName`,
+            //     data,
+            //     {withCredentials : true}
+            // );
+
+            const res = await axiosInstance.post(`/chat-nickname/update-PartnerNickName`);
             set({getNickNamesData : res.data});
 
         } catch (error) {
@@ -335,11 +343,12 @@ export const useChatStore = create((set, get) => ({
                 userNickName : userNickName
             };
 
-            const res = await axios.post(
-                `http://localhost:5001/api/chat-nickname/update-UserNickName`,
-                data,
-                {withCredentials : true}
-            );
+            // const res = await axios.post(
+            //     `http://localhost:5001/api/chat-nickname/update-UserNickName`,
+            //     data,
+            //     {withCredentials : true}
+            // );
+            const res = await axiosInstance.post(`/chat-nickname/update-UserNickName`);
             set({getNickNamesData : res.data});
 
         } catch (error) {
@@ -363,10 +372,12 @@ export const useChatStore = create((set, get) => ({
                 partnerNickName : partnerNickName
             };
             
-            const res = await axios.post(
-                `http://localhost:5001/api/chat-nickname/create-NickName`,
-                 data, 
-                 {withCredentials : true});
+            // const res = await axios.post(
+            //     `http://localhost:5001/api/chat-nickname/create-NickName`,
+            //      data, 
+            //      {withCredentials : true});
+            
+            const res = await axiosInstance.post(`/chat-nickname/create-NickName`);
                  
             set({createdNickName : res.data});
 
@@ -380,7 +391,8 @@ export const useChatStore = create((set, get) => ({
     },
     getNickNames : async (partnerId) => {
         try {
-            const res = await axios.get(`http://localhost:5001/api/chat-nickname/get-NickName/${partnerId}`, {withCredentials : true});
+            // const res = await axios.get(`http://localhost:5001/api/chat-nickname/get-NickName/${partnerId}`, {withCredentials : true});
+            const res = await axiosInstance.get(`/chat-nickname/get-NickName/${partnerId}`);
             set({getNickNamesData : res.data});
             
 

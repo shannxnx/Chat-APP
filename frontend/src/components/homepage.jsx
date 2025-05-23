@@ -32,7 +32,8 @@ export default function Homepage(){
         try {
             
             if (selectedChat._id){
-                const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
+                // const res = await axios.get(`http://localhost:5001/api/chatBg/get-ChatBg/${selectedChat._id}`, {withCredentials : true})
+                const res = await axiosInstance.get(`/chatBg/get-ChatBg/${selectedChat._id}`);
                 setBgCol(res.data);
             }else{
                 return;
@@ -60,7 +61,7 @@ export default function Homepage(){
     // console.log("Created: ", createdNickNameData);
     // console.log("Nicknames (get): ", getNickNamesData);
     
-    console.log("ShowHomePage: ", showHomePage);
+    
 
     return <div className="bg-[#F1E7E7] w-screen h-screen  flex overflow-hidden">
         

@@ -7,12 +7,15 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { app, server } from "./lib/socket.js";
 import chatBgRoutes from "./routes/chatBg.route.js";
-import chatNn from "./routes/chatNickName.route.js"
+import chatNn from "./routes/chatNickName.route.js";
+
+import path from "path";
 
 
 dotenv.config();                        //because of this we can use (process.env.PORT)
 
 const PORT = process.env.PORT;    
+const __dirname = path.resolve();
 
 app.use(cors({                          //important because this will allow the backend to talk to the frontend
     origin : "http://localhost:5173",
@@ -26,6 +29,14 @@ app.use("/api/auth", authRoutes);       //for authentication (login, signup, log
 app.use("/api/message", messageRoutes); //for message
 app.use("/api/chatBg", chatBgRoutes);
 app.use("/api/chat-nickname", chatNn);
+
+if (process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
+    })
+}
 
 app.get("/", (req, res) => {
     res.send("I hope your a fuckery okay");

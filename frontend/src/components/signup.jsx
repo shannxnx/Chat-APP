@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Camera, Loader2 } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';
 import toast from 'react-hot-toast';
+import { axiosInstance } from '../lib/axios';
 
 
 
@@ -55,7 +56,8 @@ export default function Signup(){
 
     async function handleLogOut(){
         try{
-            const res = await axios.post("http://localhost:5001/api/auth/logout", {}, {withCredentials : true});
+            // const res = await axios.post("http://localhost:5001/api/auth/logout", {}, {withCredentials : true});
+            const res = await axiosInstance.post("/auth/logout");
             console.log("Logout successfully!");
         }catch(e){
             console.log("Error in logout : ", e.message);
