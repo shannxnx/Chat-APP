@@ -187,7 +187,7 @@ export const useChatStore = create((set, get) => ({
         const {toSendNn, toSendNnPartner, selectedChat, getNickNamesData} = get();
         set({inNnEditModeReciever : !get().inNnEditModeReciever});
         await get().getNickNames(selectedChat._id);       
-        await get().updatePartnerNickName(user._id, selectedChat._id, user.fullName, selectedChat._id, toSendNnPartner)
+        await get().updatePartnerNickName(user._id, selectedChat._id, user.fullName, selectedChat._id, toSendNnPartner  )
         get().setUserNickName();
         get().changeNnRealTime();
         

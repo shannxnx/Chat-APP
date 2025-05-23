@@ -9,7 +9,7 @@ router.post("/create-NickName", protectRoute, createNickNames);
 router.get("/get-NickName/:id", protectRoute, getNickNames);
 router.post("/update-PartnerNickName", protectRoute, updatePartnerNickName);
 router.post("/update-UserNickName", protectRoute, updateUserNickName);
-
+ 
 
 
 

@@ -26,7 +26,8 @@ import { axiosInstance } from "../lib/axios";
 export default function Homepage(){
     const {logOut} = useAuthStore();
     const {getUsers, isSelectedUser, selectedChat, showModal, 
-        setModal, inNickNames, createdNickNameData, getNickNamesData, getNickNames, showHomePage} = useChatStore();
+        setModal, inNickNames, createdNickNameData, getNickNamesData, getNickNames, 
+        showHomePage, toSendNnPartner} = useChatStore();
     const [bgCol, setBgCol] = useState({});
 
     async function fetchbgColor(){
@@ -56,7 +57,7 @@ export default function Homepage(){
 
     
 
-    
+    // console.log("toSendNnPartner: ", toSendNnPartner)
     // console.log("bgCol : ", bgCol);
     // console.log("selectedChat : ", selectedChat);
     // console.log("Created: ", createdNickNameData);
